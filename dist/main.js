@@ -1,1 +1,1 @@
-alert("hello");
+(()=>{"use strict";console.log({title:"My first to do",description:"I need to do something",dueDate:"01/03/2024",priority:"high"})})();

@@ -1,1 +1,3 @@
-alert("hello");
+import todo from "./todo";
+
+todo();
