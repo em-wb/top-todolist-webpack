@@ -1,5 +1,5 @@
 import todo from "./todo";
-import project from "./project";
+import createProject from "./project";
 
-todo();
-project();
+const { defaultProject } = createProject();
+todo(defaultProject);

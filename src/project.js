@@ -1,19 +1,18 @@
 export default function project() {
-  function createProject(title, description, dueDate, colour) {
+  function createProject(title, description, colour) {
     return {
       title: title,
       description: description,
-      dueDate: dueDate,
       colour: colour,
     };
   }
 
-  const project1 = createProject(
-    "project one",
-    "my first project",
-    "01/05/2024",
+  const defaultProject = createProject(
+    "Main Project",
+    "All todo lists from all projects",
     "blue"
   );
 
-  console.log(project1);
+  console.log(defaultProject);
+  return { defaultProject: defaultProject };
 }
