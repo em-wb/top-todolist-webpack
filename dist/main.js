@@ -1,1 +1,1 @@
-(()=>{"use strict";console.log({title:"My first to do",description:"I need to do something",dueDate:"01/03/2024",priority:"high"})})();
+(()=>{"use strict";console.log({title:"My first to do",description:"I need to do something",dueDate:"01/03/2024",priority:"high"}),console.log({title:"project one",description:"my first project",dueDate:"01/05/2024",colour:"blue"})})();
