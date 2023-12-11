@@ -1,18 +1,20 @@
-export default function project() {
-  function createProject(title, description, colour) {
-    return {
-      title: title,
-      description: description,
-      colour: colour,
-    };
-  }
+export const allProjects = [];
 
-  const defaultProject = createProject(
-    "Main Project",
-    "All todo lists from all projects",
-    "blue"
-  );
-
-  console.log(defaultProject);
-  return { defaultProject: defaultProject };
+export default function createProject(title, description, colour) {
+  const project = {
+    title: title,
+    description: description,
+    colour: colour,
+    todosArray: [],
+    addToAllProjects: function () {
+      allProjects.push(this);
+    },
+    addTodo: function (todo) {
+      if (todo.assignedProjects.some((project) => project === this.title)) {
+        this.todosArray.push(todo);
+      }
+    },
+  };
+  project.addToAllProjects();
+  return project;
 }
