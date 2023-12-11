@@ -1,21 +1,19 @@
-export default function todo(defaultProject) {
-  function createToDo(title, description, dueDate, defaultProject, priority) {
-    return {
-      title: title,
-      description: description,
-      dueDate: dueDate,
-      project: defaultProject,
-      priority: priority,
-    };
-  }
+export default function createTodo(
+  title,
+  description,
+  dueDate,
+  priority,
+  projects,
+  completed
+) {
+  const todo = {
+    title: title,
+    description: description,
+    dueDate: dueDate,
+    priority: priority,
+    assignedProjects: projects,
+    completed: completed,
+  };
 
-  const toDo1 = createToDo(
-    "My first to do",
-    "I need to do something",
-    "01/03/2024",
-    defaultProject,
-    "high"
-  );
-
-  console.log(toDo1);
+  return todo;
 }
