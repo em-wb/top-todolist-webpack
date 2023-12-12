@@ -1,9 +1,11 @@
 import createProject, { allProjects } from "./project";
 import createTodo from "./todo";
-import { renderCoreUI } from "./ui";
+import { renderHeader, renderFooter } from "./ui";
 import "./styles.css";
 
 document.addEventListener("DOMContentLoaded", () => {
+  renderHeader();
+  renderFooter();
   const defaultProject = createProject(
     "All Projects",
     "Description of my project",
@@ -26,6 +28,4 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("todo", todo1);
   console.log("default", defaultProject);
   console.log("allprojects", allProjects);
-
-  renderCoreUI();
 });

@@ -16,7 +16,4 @@ module.exports = {
   },
   mode: "development",
   devtool: "inline-source-map",
-  resolve: {
-    extensions: ["", ".js", ".jsx", ".css"],
-  },
 };
