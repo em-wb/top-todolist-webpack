@@ -1,4 +1,17 @@
+body {
+  font-size: 14px;
+  padding: 10px;
+}
+
 header {
-  background-color: red;
-  height: 100px;
+  position: sticky;
+  display: flex;
+  justify-content: center;
+}
+
+i {
+}
+
+.titleCtr {
+  text-align: center;
 }
