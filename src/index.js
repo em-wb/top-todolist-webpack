@@ -1,31 +1,32 @@
-import createProject, { allProjects } from "./project";
-import createTodo from "./todo";
-import { renderHeader, renderFooter } from "./ui";
+import createList, { allLists } from "./lists";
+import createTask from "./tasks";
+import { renderHeader, renderFooter, renderList } from "./ui";
 import "./styles.css";
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderHeader();
-  renderFooter();
-  const defaultProject = createProject(
-    "All Projects",
-    "Description of my project",
+  const allTasks = createList(
+    "All Tasks",
+    "All your tasks in one list",
     "blue"
   );
 
-  const todo1 = createTodo(
+  renderFooter();
+  renderHeader(allTasks);
+
+  const task1 = createTask(
     "My first to do",
     "I need to do something",
     "01/03/2024",
     "high",
-    [defaultProject.title],
+    [allTasks.title],
     false
   );
 
-  allProjects.forEach((project) => {
-    project.addTodo(todo1);
+  allLists.forEach((list) => {
+    list.addTask(task1);
   });
 
-  console.log("todo", todo1);
-  console.log("default", defaultProject);
-  console.log("allprojects", allProjects);
+  console.log("task", task1);
+  console.log("all", allTasks);
+  console.log("allLists", allLists);
 });

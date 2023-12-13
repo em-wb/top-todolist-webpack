@@ -1,19 +1,19 @@
-export default function createTodo(
+export default function createTask(
   title,
   description,
   dueDate,
   priority,
-  projects,
+  lists,
   completed
 ) {
-  const todo = {
+  const task = {
     title: title,
     description: description,
     dueDate: dueDate,
     priority: priority,
-    assignedProjects: projects,
+    assignedLists: lists,
     completed: completed,
   };
 
-  return todo;
+  return task;
 }

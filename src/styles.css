@@ -86,6 +86,7 @@ footer {
   opacity: 80%;
 }
 
-.taskListCtr {
+.coreAppCtr {
   grid-row: 2/7
 }
+

@@ -28,15 +28,15 @@ function getIconMenu(menuDiv) {
   });
 }
 
-export function renderHeader() {
+export function renderHeader(project) {
   const header = createElement("header", "header", content);
   const titleCtr = createElement("div", "titleCtr", header);
-  const title = createElement("h1", "title", titleCtr, "All tasks");
+  const title = createElement("h1", "title", titleCtr, project.title);
   const projectDesc = createElement(
     "h2",
     "projectDesc",
     titleCtr,
-    "All your tasks in one list"
+    project.description
   );
   const ellipsisDiv = createElement("div", "ellipsisDiv", header);
   const ellipsis = createElement(
@@ -53,12 +53,12 @@ export function renderFooter() {
   const logo = createElement("h3", "logo", footer, "Absolistly");
 }
 
-export function renderproject() {}
+export function renderproject(project) {}
 
-export function something() {
+export function renderCoreApp() {
   const coreAppCtr = createElement("div", "coreAppCtr", content);
   const todoCtr = createElement("div", "todoCtr", coreAppCtr);
   const completeCtr = createElement("div", "completeCtr", coreAppCtr);
 }
 
-export function rendertodo(todo) {}
+export function rendertodo(todo, project) {}
