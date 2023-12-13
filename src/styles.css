@@ -1,7 +1,7 @@
 :root {
   --main-font: "Montserrat", sans-serif;
   --heading-font: "Montserrat", sans-serif;
-  --heading-weight: 700;
+  --heading-weight: 600;
 }
 
 * {
@@ -25,8 +25,15 @@ header {
   font-weight: var(--heading-weight);
 }
 
+h1,
+h2,
+h3,
+h4 {
+  font-weight: var(--heading-weight);
+}
+
 h2 {
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: 400;
 }
 
@@ -42,17 +49,13 @@ footer {
   justify-content: center;
   text-align: center;
   font-family: var(--main-font);
+  border-radius: 0 0 5px 5px;
+  border-top: solid 1px lightgray;
 }
 
-button {
-  width: 62%;
-  height: 16px;
-  font-size: 1rem;
-  text-align: center;
-  border-radius: 10px;
-  border: none;
-  color: grey;
-  background-color: lightgrey;
+hr {
+  opacity: 30%;
+  margin-bottom: 10px;
 }
 
 .content {
@@ -98,20 +101,34 @@ button {
   font-weight: var(--heading-weight);
   font-style: italic;
   font-size: 0.9rem;
-  opacity: 60%;
+  opacity: 80%;
+  color: aquamarine;
 }
 
 .coreAppCtr {
+  display: flex;
+  flex-direction: column;
+  gap: 20%;
   grid-row: 2/7;
+  margin-bottom: 10px;
 }
 
 .taskItem {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  padding: 10px 0;
 }
 
 .taskInfoDiv {
   grid-column: 1/5;
+}
+
+.taskTitle {
+  padding-left: 3px;
+}
+
+.taskDesc {
+  padding-left: 5px;
 }
 
 .listInfoDiv {
@@ -132,4 +149,61 @@ button {
 .taskCompleteDiv {
   grid-column: 6/8;
   text-align: center;
+}
+
+.priority {
+  border-left: solid 3px red;
+}
+
+.completeBtn {
+  width: 62%;
+  text-align: center;
+  border-radius: 10px;
+  border: none;
+  color: grey;
+  background-color: lightgrey;
+}
+
+.taskCompleteDiv > .completeBtn {
+  height: 16px;
+  font-size: 1rem;
+}
+
+.addNewBtn {
+  position: fixed;
+  width: fit-content;
+  height: fit-content;
+  font-size: 1.8rem;
+  padding: 8px;
+  border-radius: 50%;
+  border: none;
+  right: 39px;
+  bottom: 159px;
+}
+
+.doneItem {
+  display: inline-grid;
+  grid-template-columns: 2fr, 2fr, 1fr, 2fr;
+  font-size: 0.9rem;
+  width: 100%;
+  justify-items: center;
+  padding: 5px 20px 5px 3px;
+}
+
+.doneItem > h5,
+.doneItem > small {
+  justify-self: start;
+  text-decoration: line-through;
+}
+
+.doneItem > .completeBtn {
+  grid-column: 4/5;
+  width: 28px;
+  text-decoration: none;
+  text-align: center;
+  background-color: lightgreen;
+}
+
+.done {
+  opacity: 50%;
 }
