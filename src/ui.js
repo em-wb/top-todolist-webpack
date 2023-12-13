@@ -28,16 +28,11 @@ function getIconMenu(menuDiv) {
   });
 }
 
-export function renderHeader(project) {
+export function renderHeader(list) {
   const header = createElement("header", "header", content);
   const titleCtr = createElement("div", "titleCtr", header);
-  const title = createElement("h1", "title", titleCtr, project.title);
-  const projectDesc = createElement(
-    "h2",
-    "projectDesc",
-    titleCtr,
-    project.description
-  );
+  const title = createElement("h1", "title", titleCtr, list.title);
+  const listDesc = createElement("h2", "listDesc", titleCtr, list.description);
   const ellipsisDiv = createElement("div", "ellipsisDiv", header);
   const ellipsis = createElement(
     "i",
@@ -53,12 +48,24 @@ export function renderFooter() {
   const logo = createElement("h3", "logo", footer, "Absolistly");
 }
 
-export function renderproject(project) {}
-
-export function renderCoreApp() {
+export function renderCoreApp(list) {
+  console.log("render core");
   const coreAppCtr = createElement("div", "coreAppCtr", content);
-  const todoCtr = createElement("div", "todoCtr", coreAppCtr);
+  const tasksCtr = createElement("div", "tasksCtr", coreAppCtr);
   const completeCtr = createElement("div", "completeCtr", coreAppCtr);
+  list.tasksArray.forEach((task) => {
+    const taskItem = createElement("div", "taskItem", tasksCtr);
+    const taskInfoDiv = createElement("div", "taskInfoDiv", taskItem);
+    const listInfoDiv = createElement("div", "listInfoDiv", taskItem);
+    const taskCompleteDiv = createElement("div", "taskCompleteDiv", taskItem);
+    createElement("h4", "taskTitle", taskInfoDiv, task.title);
+    createElement("p", "taskDesc", taskInfoDiv, task.description);
+    createElement("div", "listAssignment", listInfoDiv);
+    createElement("small", "dueDate", taskCompleteDiv, task.dueDate);
+    createElement(
+      "button",
+      ["completeBtn", "fa-solid", "fa-check"],
+      taskCompleteDiv
+    );
+  });
 }
-
-export function rendertodo(todo, project) {}
