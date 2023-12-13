@@ -1,3 +1,10 @@
+const iconList = [
+  { classes: ["fa-solid", "fa-list"], text: "All tasks" },
+  { classes: ["fa-solid", "fa-star"], text: "Today" },
+  { classes: ["fa-solid", "fa-folder-tree"], text: "All Lists" },
+  { classes: ["fa-solid", "fa-user"], text: "Profile" },
+];
+
 function getContentEl() {
   const content = document.getElementById("content");
   return content;
@@ -13,6 +20,14 @@ function createElement(tag, classList, parent, text) {
   return newElement;
 }
 
+function getIconMenu(menuDiv) {
+  iconList.forEach((icon) => {
+    const menuItemDiv = createElement("div", "menuItemDiv", menuDiv);
+    createElement("i", icon.classes, menuItemDiv);
+    createElement("small", "menuText", menuItemDiv, icon.text);
+  });
+}
+
 export function renderHeader() {
   const header = createElement("header", "header", content);
   const titleCtr = createElement("div", "titleCtr", header);
@@ -23,34 +38,27 @@ export function renderHeader() {
     titleCtr,
     "All your tasks in one list"
   );
+  const ellipsisDiv = createElement("div", "ellipsisDiv", header);
   const ellipsis = createElement(
     "i",
     ["fa-solid", "fa-ellipsis-vertical"],
-    header
+    ellipsisDiv
   );
-}
-
-const iconList = [
-  { classes: ["fa-regular", "fa-list"], text: "All tasks" },
-  { classes: ["fa-regular", "fa-star"], text: "Today" },
-  { classes: ["fa-regular", "fa-folder-tree"], text: "All Lists" },
-  { classes: ["fa-regular", "fa-user"], text: "Profile" },
-];
-
-function getIconMenu(iconsDiv) {
-  iconList.forEach((icon) => {
-    createElement("i", icon.classes, iconsDiv);
-    createElement("small", "menuText", iconsDiv, icon.text);
-  });
 }
 
 export function renderFooter() {
   const footer = createElement("footer", null, content);
-  const iconsDiv = createElement("div", "iconsDiv", footer);
+  const menuDiv = createElement("div", "menuDiv", footer);
+  getIconMenu(menuDiv);
   const logo = createElement("h3", "logo", footer, "Absolistly");
-  getIconMenu(iconsDiv);
 }
 
-export function rendersproject() {}
+export function renderproject() {}
 
-export function renderTodo() {}
+export function something() {
+  const coreAppCtr = createElement("div", "coreAppCtr", content);
+  const todoCtr = createElement("div", "todoCtr", coreAppCtr);
+  const completeCtr = createElement("div", "completeCtr", coreAppCtr);
+}
+
+export function rendertodo(todo) {}
