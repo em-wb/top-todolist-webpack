@@ -1,6 +1,7 @@
 import createList, { allLists } from "./lists";
 import createTask from "./tasks";
 import { renderHeader, renderFooter, renderList, renderCoreApp } from "./ui";
+import getEventListeners from "./uiInteractions";
 import "./styles.css";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -41,12 +42,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderFooter();
   renderCoreApp(listAll);
-
   renderHeader(listAll);
+  getEventListeners();
 
   console.log("task", task1, task2, task3);
   console.log("all", listAll);
   console.log("allLists", allLists);
+
+  getEventListeners();
 });
 
 // function addToAllTasks() {
