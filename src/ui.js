@@ -43,10 +43,8 @@ export function renderFooter() {
   const logo = createElement("h3", "logo", footer, "Absolistly");
 }
 
-function renderPriorityStatus(taskTitle, list) {
-  list.tasksArray.forEach((task) => {
-    if (task.priority == true) taskTitle.classList.add("priority");
-  });
+function renderPriorityStatus(taskTitle, task) {
+  if (task.priority === true) taskTitle.classList.add("priority");
 }
 
 function renderCurrentTaskItems(tasksCtr, list) {
@@ -72,7 +70,7 @@ function renderCurrentTaskItems(tasksCtr, list) {
         taskCompleteDiv
       );
       createElement("hr", "break", tasksCtr);
-      renderPriorityStatus(taskTitle, list);
+      renderPriorityStatus(taskTitle, task);
     }
   });
 }

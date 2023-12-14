@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderHeader(listAll);
 
-  console.log("task", task1, task2);
+  console.log("task", task1, task2, task3);
   console.log("all", listAll);
   console.log("allLists", allLists);
 });
