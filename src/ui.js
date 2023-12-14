@@ -1,4 +1,4 @@
-const iconList = [
+const iconListFooter = [
   { classes: ["fa-solid", "fa-list"], text: "All tasks" },
   { classes: ["fa-solid", "fa-star"], text: "Today" },
   { classes: ["fa-solid", "fa-folder-tree"], text: "All Lists" },
@@ -16,7 +16,7 @@ function createElement(tag, classList, parent, text) {
 }
 
 function getIconMenu(menuDiv) {
-  iconList.forEach((icon) => {
+  iconListFooter.forEach((icon) => {
     const menuItemDiv = createElement("div", "menuItemDiv", menuDiv);
     createElement("i", icon.classes, menuItemDiv);
     createElement("small", "menuText", menuItemDiv, icon.text);
@@ -43,17 +43,41 @@ export function renderFooter() {
   const logo = createElement("h3", "logo", footer, "Absolistly");
 }
 
-export function renderCoreApp(list) {
-  console.log("render core");
-  const coreAppCtr = createElement("div", "coreAppCtr", content);
-  const addNewBtn = createElement(
-    "button",
-    ["addNewBtn", "fa-solid", "fa-plus"],
-    content
-  );
-  const tasksCtr = createElement("div", "tasksCtr", coreAppCtr);
-  const doneCtr = createElement("div", "doneCtr", coreAppCtr);
-  createElement("h4", "doneheader", doneCtr, "Done");
+function renderPriorityStatus(taskTitle, list) {
+  list.tasksArray.forEach((task) => {
+    if (task.priority == true) taskTitle.classList.add("priority");
+  });
+}
+
+function renderCurrentTaskItems(tasksCtr, list) {
+  list.tasksArray.forEach((task) => {
+    if (!task.completed) {
+      const taskItem = createElement("div", "taskItem", tasksCtr);
+      const taskInfoDiv = createElement("div", "taskInfoDiv", taskItem);
+      const listInfoDiv = createElement("div", "listInfoDiv", taskItem);
+      const taskCompleteDiv = createElement("div", "taskCompleteDiv", taskItem);
+
+      const taskTitle = createElement(
+        "h4",
+        "taskTitle",
+        taskInfoDiv,
+        task.title
+      );
+      createElement("p", "taskDesc", taskInfoDiv, task.description);
+      createElement("div", "listAssignment", listInfoDiv);
+      createElement("small", "dueDate", taskCompleteDiv, task.dueDate);
+      createElement(
+        "button",
+        ["completeBtn", "fa-solid", "fa-check"],
+        taskCompleteDiv
+      );
+      createElement("hr", "break", tasksCtr);
+      renderPriorityStatus(taskTitle, list);
+    }
+  });
+}
+
+function renderCompletedTaskItems(doneCtr, list) {
   list.tasksArray.forEach((task) => {
     if (task.completed) {
       const doneItem = createElement("div", "doneItem", doneCtr);
@@ -68,30 +92,19 @@ export function renderCoreApp(list) {
       createElement("hr", "break", doneCtr);
     }
   });
+}
 
-  list.tasksArray.forEach((task) => {
-    if (!task.completed) {
-      const taskItem = createElement("div", "taskItem", tasksCtr);
-      const taskInfoDiv = createElement("div", "taskInfoDiv", taskItem);
-      const listInfoDiv = createElement("div", "listInfoDiv", taskItem);
-      const taskCompleteDiv = createElement("div", "taskCompleteDiv", taskItem);
-
-      const taskTitle = createElement(
-        "h4",
-        "taskTitle",
-        taskInfoDiv,
-        task.title
-      );
-      if (task.priority == true) taskTitle.classList.add("priority");
-      createElement("p", "taskDesc", taskInfoDiv, task.description);
-      createElement("div", "listAssignment", listInfoDiv);
-      createElement("small", "dueDate", taskCompleteDiv, task.dueDate);
-      createElement(
-        "button",
-        ["completeBtn", "fa-solid", "fa-check"],
-        taskCompleteDiv
-      );
-      createElement("hr", "break", tasksCtr);
-    }
-  });
+export function renderCoreApp(list) {
+  console.log("render core");
+  const coreAppCtr = createElement("div", "coreAppCtr", content);
+  const addNewBtn = createElement(
+    "button",
+    ["addNewBtn", "fa-solid", "fa-plus"],
+    content
+  );
+  const tasksCtr = createElement("div", "tasksCtr", coreAppCtr);
+  const doneCtr = createElement("div", "doneCtr", coreAppCtr);
+  createElement("h4", "doneheader", doneCtr, "Done");
+  renderCompletedTaskItems(doneCtr, list);
+  renderCurrentTaskItems(tasksCtr, list);
 }
