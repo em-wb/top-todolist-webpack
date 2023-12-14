@@ -26,7 +26,7 @@ function createElement(tag, classList, parentEl, text, attributes) {
 const taskDialogElements = [
   {
     elements: [
-      ["h1", null, null, "NewTask", [["id", "taskDialogH1"]]],
+      ["h1", null, null, "New Task", [["id", "taskDialogH1"]]],
       [
         "button",
         ["closeBtn", "fa-solid", "fa-xmark"],
@@ -48,6 +48,8 @@ const taskDialogElements = [
           ["id", "inputTaskTitle"],
           ["type", "text"],
           ["required", ""],
+          ["placeholder", "Do the grocery shop"],
+          ["maxlength", "50"],
         ],
       ],
     ],
@@ -56,20 +58,22 @@ const taskDialogElements = [
     elements: [
       ["h2", null, null, "Description (optional)"],
       [
-        "input",
+        "textarea",
         "inputText",
         null,
         "",
         [
           ["id", "inputTaskDesc"],
-          ["type", "text"],
+          ["rows", "2"],
+          ["placeholder", "Eggs, milk, cereal, bread, bananas"],
+          ["maxlength", "250"],
         ],
       ],
     ],
   },
   {
     elements: [
-      ["h2", null, null, "Due Date"],
+      ["h2", null, null, "Due Date (optional)"],
       [
         "input",
         "inputDate",
@@ -91,7 +95,7 @@ const taskDialogElements = [
   },
   {
     elements: [
-      ["h2", null, null, "List"],
+      ["h2", null, null, "List (optional)"],
       [
         "input",
         null,
