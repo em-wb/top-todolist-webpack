@@ -1,6 +1,7 @@
 import createList, { allLists } from "./lists";
 import createTask from "./tasks";
-import { renderHeader, renderFooter, renderCoreApp } from "./ui";
+import { renderFooter, renderAppCtr, renderCoreApp } from "./ui";
+import createElement from "./createElement";
 import { getTaskDialogELs } from "./taskDialog";
 import "./styles.css";
 
@@ -39,21 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
     list.addTask(task2);
     list.addTask(task3);
   });
-
   renderCoreApp(listAll);
-  renderHeader(listAll);
-  renderFooter();
+
   getTaskDialogELs();
 
   console.log("task", task1, task2, task3);
   console.log("all", listAll);
   console.log("allLists", allLists);
 });
-
-// function addToAllTasks() {
-//   list.tasksArray.forEach((task) => {
-//     allLists.forEach((list) => {
-//       list.addTask(task);
-//     });
-//   });
-// }

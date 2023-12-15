@@ -1,4 +1,5 @@
 import createElement from "./createElement";
+import { allLists } from "./lists";
 import createNewTaskDialog from "./taskDialog";
 
 const iconListFooter = [
@@ -85,8 +86,14 @@ function renderCompletedTaskItems(doneCtr, list) {
 }
 
 export function renderCoreApp(list) {
-  console.log("render core");
-  const coreAppCtr = createElement("div", "coreAppCtr", content);
+  while (content.firstChild) {
+    content.removeChild(content.firstChild);
+  }
+  renderHeader(list);
+  const coreAppCtr = createElement("div", "coreAppCtr", content, "", [
+    ["id", "coreAppCtr"],
+  ]);
+
   const addNewBtn = createElement(
     "button",
     ["addNewBtn", "fa-solid", "fa-plus"],
@@ -100,4 +107,5 @@ export function renderCoreApp(list) {
   renderCompletedTaskItems(doneCtr, list);
   renderCurrentTaskItems(tasksCtr, list);
   createNewTaskDialog();
+  renderFooter(list);
 }
