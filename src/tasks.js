@@ -11,9 +11,10 @@ export default function createTask(
     description: description,
     dueDate: dueDate,
     priority: priority,
-    assignedLists: lists,
+    assignedLists: Array.isArray(lists) ? lists : [lists],
     completed: completed,
   };
 
+  console.log(task);
   return task;
 }
