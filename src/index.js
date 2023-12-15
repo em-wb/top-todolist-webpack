@@ -1,18 +1,18 @@
 import createList, { allLists } from "./lists";
 import createTask from "./tasks";
-import { renderHeader, renderFooter, renderList, renderCoreApp } from "./ui";
-import getEventListeners from "./uiInteractions";
+import { renderHeader, renderFooter, renderCoreApp } from "./ui";
+import { getTaskDialogELs } from "./taskDialog";
 import "./styles.css";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const listAll = createList("All Tasks", "All your tasks in one list", "blue");
+  const listAll = createList("All tasks", "All your tasks in one list", "blue");
 
   const task1 = createTask(
     "My first to do",
     "I need to do something",
     "01 Mar 24",
     true,
-    [listAll.title],
+    listAll.title,
     false
   );
 
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "I need to do something",
     "01 Jan 24",
     false,
-    [listAll.title],
+    listAll.title,
     true
   );
 
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     null,
     "19 Dec 23",
     false,
-    [listAll.title],
+    "All tasks",
     false
   );
 
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCoreApp(listAll);
   renderHeader(listAll);
   renderFooter();
-  getEventListeners();
+  getTaskDialogELs();
 
   console.log("task", task1, task2, task3);
   console.log("all", listAll);

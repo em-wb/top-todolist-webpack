@@ -1,4 +1,6 @@
 import createElement from "./createElement";
+import { allLists } from "./lists";
+import createTask from "./tasks";
 
 const taskDialogElements = [
   {
@@ -18,7 +20,7 @@ const taskDialogElements = [
       ["label", null, null, "Title"],
       [
         "input",
-        "inputText",
+        "input",
         null,
         "",
         [
@@ -36,7 +38,7 @@ const taskDialogElements = [
       ["label", null, null, "Description (optional)"],
       [
         "textarea",
-        "inputText",
+        "input",
         null,
         "",
         [
@@ -50,10 +52,10 @@ const taskDialogElements = [
   },
   {
     elements: [
-      ["label", null, null, "Due Date (optional)"],
+      ["label", "textInput", null, "Due Date (optional)"],
       [
         "input",
-        "inputDate",
+        "input",
         null,
         "",
         [
@@ -65,9 +67,19 @@ const taskDialogElements = [
   },
   {
     elements: [
-      ["label", null, null, "Priority"],
-      ["button", "priorityBtn", null, "Normal", [["id", "normalPriorityBtn"]]],
-      ["button", "priorityBtn", null, "High", [["id", "highPriorityBtn"]]],
+      ["p", null, null, "Priority"],
+
+      [
+        "input",
+        "highPriority",
+        null,
+        "",
+        [
+          ["id", "highPriorityTask"],
+          ["type", "checkbox"],
+        ],
+      ],
+      ["label", null, null, "High", [["for", "highPriorityTask"]]],
     ],
   },
   {
@@ -124,4 +136,49 @@ export default function createNewTaskDialog() {
   //PLACEHOLDER... TO LOOP THROUGH LISTS LATER
   const dropdown = document.getElementById("listOfLists");
   createElement("option", null, dropdown, "", [["value", "All tasks"]]);
+}
+
+export function getTaskDialogELs() {
+  const taskDialog = document.getElementById("taskDialog");
+  const closeTaskDialog = document.getElementById("closeTaskDialog");
+  const newTaskForm = document.getElementById("newTaskForm");
+  const submitTaskBtn = document.getElementById("submitTaskBtn");
+  // const taskTitle = document.getElementById("inputTaskTitle")
+  // const taskDesc = document.getElementById("inputTaskDesc")
+  // const taskDate = document.getElementById("inputTaskDate")
+  // const normalPriorityBtn = document.getElementById("normalPriorityBtn")
+
+  document.getElementById("addNewBtn").addEventListener("click", (e) => {
+    e.preventDefault();
+    taskDialog.showModal();
+  });
+
+  closeTaskDialog.addEventListener("click", (e) => {
+    newTaskForm.reset();
+    taskDialog.close();
+  });
+
+  submitTaskBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    const newTask = createTask(
+      newTaskForm.elements["inputTaskTitle"].value,
+      newTaskForm.elements["inputTaskDesc"].value,
+      newTaskForm.elements["inputTaskDate"].value,
+      newTaskForm.elements["highPriorityTask"].checked,
+      newTaskForm.elements["dropdownList"].value,
+      false
+    );
+    console.log(newTask);
+
+    allLists.forEach((list) => {
+      console.log(list);
+      list.addTask(newTask);
+    });
+    console.log(allLists);
+    newTaskForm.reset();
+    taskDialog.close();
+
+    // myLibrary.push(nextBook);
+    // displayBooks(myLibrary);
+  });
 }
