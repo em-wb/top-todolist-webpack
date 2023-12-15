@@ -1,10 +1,13 @@
+import { renderCoreApp } from "./ui";
+
 export const allLists = [];
 
-function addToAllLists() {
+function addToAllListsArray() {
   allLists.push(this);
 }
 
 function addTask(task) {
+  console.log("task in addtask", task.assignedLists);
   if (task.assignedLists.some((list) => list === this.title)) {
     this.tasksArray.push(task);
   }
@@ -16,11 +19,11 @@ export default function createList(title, description, colour) {
     description: description,
     colour: colour,
     tasksArray: [],
-    addToAllLists: addToAllLists,
+    addToAllListsArray: addToAllListsArray,
     addTask: addTask,
   };
 
-  list.addToAllLists();
+  list.addToAllListsArray();
 
   return list;
 }
