@@ -11,6 +11,10 @@ function addTask(task) {
   if (task.assignedLists.some((list) => list === this.title)) {
     this.tasksArray.push(task);
   }
+  const findListToRender = task.assignedLists[0];
+  allLists.forEach((list) => {
+    if (list.title === findListToRender) renderCoreApp(list);
+  });
 }
 
 export default function createList(title, description, colour) {
