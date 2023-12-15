@@ -143,10 +143,6 @@ export function getTaskDialogELs() {
   const closeTaskDialog = document.getElementById("closeTaskDialog");
   const newTaskForm = document.getElementById("newTaskForm");
   const submitTaskBtn = document.getElementById("submitTaskBtn");
-  // const taskTitle = document.getElementById("inputTaskTitle")
-  // const taskDesc = document.getElementById("inputTaskDesc")
-  // const taskDate = document.getElementById("inputTaskDate")
-  // const normalPriorityBtn = document.getElementById("normalPriorityBtn")
 
   document.getElementById("addNewBtn").addEventListener("click", (e) => {
     e.preventDefault();
@@ -168,17 +164,13 @@ export function getTaskDialogELs() {
       newTaskForm.elements["dropdownList"].value,
       false
     );
-    console.log(newTask);
 
     allLists.forEach((list) => {
       console.log(list);
       list.addTask(newTask);
     });
-    console.log(allLists);
+
     newTaskForm.reset();
     taskDialog.close();
-
-    // myLibrary.push(nextBook);
-    // displayBooks(myLibrary);
   });
 }

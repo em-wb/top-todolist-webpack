@@ -1,6 +1,6 @@
 import createElement from "./createElement";
 import { allLists } from "./lists";
-import createNewTaskDialog from "./taskDialog";
+import createNewTaskDialog, { getTaskDialogELs } from "./taskDialog";
 
 const iconListFooter = [
   { classes: ["fa-solid", "fa-list"], text: "All tasks" },
@@ -108,4 +108,5 @@ export function renderCoreApp(list) {
   renderCurrentTaskItems(tasksCtr, list);
   createNewTaskDialog();
   renderFooter(list);
+  getTaskDialogELs();
 }

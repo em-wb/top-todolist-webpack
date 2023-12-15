@@ -42,8 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   renderCoreApp(listAll);
 
-  getTaskDialogELs();
-
   console.log("task", task1, task2, task3);
   console.log("all", listAll);
   console.log("allLists", allLists);
