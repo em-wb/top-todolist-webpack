@@ -1,5 +1,6 @@
 import { renderCoreApp } from "./ui";
 
+let listToRender = "All tasks";
 export const allLists = [];
 
 function addToAllListsArray() {
@@ -11,9 +12,23 @@ function addTask(task) {
   if (task.assignedLists.some((list) => list === this.title)) {
     this.tasksArray.push(task);
   }
-  const findListToRender = task.assignedLists[0];
+  listToRender = task.assignedLists[0];
+  findListToRender(listToRender);
+}
+
+function removeTask(task) {
+  listToRender = task.assignedLists[0];
   allLists.forEach((list) => {
-    if (list.title === findListToRender) renderCoreApp(list);
+    if (list[i] === task) {
+      list.splice(i, 1);
+    }
+  });
+  findListToRender(listToRender);
+}
+
+function findListToRender(listToRender) {
+  allLists.forEach((list) => {
+    if (list.title === listToRender) renderCoreApp(list);
   });
 }
 
@@ -25,6 +40,7 @@ export default function createList(title, description, colour) {
     tasksArray: [],
     addToAllListsArray: addToAllListsArray,
     addTask: addTask,
+    removeTask: removeTask,
   };
 
   list.addToAllListsArray();

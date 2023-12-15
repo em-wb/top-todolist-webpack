@@ -1,6 +1,7 @@
 import createElement from "./createElement";
 import { allLists } from "./lists";
 import createTask from "./tasks";
+import { renderCoreApp } from "./ui";
 
 let newTask = true;
 let editedTask = null;
@@ -155,8 +156,9 @@ export function openDialogForThisTask(taskToOpen) {
   }
 }
 
-function removeOldVersion(editedTask) {
+function removeTask(editedTask) {
   editedTask.assignedLists = [];
+  editedTask = null;
 }
 
 export function getTaskDialogELs() {
@@ -164,6 +166,7 @@ export function getTaskDialogELs() {
   const closeTaskDialog = document.getElementById("closeTaskDialog");
   const newTaskForm = document.getElementById("newTaskForm");
   const submitTaskBtn = document.getElementById("submitTaskBtn");
+  const deleteTaskBtn = document.getElementById("deleteTaskBtn");
 
   document.getElementById("addNewBtn").addEventListener("click", (e) => {
     e.preventDefault();
@@ -178,7 +181,7 @@ export function getTaskDialogELs() {
   submitTaskBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (!newTask) {
-      removeOldVersion(editedTask);
+      removeTask(editedTask);
     } else {
       const newTask = createTask(
         newTaskForm.elements["inputTaskTitle"].value,
@@ -194,7 +197,15 @@ export function getTaskDialogELs() {
         list.addTask(newTask);
       });
     }
+    newTaskForm.reset();
+    taskDialog.close();
+  });
 
+  deleteTaskBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (editedTask) {
+      removeTask(editedTask);
+    }
     newTaskForm.reset();
     taskDialog.close();
   });
