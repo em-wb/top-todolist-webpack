@@ -40,16 +40,14 @@ document.addEventListener("DOMContentLoaded", () => {
     list.addTask(task3);
   });
 
-  renderFooter();
   renderCoreApp(listAll);
   renderHeader(listAll);
+  renderFooter();
   getEventListeners();
 
   console.log("task", task1, task2, task3);
   console.log("all", listAll);
   console.log("allLists", allLists);
-
-  getEventListeners();
 });
 
 // function addToAllTasks() {
