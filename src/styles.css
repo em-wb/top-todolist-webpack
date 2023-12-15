@@ -158,19 +158,28 @@ textarea,
   padding-left: 5px;
 }
 
-.listInfoDiv {
+.moreDiv {
   display: flex;
   justify-content: end;
   align-items: end;
+  gap: 19%;
   grid-column: 5/6;
 }
 
-.listAssignment {
+.listAssignment,
+.editTask {
   border-radius: 50%;
   height: 16px;
   width: 16px;
   margin-bottom: 3px;
+}
+
+.listAssignment {
   background-color: blue;
+}
+.editTask {
+  color: grey;
+  opacity: 80%;
 }
 
 .taskCompleteDiv {

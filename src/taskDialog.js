@@ -2,6 +2,8 @@ import createElement from "./createElement";
 import { allLists } from "./lists";
 import createTask from "./tasks";
 
+let newTask = true;
+let editedTask = null;
 const taskDialogElements = [
   {
     elements: [
@@ -119,11 +121,11 @@ export default function createNewTaskDialog() {
   const dialog = createElement("dialog", "taskDialog", content, "", [
     ["id", "taskDialog"],
   ]);
-  const form = createElement("form", "newTaskForm", dialog, "", [
+  const newTaskForm = createElement("form", "newTaskForm", dialog, "", [
     ["id", "newTaskForm"],
   ]);
   for (let i = 0; i < 7; i++) {
-    const taskDialogDiv = createElement("div", "dialogDivs", form, "", [
+    const taskDialogDiv = createElement("div", "dialogDivs", newTaskForm, "", [
       ["id", `taskDialogDiv${i}`],
     ]);
     if (taskDialogElements[i]) {
@@ -136,6 +138,25 @@ export default function createNewTaskDialog() {
   //PLACEHOLDER... TO LOOP THROUGH LISTS LATER
   const dropdown = document.getElementById("listOfLists");
   createElement("option", null, dropdown, "", [["value", "All tasks"]]);
+}
+
+export function openDialogForThisTask(taskToOpen) {
+  if (taskToOpen) {
+    const newTaskForm = document.getElementById("newTaskForm");
+    const taskDialog = document.getElementById("taskDialog");
+    (newTaskForm.elements["inputTaskTitle"].value = taskToOpen.title),
+      (newTaskForm.elements["inputTaskDesc"].value = taskToOpen.description);
+    newTaskForm.elements["inputTaskDate"].value = taskToOpen.dueDate;
+    newTaskForm.elements["highPriorityTask"].checked = taskToOpen.priority;
+    newTaskForm.elements["dropdownList"].value = taskToOpen.assignedLists[0];
+    newTask = false;
+    editedTask = taskToOpen;
+    taskDialog.showModal();
+  }
+}
+
+function removeOldVersion(editedTask) {
+  editedTask.assignedLists = [];
 }
 
 export function getTaskDialogELs() {
@@ -156,19 +177,23 @@ export function getTaskDialogELs() {
 
   submitTaskBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    const newTask = createTask(
-      newTaskForm.elements["inputTaskTitle"].value,
-      newTaskForm.elements["inputTaskDesc"].value,
-      newTaskForm.elements["inputTaskDate"].value,
-      newTaskForm.elements["highPriorityTask"].checked,
-      newTaskForm.elements["dropdownList"].value,
-      false
-    );
+    if (!newTask) {
+      removeOldVersion(editedTask);
+    } else {
+      const newTask = createTask(
+        newTaskForm.elements["inputTaskTitle"].value,
+        newTaskForm.elements["inputTaskDesc"].value,
+        newTaskForm.elements["inputTaskDate"].value,
+        newTaskForm.elements["highPriorityTask"].checked,
+        newTaskForm.elements["dropdownList"].value,
+        false
+      );
 
-    allLists.forEach((list) => {
-      console.log(list);
-      list.addTask(newTask);
-    });
+      allLists.forEach((list) => {
+        console.log(list);
+        list.addTask(newTask);
+      });
+    }
 
     newTaskForm.reset();
     taskDialog.close();

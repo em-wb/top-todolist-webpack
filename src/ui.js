@@ -1,6 +1,9 @@
 import createElement from "./createElement";
 import { allLists } from "./lists";
-import createNewTaskDialog, { getTaskDialogELs } from "./taskDialog";
+import createNewTaskDialog, {
+  getTaskDialogELs,
+  openDialogForThisTask,
+} from "./taskDialog";
 
 const iconListFooter = [
   { classes: ["fa-solid", "fa-list"], text: "All tasks" },
@@ -42,11 +45,12 @@ function renderPriorityStatus(taskTitle, task) {
 }
 
 function renderCurrentTaskItems(tasksCtr, list) {
+  let i = 0;
   list.tasksArray.forEach((task) => {
     if (!task.completed) {
-      const taskItem = createElement("div", "taskItem", tasksCtr);
+      const taskItem = createElement("div", "taskItem", tasksCtr, "");
       const taskInfoDiv = createElement("div", "taskInfoDiv", taskItem);
-      const listInfoDiv = createElement("div", "listInfoDiv", taskItem);
+      const moreDiv = createElement("div", "moreDiv", taskItem);
       const taskCompleteDiv = createElement("div", "taskCompleteDiv", taskItem);
       const taskTitle = createElement(
         "h4",
@@ -55,7 +59,15 @@ function renderCurrentTaskItems(tasksCtr, list) {
         task.title
       );
       createElement("p", "taskDesc", taskInfoDiv, task.description);
-      createElement("div", "listAssignment", listInfoDiv);
+      const editTask = createElement(
+        "div",
+        ["editTask", "fa-solid", "fa-pen"],
+        moreDiv,
+        "",
+        [["data-index-number", i]]
+      );
+
+      createElement("div", "listAssignment", moreDiv);
       createElement("small", "dueDate", taskCompleteDiv, task.dueDate);
       createElement(
         "button",
@@ -64,6 +76,21 @@ function renderCurrentTaskItems(tasksCtr, list) {
       );
       createElement("hr", "break", tasksCtr);
       renderPriorityStatus(taskTitle, task);
+      i++;
+    }
+  });
+}
+
+function openThisTaskEL(tasksCtr) {
+  tasksCtr.addEventListener("click", (e) => {
+    console.log("openthis");
+    if (e.target.classList == "editTask fa-solid fa-pen") {
+      console.log("open");
+      const itemIndex = e.target.getAttribute("data-index-number");
+      console.log(itemIndex);
+      const taskToOpen = allLists[0].tasksArray[itemIndex];
+      console.log(taskToOpen);
+      openDialogForThisTask(taskToOpen);
     }
   });
 }
@@ -105,8 +132,10 @@ export function renderCoreApp(list) {
   const doneCtr = createElement("div", "doneCtr", coreAppCtr);
   createElement("h4", "doneheader", doneCtr, "Done");
   renderCompletedTaskItems(doneCtr, list);
+  // getCompletedTaskELs();
   renderCurrentTaskItems(tasksCtr, list);
-  createNewTaskDialog();
   renderFooter(list);
+  createNewTaskDialog();
   getTaskDialogELs();
+  openThisTaskEL(tasksCtr);
 }
