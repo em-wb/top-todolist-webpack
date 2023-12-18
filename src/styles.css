@@ -244,8 +244,14 @@ textarea,
   text-decoration: line-through;
 }
 
-.hidden {
-  display: none;
+.overdue {
+  color: coral;
+  font-weight: 600;
+}
+
+.today {
+  font-weight: 600;
+  color: black;
 }
 
 /* dialog */

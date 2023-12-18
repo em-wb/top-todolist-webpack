@@ -4,6 +4,7 @@ import createNewTaskDialog, {
   getTaskDialogELs,
   openDialogForThisTask,
 } from "./taskDialog";
+import formatDueDates from "./dates";
 
 const iconListFooter = [
   { classes: ["fa-solid", "fa-list"], text: "All tasks" },
@@ -84,7 +85,7 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
   });
 }
 
-function openThisTaskEL(tasksCtr) {
+function editThisTaskEL(tasksCtr) {
   tasksCtr.addEventListener("click", (e) => {
     console.log("openthis");
     if (e.target.classList == "editTask fa-solid fa-pen") {
@@ -97,25 +98,6 @@ function openThisTaskEL(tasksCtr) {
     }
   });
 }
-
-function moveDoneItems(tasksCtr, list) {}
-
-// function renderCompletedTaskItems(doneCtr, list) {
-//   list.tasksArray.forEach((task) => {
-//     if (task.completed) {
-//       const doneItem = createElement("div", "doneItem", doneCtr);
-//       createElement("h5", "done", doneItem, task.title);
-//       createElement("small", "done", doneItem, task.dueDate);
-//       createElement("div", ["listAssignment", "done"], doneItem);
-//       createElement(
-//         "button",
-//         ["completeBtn", "fa-solid", "fa-check", "done"],
-//         doneItem
-//       );
-//       createElement("hr", "break", doneCtr);
-//     }
-//   });
-// }
 
 export function renderCoreApp(list) {
   while (content.firstChild) {
@@ -140,5 +122,6 @@ export function renderCoreApp(list) {
   renderFooter(list);
   createNewTaskDialog();
   getTaskDialogELs();
-  openThisTaskEL(tasksCtr);
+  editThisTaskEL(tasksCtr);
+  formatDueDates();
 }

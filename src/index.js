@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const task1 = createTask(
     "My first to do",
     "I need to do something",
-    "01 Mar 24",
+    "2023-11-13",
     true,
     listAll.title,
     false
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const task2 = createTask(
     "My second to do",
     "I need to do something",
-    "01 Jan 24",
+    "2023-12-20",
     false,
     listAll.title,
     true
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const task3 = createTask(
     "Task 3",
     null,
-    "19 Dec 23",
+    "2023-12-27",
     false,
     "All tasks",
     false
