@@ -151,10 +151,29 @@ function renderListItems() {
 }
 
 export function renderAllLists() {
+  clearContents();
   renderHeader("", true);
   renderListItems();
   renderFooter();
-  renderToday();
+  renderMenuEvLis();
+}
+
+function renderProfileInfo() {
+  const profileCtr = createElement("div", "profile-ctr", content);
+  console.log(profileCtr);
+  createElement("h1", "user-name", profileCtr, "UserName: Vivi90");
+  createElement(
+    "i",
+    ["profile-pic", "fa-solid", "fa-person-burst"],
+    profileCtr
+  );
+}
+
+export function renderProfile() {
+  clearContents();
+  renderProfileInfo();
+  renderFooter();
+  renderMenuEvLis();
 }
 
 export function renderCoreApp(list) {

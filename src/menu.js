@@ -1,6 +1,11 @@
 import createList, { allLists } from "./lists";
 import { isToday } from "date-fns";
-import { renderCoreApp, clearContents, renderAllLists } from "./ui";
+import {
+  renderCoreApp,
+  clearContents,
+  renderAllLists,
+  renderProfile,
+} from "./ui";
 
 export default function renderMenuEvLis() {
   document.getElementById("menuItem2").addEventListener("click", () => {
@@ -23,5 +28,10 @@ export default function renderMenuEvLis() {
   document.getElementById("menuItem3").addEventListener("click", () => {
     clearContents();
     renderAllLists();
+  });
+
+  document.getElementById("menuItem4").addEventListener("click", () => {
+    clearContents();
+    renderProfile();
   });
 }
