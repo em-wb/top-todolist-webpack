@@ -143,9 +143,15 @@ function renderListItems() {
   const listCtr = createElement("div", "list-ctr", content, "");
   allLists.forEach((list) => {
     const listItem = createElement("div", "list-item", listCtr);
-    createElement("h4", "listTitle", listItem, list.title);
-    createElement("p", "list-desc", listItem, list.description);
-    createElement("div", ["list-colour", list.colour], listItem);
+    const textCtr = createElement("div", "text-ctr", listItem);
+    createElement("h4", "listTitle", textCtr, list.title);
+    createElement("p", "list-desc", textCtr, list.description);
+    const listColor = createElement(
+      "div",
+      ["list-colour", list.colour],
+      listItem
+    );
+    listColor.style.backgroundColor = list.colour;
   });
   createElement("hr", "break", listCtr);
 }
@@ -161,7 +167,7 @@ export function renderAllLists() {
 function renderProfileInfo() {
   const profileCtr = createElement("div", "profile-ctr", content);
   console.log(profileCtr);
-  createElement("h1", "user-name", profileCtr, "UserName: Vivi90");
+  createElement("h1", "user-name", profileCtr, "User: Vivi90");
   createElement(
     "i",
     ["profile-pic", "fa-solid", "fa-person-burst"],

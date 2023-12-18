@@ -167,7 +167,8 @@ textarea,
 }
 
 .listAssignment,
-.editTask {
+.editTask,
+.list-colour {
   border-radius: 50%;
   height: 16px;
   width: 16px;
@@ -313,4 +314,28 @@ label {
 .input {
   padding: 5px;
   width: 100%;
+}
+
+.profile-ctr {
+  grid-row: 3/5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.profile-ctr > i {
+  margin-top: 3%;
+  font-size: 3rem;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-colour {
+  align-self: center;
+  margin-right: 10%;
 }
