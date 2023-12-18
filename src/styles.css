@@ -220,19 +220,9 @@ textarea,
   bottom: 159px;
 }
 
-.doneItem {
-  display: inline-grid;
-  grid-template-columns: 2fr, 2fr, 1fr, 2fr;
-  font-size: 0.9rem;
-  width: 100%;
-  justify-items: center;
-  padding: 5px 20px 5px 3px;
-}
-
-.doneItem > h5,
-.doneItem > small {
-  justify-self: start;
-  text-decoration: line-through;
+.doneCtr {
+  color: black;
+  font-weight: 400;
 }
 
 .doneBtn {

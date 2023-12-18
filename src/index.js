@@ -3,6 +3,7 @@ import createTask from "./tasks";
 import { renderFooter, renderAppCtr, renderCoreApp } from "./ui";
 import createElement from "./createElement";
 import { getTaskDialogELs } from "./taskDialog";
+import renderToday from "./today";
 import "./styles.css";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -29,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const task3 = createTask(
     "Task 3",
     null,
-    "2023-12-27",
+    "2023-12-18",
     false,
     "All tasks",
     false
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     list.addTask(task3);
   });
   renderCoreApp(listAll);
+  renderToday();
 
   console.log("task", task1, task2, task3);
   console.log("all", listAll);

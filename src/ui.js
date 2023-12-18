@@ -14,10 +14,14 @@ const iconListFooter = [
 ];
 
 function getIconMenu(menuDiv) {
+  let i = 1;
   iconListFooter.forEach((icon) => {
-    const menuItemDiv = createElement("div", "menuItemDiv", menuDiv);
+    const menuItemDiv = createElement("div", "menuItemDiv", menuDiv, "", [
+      ["id", `menuItem${i}`],
+    ]);
     createElement("i", icon.classes, menuItemDiv);
     createElement("small", "menuText", menuItemDiv, icon.text);
+    i++;
   });
 }
 
