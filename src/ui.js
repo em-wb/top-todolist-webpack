@@ -57,6 +57,7 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
     const moreDiv = createElement("div", "moreDiv", taskItem);
     const taskCompleteDiv = createElement("div", "taskCompleteDiv", taskItem);
     const taskTitle = createElement("h4", "taskTitle", taskInfoDiv, task.title);
+
     createElement("p", "taskDesc", taskInfoDiv, task.description);
     const editTask = createElement(
       "div",
@@ -65,12 +66,16 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
       "",
       [["data-index-number", i]]
     );
-
     createElement("div", "listAssignment", moreDiv);
     createElement("small", "dueDate", taskCompleteDiv, task.dueDate);
     createElement(
       "button",
-      ["completeBtn", "fa-solid", "fa-check"],
+      [
+        "completeBtn",
+        "fa-solid",
+        "fa-check",
+        task.completed ? "doneBtn" : "todoBtn",
+      ],
       taskCompleteDiv
     );
     createElement("hr", "break", tasksCtr);

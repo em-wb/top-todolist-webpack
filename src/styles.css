@@ -197,6 +197,9 @@ textarea,
   border-radius: 10px;
   border: none;
   color: grey;
+}
+
+.todoBtn {
   background-color: lightgrey;
 }
 
@@ -232,16 +235,17 @@ textarea,
   text-decoration: line-through;
 }
 
-.doneItem > .completeBtn {
-  grid-column: 4/5;
-  width: 28px;
-  text-decoration: none;
-  text-align: center;
+.doneBtn {
   background-color: lightgreen;
 }
 
-.done {
+.doneCtr > .taskItem {
   opacity: 50%;
+  text-decoration: line-through;
+}
+
+.hidden {
+  display: none;
 }
 
 /* dialog */
