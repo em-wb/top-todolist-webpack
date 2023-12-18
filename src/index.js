@@ -3,7 +3,7 @@ import createTask from "./tasks";
 import { renderFooter, renderAppCtr, renderCoreApp } from "./ui";
 import createElement from "./createElement";
 import { getTaskDialogELs } from "./taskDialog";
-import renderToday from "./today";
+import renderToday from "./menu";
 import "./styles.css";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -42,13 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
     list.addTask(task3);
   });
   renderCoreApp(listAll);
-  renderToday();
 
   //move this
-  document.getElementById("menuItem1").addEventListener("click", () => {
-    console.log("hellolistall");
-    renderCoreApp(listAll);
-  });
 
   console.log("task", task1, task2, task3);
   console.log("all", listAll);

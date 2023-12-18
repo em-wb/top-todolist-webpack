@@ -1,11 +1,12 @@
 import createElement from "./createElement";
-import { allLists, removeTask } from "./lists";
+import createList, { allLists, removeTask } from "./lists";
 import createNewTaskDialog, {
   getTaskDialogELs,
   openDialogForThisTask,
 } from "./taskDialog";
 import formatDueDates from "./dates";
-import renderToday, { renderAllTasks } from "./today";
+import renderToday, { renderAllTasks } from "./menu";
+import renderMenuEvLis from "./menu";
 
 const iconListFooter = [
   { classes: ["fa-solid", "fa-list"], text: "All tasks" },
@@ -26,11 +27,21 @@ function getIconMenu(menuDiv) {
   });
 }
 
-export function renderHeader(list) {
+export function renderHeader(list, allLists) {
   const header = createElement("header", "header", content);
   const titleCtr = createElement("div", "titleCtr", header);
-  const title = createElement("h1", "title", titleCtr, list.title);
-  const listDesc = createElement("h2", "listDesc", titleCtr, list.description);
+  const title = createElement(
+    "h1",
+    "title",
+    titleCtr,
+    allLists ? "All Lists" : list.title
+  );
+  const listDesc = createElement(
+    "h2",
+    "listDesc",
+    titleCtr,
+    allLists ? "" : list.description
+  );
   const ellipsisDiv = createElement("div", "ellipsisDiv", header);
   const ellipsis = createElement(
     "i",
@@ -104,7 +115,7 @@ function editThisTaskEL(tasksCtr) {
   });
 }
 
-function clearContents() {
+export function clearContents() {
   while (content.firstChild) {
     content.removeChild(content.firstChild);
   }
@@ -128,6 +139,24 @@ function renderCoreAppCtr() {
   return { tasksCtr, doneCtr };
 }
 
+function renderListItems() {
+  const listCtr = createElement("div", "list-ctr", content, "");
+  allLists.forEach((list) => {
+    const listItem = createElement("div", "list-item", listCtr);
+    createElement("h4", "listTitle", listItem, list.title);
+    createElement("p", "list-desc", listItem, list.description);
+    createElement("div", ["list-colour", list.colour], listItem);
+  });
+  createElement("hr", "break", listCtr);
+}
+
+export function renderAllLists() {
+  renderHeader("", true);
+  renderListItems();
+  renderFooter();
+  renderToday();
+}
+
 export function renderCoreApp(list) {
   clearContents();
 
@@ -139,6 +168,5 @@ export function renderCoreApp(list) {
   getTaskDialogELs();
   editThisTaskEL(tasksCtr);
   formatDueDates();
-  renderToday();
-  renderAllTasks();
+  renderMenuEvLis();
 }
