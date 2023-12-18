@@ -1,6 +1,7 @@
 import { renderCoreApp } from "./ui";
 
 let listToRender = "All tasks";
+
 export const allLists = [];
 
 function addToAllListsArray() {
@@ -16,13 +17,11 @@ function addTask(task) {
   findListToRender(listToRender);
 }
 
-function removeTask(task) {
-  listToRender = task.assignedLists[0];
-  allLists.forEach((list) => {
-    if (list[i] === task) {
-      list.splice(i, 1);
-    }
-  });
+export function removeTask(taskToDelete, itemIndex) {
+  console.log("HEY", itemIndex, taskToDelete);
+  listToRender = taskToDelete.assignedLists[0]; //PLACEHOLDER
+  allLists[0].tasksArray.splice(itemIndex, 1);
+
   findListToRender(listToRender);
 }
 

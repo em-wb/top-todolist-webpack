@@ -1,10 +1,11 @@
 import createElement from "./createElement";
-import { allLists } from "./lists";
+import { allLists, removeTask } from "./lists";
 import createTask from "./tasks";
 import { renderCoreApp } from "./ui";
 
 let newTask = true;
 let editedTask = null;
+let taskIndex = null;
 const taskDialogElements = [
   {
     elements: [
@@ -141,7 +142,7 @@ export default function createNewTaskDialog() {
   createElement("option", null, dropdown, "", [["value", "All tasks"]]);
 }
 
-export function openDialogForThisTask(taskToOpen) {
+export function openDialogForThisTask(taskToOpen, itemIndex) {
   if (taskToOpen) {
     const newTaskForm = document.getElementById("newTaskForm");
     const taskDialog = document.getElementById("taskDialog");
@@ -152,14 +153,15 @@ export function openDialogForThisTask(taskToOpen) {
     newTaskForm.elements["dropdownList"].value = taskToOpen.assignedLists[0];
     newTask = false;
     editedTask = taskToOpen;
+    taskIndex = itemIndex;
     taskDialog.showModal();
   }
 }
 
-function removeTask(editedTask) {
-  editedTask.assignedLists = [];
-  editedTask = null;
-}
+// function removeTask(editedTask) {
+//   editedTask.assignedLists = [];
+//   editedTask = null;
+// }
 
 export function getTaskDialogELs() {
   const taskDialog = document.getElementById("taskDialog");
@@ -180,31 +182,34 @@ export function getTaskDialogELs() {
 
   submitTaskBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    if (!newTask) {
-      removeTask(editedTask);
-    } else {
-      const newTask = createTask(
-        newTaskForm.elements["inputTaskTitle"].value,
-        newTaskForm.elements["inputTaskDesc"].value,
-        newTaskForm.elements["inputTaskDate"].value,
-        newTaskForm.elements["highPriorityTask"].checked,
-        newTaskForm.elements["dropdownList"].value,
-        false
-      );
-
-      allLists.forEach((list) => {
-        console.log(list);
-        list.addTask(newTask);
-      });
+    if (editedTask) {
+      console.log("submit editd");
+      removeTask(editedTask, taskIndex);
     }
+    const newTask = createTask(
+      newTaskForm.elements["inputTaskTitle"].value,
+      newTaskForm.elements["inputTaskDesc"].value,
+      newTaskForm.elements["inputTaskDate"].value,
+      newTaskForm.elements["highPriorityTask"].checked,
+      newTaskForm.elements["dropdownList"].value,
+      false
+    );
+
+    allLists.forEach((list) => {
+      console.log(list);
+      list.addTask(newTask);
+    });
+
     newTaskForm.reset();
     taskDialog.close();
   });
 
   deleteTaskBtn.addEventListener("click", (e) => {
     e.preventDefault();
+    console.log("edited task?", editedTask);
     if (editedTask) {
-      removeTask(editedTask);
+      removeTask(editedTask, taskIndex);
+      console.log("delete btn");
     }
     newTaskForm.reset();
     taskDialog.close();
