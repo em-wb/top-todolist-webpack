@@ -1,5 +1,5 @@
 import createElement from "./createElement";
-import { allLists } from "./lists";
+import { allLists, removeTask } from "./lists";
 import createNewTaskDialog, {
   getTaskDialogELs,
   openDialogForThisTask,
@@ -44,40 +44,38 @@ function renderPriorityStatus(taskTitle, task) {
   if (task.priority === true) taskTitle.classList.add("priority");
 }
 
-function renderCurrentTaskItems(tasksCtr, list) {
+function renderTaskItems(tasksCtr, doneCtr, list) {
   let i = 0;
   list.tasksArray.forEach((task) => {
-    if (!task.completed) {
-      const taskItem = createElement("div", "taskItem", tasksCtr, "");
-      const taskInfoDiv = createElement("div", "taskInfoDiv", taskItem);
-      const moreDiv = createElement("div", "moreDiv", taskItem);
-      const taskCompleteDiv = createElement("div", "taskCompleteDiv", taskItem);
-      const taskTitle = createElement(
-        "h4",
-        "taskTitle",
-        taskInfoDiv,
-        task.title
-      );
-      createElement("p", "taskDesc", taskInfoDiv, task.description);
-      const editTask = createElement(
-        "div",
-        ["editTask", "fa-solid", "fa-pen"],
-        moreDiv,
-        "",
-        [["data-index-number", i]]
-      );
+    const taskItem = createElement(
+      "div",
+      "taskItem",
+      task.completed ? doneCtr : tasksCtr,
+      ""
+    );
+    const taskInfoDiv = createElement("div", "taskInfoDiv", taskItem);
+    const moreDiv = createElement("div", "moreDiv", taskItem);
+    const taskCompleteDiv = createElement("div", "taskCompleteDiv", taskItem);
+    const taskTitle = createElement("h4", "taskTitle", taskInfoDiv, task.title);
+    createElement("p", "taskDesc", taskInfoDiv, task.description);
+    const editTask = createElement(
+      "div",
+      ["editTask", "fa-solid", "fa-pen"],
+      moreDiv,
+      "",
+      [["data-index-number", i]]
+    );
 
-      createElement("div", "listAssignment", moreDiv);
-      createElement("small", "dueDate", taskCompleteDiv, task.dueDate);
-      createElement(
-        "button",
-        ["completeBtn", "fa-solid", "fa-check"],
-        taskCompleteDiv
-      );
-      createElement("hr", "break", tasksCtr);
-      renderPriorityStatus(taskTitle, task);
-      i++;
-    }
+    createElement("div", "listAssignment", moreDiv);
+    createElement("small", "dueDate", taskCompleteDiv, task.dueDate);
+    createElement(
+      "button",
+      ["completeBtn", "fa-solid", "fa-check"],
+      taskCompleteDiv
+    );
+    createElement("hr", "break", tasksCtr);
+    renderPriorityStatus(taskTitle, task);
+    i++;
   });
 }
 
@@ -90,27 +88,29 @@ function openThisTaskEL(tasksCtr) {
       console.log(itemIndex);
       const taskToOpen = allLists[0].tasksArray[itemIndex];
       console.log(taskToOpen);
-      openDialogForThisTask(taskToOpen);
+      openDialogForThisTask(taskToOpen, itemIndex);
     }
   });
 }
 
-function renderCompletedTaskItems(doneCtr, list) {
-  list.tasksArray.forEach((task) => {
-    if (task.completed) {
-      const doneItem = createElement("div", "doneItem", doneCtr);
-      createElement("h5", "done", doneItem, task.title);
-      createElement("small", "done", doneItem, task.dueDate);
-      createElement("div", ["listAssignment", "done"], doneItem);
-      createElement(
-        "button",
-        ["completeBtn", "fa-solid", "fa-check", "done"],
-        doneItem
-      );
-      createElement("hr", "break", doneCtr);
-    }
-  });
-}
+function moveDoneItems(tasksCtr, list) {}
+
+// function renderCompletedTaskItems(doneCtr, list) {
+//   list.tasksArray.forEach((task) => {
+//     if (task.completed) {
+//       const doneItem = createElement("div", "doneItem", doneCtr);
+//       createElement("h5", "done", doneItem, task.title);
+//       createElement("small", "done", doneItem, task.dueDate);
+//       createElement("div", ["listAssignment", "done"], doneItem);
+//       createElement(
+//         "button",
+//         ["completeBtn", "fa-solid", "fa-check", "done"],
+//         doneItem
+//       );
+//       createElement("hr", "break", doneCtr);
+//     }
+//   });
+// }
 
 export function renderCoreApp(list) {
   while (content.firstChild) {
@@ -131,9 +131,7 @@ export function renderCoreApp(list) {
   const tasksCtr = createElement("div", "tasksCtr", coreAppCtr);
   const doneCtr = createElement("div", "doneCtr", coreAppCtr);
   createElement("h4", "doneheader", doneCtr, "Done");
-  renderCompletedTaskItems(doneCtr, list);
-  // getCompletedTaskELs();
-  renderCurrentTaskItems(tasksCtr, list);
+  renderTaskItems(tasksCtr, doneCtr, list);
   renderFooter(list);
   createNewTaskDialog();
   getTaskDialogELs();
