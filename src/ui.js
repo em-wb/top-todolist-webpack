@@ -5,6 +5,7 @@ import createNewTaskDialog, {
   openDialogForThisTask,
 } from "./taskDialog";
 import formatDueDates from "./dates";
+import renderToday, { renderAllTasks } from "./today";
 
 const iconListFooter = [
   { classes: ["fa-solid", "fa-list"], text: "All tasks" },
@@ -103,11 +104,13 @@ function editThisTaskEL(tasksCtr) {
   });
 }
 
-export function renderCoreApp(list) {
+function clearContents() {
   while (content.firstChild) {
     content.removeChild(content.firstChild);
   }
-  renderHeader(list);
+}
+
+function renderCoreAppCtr() {
   const coreAppCtr = createElement("div", "coreAppCtr", content, "", [
     ["id", "coreAppCtr"],
   ]);
@@ -122,10 +125,20 @@ export function renderCoreApp(list) {
   const tasksCtr = createElement("div", "tasksCtr", coreAppCtr);
   const doneCtr = createElement("div", "doneCtr", coreAppCtr);
   createElement("h4", "doneheader", doneCtr, "Done");
+  return { tasksCtr, doneCtr };
+}
+
+export function renderCoreApp(list) {
+  clearContents();
+
+  const { tasksCtr, doneCtr } = renderCoreAppCtr();
+  renderHeader(list);
   renderTaskItems(tasksCtr, doneCtr, list);
   renderFooter(list);
   createNewTaskDialog();
   getTaskDialogELs();
   editThisTaskEL(tasksCtr);
   formatDueDates();
+  renderToday();
+  renderAllTasks();
 }

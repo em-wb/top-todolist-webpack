@@ -44,6 +44,12 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCoreApp(listAll);
   renderToday();
 
+  //move this
+  document.getElementById("menuItem1").addEventListener("click", () => {
+    console.log("hellolistall");
+    renderCoreApp(listAll);
+  });
+
   console.log("task", task1, task2, task3);
   console.log("all", listAll);
   console.log("allLists", allLists);
