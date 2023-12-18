@@ -1,8 +1,8 @@
 import createList, { allLists } from "./lists";
 import { isToday } from "date-fns";
-import { renderCoreApp } from "./ui";
+import { renderCoreApp, clearContents, renderAllLists } from "./ui";
 
-export default function renderToday() {
+export default function renderMenuEvLis() {
   document.getElementById("menuItem2").addEventListener("click", () => {
     const todaysList = createList("Today", "All tasks due today", "");
 
@@ -15,10 +15,13 @@ export default function renderToday() {
     renderCoreApp(todaysList);
     allLists.splice(-1, 1);
   });
-}
 
-export function renderAllTasks() {
   document.getElementById("menuItem1").addEventListener("click", () => {
     renderCoreApp(allLists[0]);
+  });
+
+  document.getElementById("menuItem3").addEventListener("click", () => {
+    clearContents();
+    renderAllLists();
   });
 }
