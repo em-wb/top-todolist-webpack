@@ -1,11 +1,6 @@
 import createList, { allLists } from "./lists";
 import { isToday } from "date-fns";
-import {
-  renderCoreApp,
-  clearContents,
-  renderAllLists,
-  renderProfile,
-} from "./ui";
+import { renderCoreApp, renderAllLists, renderProfile } from "./ui";
 
 export default function renderMenuEvLis() {
   document.getElementById("menuItem2").addEventListener("click", () => {
@@ -18,20 +13,22 @@ export default function renderMenuEvLis() {
       }
     });
     renderCoreApp(todaysList);
+    document.getElementById("menuItem2").classList.add("selected");
     allLists.splice(-1, 1);
   });
 
   document.getElementById("menuItem1").addEventListener("click", () => {
     renderCoreApp(allLists[0]);
+    document.getElementById("menuItem1").classList.add("selected");
   });
 
   document.getElementById("menuItem3").addEventListener("click", () => {
-    clearContents();
     renderAllLists();
+    document.getElementById("menuItem3").classList.add("selected");
   });
 
   document.getElementById("menuItem4").addEventListener("click", () => {
-    clearContents();
     renderProfile();
+    document.getElementById("menuItem4").classList.add("selected");
   });
 }

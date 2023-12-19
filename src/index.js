@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     list.addTask(task3);
   });
   renderCoreApp(listAll);
+  document.getElementById("menuItem1").classList.add("selected");
 
   //move this
 

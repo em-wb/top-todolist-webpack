@@ -167,7 +167,7 @@ export function renderAllLists() {
 function renderProfileInfo() {
   const profileCtr = createElement("div", "profile-ctr", content);
   console.log(profileCtr);
-  createElement("h1", "user-name", profileCtr, "User: Vivi90");
+  createElement("h1", "user-name", profileCtr, "Vivi90");
   createElement(
     "i",
     ["profile-pic", "fa-solid", "fa-person-burst"],

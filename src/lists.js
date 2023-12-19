@@ -21,7 +21,6 @@ export function removeTask(taskToDelete, itemIndex) {
   console.log("HEY", itemIndex, taskToDelete);
   listToRender = taskToDelete.assignedLists[0]; //PLACEHOLDER
   allLists[0].tasksArray.splice(itemIndex, 1);
-
   findListToRender(listToRender);
 }
 

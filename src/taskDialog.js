@@ -6,6 +6,7 @@ import { renderCoreApp } from "./ui";
 let newTask = true;
 let editedTask = null;
 let taskIndex = null;
+
 const taskDialogElements = [
   {
     elements: [
@@ -158,11 +159,6 @@ export function openDialogForThisTask(taskToOpen, itemIndex) {
   }
 }
 
-// function removeTask(editedTask) {
-//   editedTask.assignedLists = [];
-//   editedTask = null;
-// }
-
 export function getTaskDialogELs() {
   const taskDialog = document.getElementById("taskDialog");
   const closeTaskDialog = document.getElementById("closeTaskDialog");
@@ -183,9 +179,9 @@ export function getTaskDialogELs() {
   submitTaskBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (editedTask) {
-      console.log("submit editd");
       removeTask(editedTask, taskIndex);
     }
+
     const newTask = createTask(
       newTaskForm.elements["inputTaskTitle"].value,
       newTaskForm.elements["inputTaskDesc"].value,
