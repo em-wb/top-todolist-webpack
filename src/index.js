@@ -1,6 +1,6 @@
 import createList, { allLists } from "./lists";
 import createTask from "./tasks";
-import { renderFooter, renderAppCtr, renderCoreApp } from "./ui";
+import { renderFooter, renderAppCtr, renderCoreApp } from "./tasksUI";
 import createElement from "./createElement";
 import { getTaskDialogELs } from "./taskDialog";
 import renderToday from "./menu";
@@ -41,7 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
     list.addTask(task2);
     list.addTask(task3);
   });
+
   renderCoreApp(listAll);
+
   document.getElementById("menuItem1").classList.add("selected");
 
   //move this

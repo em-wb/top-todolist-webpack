@@ -116,6 +116,7 @@ function editThisTaskEL(tasksCtr) {
 }
 
 export function clearContents() {
+  const content = document.getElementById("content");
   while (content.firstChild) {
     content.removeChild(content.firstChild);
   }
@@ -137,31 +138,6 @@ function renderCoreAppCtr() {
   const doneCtr = createElement("div", "doneCtr", coreAppCtr);
   createElement("h4", "doneheader", doneCtr, "Done");
   return { tasksCtr, doneCtr };
-}
-
-function renderListItems() {
-  const listCtr = createElement("div", "list-ctr", content, "");
-  allLists.forEach((list) => {
-    const listItem = createElement("div", "list-item", listCtr);
-    const textCtr = createElement("div", "text-ctr", listItem);
-    createElement("h4", "listTitle", textCtr, list.title);
-    createElement("p", "list-desc", textCtr, list.description);
-    const listColor = createElement(
-      "div",
-      ["list-colour", list.colour],
-      listItem
-    );
-    listColor.style.backgroundColor = list.colour;
-  });
-  createElement("hr", "break", listCtr);
-}
-
-export function renderAllLists() {
-  clearContents();
-  renderHeader("", true);
-  renderListItems();
-  renderFooter();
-  renderMenuEvLis();
 }
 
 function renderProfileInfo() {
@@ -188,8 +164,8 @@ export function renderCoreApp(list) {
   const { tasksCtr, doneCtr } = renderCoreAppCtr();
   renderHeader(list);
   renderTaskItems(tasksCtr, doneCtr, list);
-  renderFooter(list);
   createNewTaskDialog();
+  renderFooter();
   getTaskDialogELs();
   editThisTaskEL(tasksCtr);
   formatDueDates();

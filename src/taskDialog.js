@@ -1,7 +1,7 @@
 import createElement from "./createElement";
 import { allLists, removeTask } from "./lists";
 import createTask from "./tasks";
-import { renderCoreApp } from "./ui";
+import { renderCoreApp } from "./tasksUI";
 
 let newTask = true;
 let editedTask = null;

@@ -1,4 +1,4 @@
-import { renderCoreApp } from "./ui";
+import { renderCoreApp } from "./tasksUI";
 
 let listToRender = "All tasks";
 
