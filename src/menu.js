@@ -1,6 +1,7 @@
 import createList, { allLists } from "./lists";
 import { isToday } from "date-fns";
-import { renderCoreApp, renderAllLists, renderProfile } from "./tasksUI";
+import { renderCoreApp, renderProfile } from "./tasksUI";
+import renderAllLists from "./listsUI";
 
 export default function renderMenuEvLis() {
   document.getElementById("menuItem2").addEventListener("click", () => {

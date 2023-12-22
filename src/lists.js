@@ -1,3 +1,4 @@
+import renderAllLists from "./listsUI";
 import { renderCoreApp } from "./tasksUI";
 
 let listToRender = "All tasks";
@@ -6,6 +7,8 @@ export const allLists = [];
 
 function addToAllListsArray() {
   allLists.push(this);
+  renderAllLists();
+  console.log("add to");
 }
 
 function addTask(task) {

@@ -96,7 +96,9 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
       taskCompleteDiv
     );
     createElement("hr", "break", tasksCtr);
+
     renderPriorityStatus(taskTitle, task);
+
     i++;
   });
 }
