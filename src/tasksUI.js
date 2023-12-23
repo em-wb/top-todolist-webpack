@@ -83,9 +83,11 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
       "",
       [["data-index-number", i]]
     );
-    const listAssignment = createElement("div", "listAssignment", moreDiv);
+    const listAssignment = createElement("div", "listAssignment", moreDiv, "", [
+      ["id", `listAssignment${i}`],
+      ["data-index-number", i],
+    ]);
     const list = task.assignedLists.slice(-1);
-    console.log("listforcolor", list, "col", list[0].colour);
     listAssignment.style.backgroundColor = list[0].colour;
     createElement("small", "dueDate", taskCompleteDiv, task.dueDate);
     createElement(
@@ -163,6 +165,16 @@ export function renderProfile() {
   renderMenuEvLis();
 }
 
+// function renderThisListEL(){
+//   document.querySelectorAll(".listAssignment").addEventListener("click", (e)=>{
+//     let listIndex = e.target.getAttribute("data-index-number")
+//change data att to list array number
+//open list array
+
+//   })
+
+// }
+
 export function renderCoreApp(list) {
   clearContents();
   console.log("clear");
@@ -173,6 +185,7 @@ export function renderCoreApp(list) {
   renderFooter();
   getTaskDialogELs();
   editThisTaskEL(tasksCtr);
+  // renderThisListEL();
   formatDueDates();
   renderMenuEvLis();
 }
