@@ -1,7 +1,6 @@
 export function addAssignedList(list) {
-  console.log("todays list in as func", list);
   if (list.tasksArray.some((task) => task === this.task)) {
-    this.assignedLists.push(list.title);
+    this.assignedLists.push(list);
   }
 }
 

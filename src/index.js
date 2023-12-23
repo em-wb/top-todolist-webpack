@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "I need to do something",
     "2023-11-13",
     true,
-    listAll.title,
+    allLists[0],
     false
   );
 
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "I need to do something",
     "2023-12-20",
     false,
-    listAll.title,
+    allLists[0],
     true
   );
 
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     null,
     "2023-12-18",
     false,
-    "All tasks",
+    allLists[0],
     false
   );
 
