@@ -140,7 +140,12 @@ export default function createNewTaskDialog() {
   }
   //PLACEHOLDER... TO LOOP THROUGH LISTS LATER
   const dropdown = document.getElementById("listOfLists");
-  createElement("option", null, dropdown, "", [["value", "All tasks"]]);
+  allLists.forEach((list) => {
+    createElement("option", "listOptions", dropdown, "", [
+      ["value", list.title],
+    ]);
+  });
+  // createElement("option", null, dropdown, "", [["value", "All tasks"]]);
 }
 
 export function openDialogForThisTask(taskToOpen, itemIndex) {
@@ -165,7 +170,6 @@ export function getTaskDialogELs() {
   const newTaskForm = document.getElementById("newTaskForm");
   const submitTaskBtn = document.getElementById("submitTaskBtn");
   const deleteTaskBtn = document.getElementById("deleteTaskBtn");
-
   document.getElementById("addNewBtn").addEventListener("click", (e) => {
     e.preventDefault();
     taskDialog.showModal();
