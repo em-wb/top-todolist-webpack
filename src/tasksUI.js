@@ -85,8 +85,8 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
     );
     const listAssignment = createElement("div", "listAssignment", moreDiv);
     const list = task.assignedLists.slice(-1);
-    console.log("list", list);
-    listAssignment.style.backgroundColor = list.color;
+    console.log("listforcolor", list, "col", list[0].colour);
+    listAssignment.style.backgroundColor = list[0].colour;
     createElement("small", "dueDate", taskCompleteDiv, task.dueDate);
     createElement(
       "button",
