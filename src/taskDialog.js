@@ -138,14 +138,12 @@ export default function createNewTaskDialog() {
       });
     }
   }
-  //PLACEHOLDER... TO LOOP THROUGH LISTS LATER
   const dropdown = document.getElementById("listOfLists");
   allLists.forEach((list) => {
     createElement("option", "listOptions", dropdown, "", [
       ["value", list.title],
     ]);
   });
-  // createElement("option", null, dropdown, "", [["value", "All tasks"]]);
 }
 
 export function openDialogForThisTask(taskToOpen, itemIndex) {
@@ -156,7 +154,8 @@ export function openDialogForThisTask(taskToOpen, itemIndex) {
       (newTaskForm.elements["inputTaskDesc"].value = taskToOpen.description);
     newTaskForm.elements["inputTaskDate"].value = taskToOpen.dueDate;
     newTaskForm.elements["highPriorityTask"].checked = taskToOpen.priority;
-    newTaskForm.elements["dropdownList"].value = taskToOpen.assignedLists[0];
+    newTaskForm.elements["dropdownList"].value = taskToOpen.assignedLists[1] =
+      null ? taskToOpen.assignedLists[0] : taskToOpen.assignedLists[1];
     newTask = false;
     editedTask = taskToOpen;
     taskIndex = itemIndex;
@@ -186,17 +185,22 @@ export function getTaskDialogELs() {
       removeTask(editedTask, taskIndex);
     }
 
+    let chosenList = newTaskForm.elements["dropdownList"].value;
+    allLists.forEach((list) => {
+      if (chosenList === list.title) chosenList = list;
+      if (chosenList !== allLists[0]) chosenList = [allLists[0], allLists[1]];
+    });
+
     const newTask = createTask(
       newTaskForm.elements["inputTaskTitle"].value,
       newTaskForm.elements["inputTaskDesc"].value,
       newTaskForm.elements["inputTaskDate"].value,
       newTaskForm.elements["highPriorityTask"].checked,
-      newTaskForm.elements["dropdownList"].value,
+      chosenList,
       false
     );
 
     allLists.forEach((list) => {
-      console.log(list);
       list.addTask(newTask);
     });
 

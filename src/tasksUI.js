@@ -83,7 +83,10 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
       "",
       [["data-index-number", i]]
     );
-    createElement("div", "listAssignment", moreDiv);
+    const listAssignment = createElement("div", "listAssignment", moreDiv);
+    const list = task.assignedLists.slice(-1);
+    console.log("list", list);
+    listAssignment.style.backgroundColor = list.color;
     createElement("small", "dueDate", taskCompleteDiv, task.dueDate);
     createElement(
       "button",
@@ -162,7 +165,7 @@ export function renderProfile() {
 
 export function renderCoreApp(list) {
   clearContents();
-
+  console.log("clear");
   const { tasksCtr, doneCtr } = renderCoreAppCtr();
   renderHeader(list);
   renderTaskItems(tasksCtr, doneCtr, list);

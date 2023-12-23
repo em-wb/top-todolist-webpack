@@ -1,7 +1,7 @@
 import renderAllLists from "./listsUI";
 import { renderCoreApp } from "./tasksUI";
 
-let listToRender = "All tasks";
+let listToRender = "";
 
 export const allLists = [];
 
@@ -13,10 +13,11 @@ function addToAllListsArray() {
 
 function addTask(task) {
   console.log("task in addtask", task.assignedLists);
-  if (task.assignedLists.some((list) => list === this.title)) {
+  if (task.assignedLists.some((list) => list === this)) {
     this.tasksArray.push(task);
   }
-  listToRender = task.assignedLists[0];
+  listToRender = task.assignedLists.slice(-1);
+  console.log("list to render", listToRender);
   findListToRender(listToRender);
 }
 
@@ -29,7 +30,11 @@ export function removeTask(taskToDelete, itemIndex) {
 
 function findListToRender(listToRender) {
   allLists.forEach((list) => {
-    if (list.title === listToRender) renderCoreApp(list);
+    console.log("listsearch", list, "ltr", listToRender[0].title);
+    if (list === listToRender[0]) {
+      renderCoreApp(list);
+      console.log("rendering", list);
+    }
   });
 }
 
