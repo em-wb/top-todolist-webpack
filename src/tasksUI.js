@@ -165,15 +165,17 @@ export function renderProfile() {
   renderMenuEvLis();
 }
 
-// function renderThisListEL(){
-//   document.querySelectorAll(".listAssignment").addEventListener("click", (e)=>{
-//     let listIndex = e.target.getAttribute("data-index-number")
-//change data att to list array number
-//open list array
-
-//   })
-
-// }
+function renderThisListEL() {
+  const listColours = document.querySelectorAll(".listAssignment");
+  listColours.forEach((listColour) => {
+    listColour.addEventListener("click", (e) => {
+      allLists.forEach((list) => {
+        if (listColour.style.backgroundColor == list.colour)
+          renderCoreApp(list);
+      });
+    });
+  });
+}
 
 export function renderCoreApp(list) {
   clearContents();
@@ -185,7 +187,7 @@ export function renderCoreApp(list) {
   renderFooter();
   getTaskDialogELs();
   editThisTaskEL(tasksCtr);
-  // renderThisListEL();
   formatDueDates();
   renderMenuEvLis();
+  renderThisListEL();
 }
