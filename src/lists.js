@@ -30,7 +30,6 @@ export function removeTask(taskToDelete, itemIndex) {
 
 function findListToRender(listToRender) {
   allLists.forEach((list) => {
-    console.log("listsearch", list, "ltr", listToRender[0].title);
     if (list === listToRender[0]) {
       renderCoreApp(list);
       console.log("rendering", list);
