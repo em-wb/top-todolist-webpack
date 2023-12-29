@@ -165,7 +165,7 @@ export function renderProfile() {
   renderMenuEvLis();
 }
 
-function renderThisListEL() {
+export function renderThisListEL() {
   const listColours = document.querySelectorAll(".listAssignment");
   listColours.forEach((listColour) => {
     listColour.addEventListener("click", (e) => {

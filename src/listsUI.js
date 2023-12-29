@@ -1,4 +1,9 @@
-import { clearContents, renderFooter, renderHeader } from "./tasksUI";
+import {
+  clearContents,
+  renderFooter,
+  renderHeader,
+  renderThisListEL,
+} from "./tasksUI";
 import renderMenuEvLis from "./menu";
 import createElement from "./createElement";
 import { allLists } from "./lists";
@@ -12,7 +17,7 @@ function renderListItems(listCtr) {
     createElement("p", "list-desc", textCtr, list.description);
     const listColor = createElement(
       "div",
-      ["list-colour", list.colour],
+      ["list-colour", list.colour, "listAssignment"],
       listItem
     );
     listColor.style.backgroundColor = list.colour;
@@ -43,4 +48,5 @@ export default function renderAllLists() {
   getListDialogELs();
   renderMenuEvLis();
   console.log("renderlists");
+  renderThisListEL();
 }
