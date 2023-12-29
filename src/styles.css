@@ -148,7 +148,7 @@ textarea,
 
 .taskItem {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   padding: 10px 0;
 }
 
@@ -168,14 +168,25 @@ textarea,
 .taskDesc {
   padding-left: 5px;
   margin-top: 3px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.moreDiv {
+.editDiv,
+.changeListDiv {
   display: flex;
   justify-content: end;
   align-items: end;
-  gap: 19%;
+}
+
+.editDiv {
   grid-column: 5/6;
+}
+
+.changeListDiv {
+  grid-column: 6/7;
 }
 
 .listAssignment,
@@ -187,6 +198,10 @@ textarea,
   margin-bottom: 3px;
 }
 
+.list-desc {
+  font-size: 0.8rem;
+}
+
 /* .listAssignment {
   background-color: blue;
 } */
@@ -196,7 +211,7 @@ textarea,
 }
 
 .taskCompleteDiv {
-  grid-column: 6/8;
+  grid-column: 7/9;
   text-align: center;
 }
 
@@ -265,6 +280,7 @@ textarea,
 }
 
 label {
+  display: block;
   font-size: 0.8rem;
 }
 
@@ -277,6 +293,7 @@ label {
 #taskDialogDiv4 > p {
   grid-column: 1/7;
   grid-row: 1/2;
+  font-size: 0.8rem;
 }
 
 #taskDialogDiv4 > label {
