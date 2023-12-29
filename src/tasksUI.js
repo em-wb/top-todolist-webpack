@@ -101,7 +101,9 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
         "fa-check",
         task.completed ? "doneBtn" : "todoBtn",
       ],
-      taskCompleteDiv
+      taskCompleteDiv,
+      "",
+      [["data-index-number", i]]
     );
     createElement("hr", "break", tasksCtr);
     renderPriorityStatus(taskTitle, task);
@@ -177,6 +179,17 @@ export function renderThisListEL() {
   });
 }
 
+function completeTaskEL(list) {
+  const completeTask = document.querySelectorAll(".completeBtn");
+  completeTask.forEach((completeTaskBtn) => {
+    completeTaskBtn.addEventListener("click", (e) => {
+      const taskToComplete = completeTaskBtn.getAttribute("data-index-number");
+      allLists[0].tasksArray[taskToComplete].completed = true;
+      renderCoreApp(list);
+    });
+  });
+}
+
 export function renderCoreApp(list) {
   clearContents();
   console.log("clear");
@@ -190,4 +203,5 @@ export function renderCoreApp(list) {
   formatDueDates();
   renderMenuEvLis();
   renderThisListEL();
+  completeTaskEL(list);
 }
