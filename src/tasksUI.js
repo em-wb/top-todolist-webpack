@@ -182,9 +182,12 @@ export function renderThisListEL() {
 function completeTaskEL(list) {
   const completeTask = document.querySelectorAll(".completeBtn");
   completeTask.forEach((completeTaskBtn) => {
-    completeTaskBtn.addEventListener("click", (e) => {
+    completeTaskBtn.addEventListener("click", () => {
       const taskToComplete = completeTaskBtn.getAttribute("data-index-number");
-      allLists[0].tasksArray[taskToComplete].completed = true;
+      allLists.forEach((list) => {
+        list.tasksArray[taskToComplete].completed =
+          !allLists[0].tasksArray[taskToComplete].completed;
+      });
       renderCoreApp(list);
     });
   });
