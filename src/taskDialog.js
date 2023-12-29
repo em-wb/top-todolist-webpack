@@ -10,7 +10,7 @@ let taskIndex = null;
 const taskDialogElements = [
   {
     elements: [
-      ["h1", null, null, "New Task", [["id", "taskDialogH1"]]],
+      ["h1", null, null, "Task", [["id", "taskDialogH1"]]],
       [
         "button",
         ["closeBtn", "fa-solid", "fa-xmark"],
@@ -57,7 +57,7 @@ const taskDialogElements = [
   },
   {
     elements: [
-      ["label", "textInput", null, "Due Date (optional)"],
+      ["label", "textInput", null, "Due Date"],
       [
         "input",
         "input",
@@ -66,6 +66,7 @@ const taskDialogElements = [
         [
           ["id", "inputTaskDate"],
           ["type", "date"],
+          ["required", ""],
         ],
       ],
     ],
@@ -140,22 +141,23 @@ export default function createNewTaskDialog() {
   }
   const dropdown = document.getElementById("listOfLists");
   allLists.forEach((list) => {
-    createElement("option", "listOptions", dropdown, "", [
-      ["value", list.title],
-    ]);
+    if (list.title !== "All tasks") {
+      createElement("option", "listOptions", dropdown, "", [
+        ["value", list.title],
+      ]);
+    }
   });
 }
 
 export function openDialogForThisTask(taskToOpen, itemIndex) {
   if (taskToOpen) {
+    console.log("thisishappening", taskToOpen);
     const newTaskForm = document.getElementById("newTaskForm");
     const taskDialog = document.getElementById("taskDialog");
-    (newTaskForm.elements["inputTaskTitle"].value = taskToOpen.title),
-      (newTaskForm.elements["inputTaskDesc"].value = taskToOpen.description);
+    newTaskForm.elements["inputTaskTitle"].value = taskToOpen.title;
+    newTaskForm.elements["inputTaskDesc"].value = taskToOpen.description;
     newTaskForm.elements["inputTaskDate"].value = taskToOpen.dueDate;
     newTaskForm.elements["highPriorityTask"].checked = taskToOpen.priority;
-    newTaskForm.elements["dropdownList"].value = taskToOpen.assignedLists[1] =
-      null ? taskToOpen.assignedLists[0] : taskToOpen.assignedLists[1];
     newTask = false;
     editedTask = taskToOpen;
     taskIndex = itemIndex;
@@ -185,11 +187,16 @@ export function getTaskDialogELs() {
       removeTask(editedTask, taskIndex);
     }
 
-    let chosenList = newTaskForm.elements["dropdownList"].value;
-    allLists.forEach((list) => {
-      if (chosenList === list.title) chosenList = list;
-      if (chosenList !== allLists[0]) chosenList = [allLists[0], allLists[1]];
-    });
+    let chosenList = newTaskForm.elements["dropdownList"].value
+      ? newTaskForm.elements["dropdownList"].value
+      : "All Tasks";
+    console.log("chose", chosenList);
+    if ((chosenList = allLists[0].title)) chosenList = allLists[0];
+    else {
+      allLists.forEach((list) => {
+        if (chosenList === list.title) chosenList = [allLists[0], list];
+      });
+    }
 
     const newTask = createTask(
       newTaskForm.elements["inputTaskTitle"].value,
