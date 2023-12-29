@@ -71,24 +71,27 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
       ""
     );
     const taskInfoDiv = createElement("div", "taskInfoDiv", taskItem);
-    const moreDiv = createElement("div", "moreDiv", taskItem);
+    const editDiv = createElement("div", "editDiv", taskItem, "");
+    const changeListDiv = createElement("div", "changeListDiv", taskItem);
     const taskCompleteDiv = createElement("div", "taskCompleteDiv", taskItem);
     const taskTitle = createElement("h4", "taskTitle", taskInfoDiv, task.title);
-
     createElement("p", "taskDesc", taskInfoDiv, task.description);
     const editTask = createElement(
       "div",
-      ["editTask", "fa-solid", "fa-pen"],
-      moreDiv,
+      ["editTask", "fa-solid", "fa-eye"],
+      editDiv,
       "",
       [["data-index-number", i]]
     );
-    const listAssignment = createElement("div", "listAssignment", moreDiv, "", [
-      ["id", `listAssignment${i}`],
-      ["data-index-number", i],
-    ]);
-    const list = task.assignedLists.slice(-1);
-    listAssignment.style.backgroundColor = list[0].colour;
+    const listAssignment = createElement(
+      "div",
+      "listAssignment",
+      changeListDiv,
+      ""
+    );
+    const listColour = task.assignedLists.slice(-1);
+    console.log("listCOl", listColour[0].colour);
+    listAssignment.style.backgroundColor = listColour[0].colour;
     createElement("small", "dueDate", taskCompleteDiv, task.dueDate);
     createElement(
       "button",
@@ -101,24 +104,19 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
       taskCompleteDiv
     );
     createElement("hr", "break", tasksCtr);
-
     renderPriorityStatus(taskTitle, task);
-
     i++;
   });
 }
 
-function editThisTaskEL(tasksCtr) {
-  tasksCtr.addEventListener("click", (e) => {
-    console.log("openthis");
-    if (e.target.classList == "editTask fa-solid fa-pen") {
-      console.log("open");
-      const itemIndex = e.target.getAttribute("data-index-number");
-      console.log(itemIndex);
+function editThisTaskEL() {
+  const editTasks = document.querySelectorAll(".editTask");
+  editTasks.forEach((editTask) => {
+    editTask.addEventListener("click", () => {
+      const itemIndex = editTask.getAttribute("data-index-number");
       const taskToOpen = allLists[0].tasksArray[itemIndex];
-      console.log(taskToOpen);
       openDialogForThisTask(taskToOpen, itemIndex);
-    }
+    });
   });
 }
 
@@ -168,10 +166,12 @@ export function renderProfile() {
 export function renderThisListEL() {
   const listColours = document.querySelectorAll(".listAssignment");
   listColours.forEach((listColour) => {
-    listColour.addEventListener("click", (e) => {
+    console.log("LC", listColour);
+    listColour.addEventListener("click", () => {
+      console.log("click");
       allLists.forEach((list) => {
-        if (listColour.style.backgroundColor == list.colour)
-          renderCoreApp(list);
+        if (listColour.style.backgroundColor === list.colour) console.log("yo");
+        renderCoreApp(list);
       });
     });
   });
@@ -186,7 +186,7 @@ export function renderCoreApp(list) {
   createNewTaskDialog();
   renderFooter();
   getTaskDialogELs();
-  editThisTaskEL(tasksCtr);
+  editThisTaskEL();
   formatDueDates();
   renderMenuEvLis();
   renderThisListEL();
