@@ -217,6 +217,7 @@ export function getTaskDialogELs() {
     e.preventDefault();
     console.log("edited task?", editedTask);
     if (editedTask) {
+      console.log("edit", editedTask, "taskindex", taskIndex);
       removeTask(editedTask, taskIndex);
       console.log("delete btn");
     }
