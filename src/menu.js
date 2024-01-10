@@ -4,17 +4,19 @@ import { renderCoreApp, renderProfile } from "./tasksUI";
 import renderAllLists from "./listsUI";
 
 export default function renderMenuEvLis() {
-  document.getElementById("menuItem2").addEventListener("click", () => {
-    const todaysList = createList("Today", "All tasks due today", "");
-
+  const todayBtn = document.getElementById("menuItem2");
+  todayBtn.addEventListener("click", () => {
+    const todaysList = createList("Today", "All tasks due today", "gold");
+    console.log("todays list", todaysList);
     allLists[0].tasksArray.forEach((task) => {
       if (isToday(task.dueDate)) {
         task.assignedLists.push(todaysList);
         todaysList.addTask(task);
       }
     });
+
     renderCoreApp(todaysList);
-    document.getElementById("menuItem2").classList.add("selected");
+    todayBtn.classList.add("selected");
     allLists.splice(-1, 1);
   });
 
