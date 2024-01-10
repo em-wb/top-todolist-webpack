@@ -5,7 +5,7 @@ import renderAllLists from "./listsUI";
 
 export default function renderMenuEvLis() {
   document.getElementById("menuItem2").addEventListener("click", () => {
-    const todaysList = createList("Today", "All tasks due today", "yellow");
+    const todaysList = createList("Today", "All tasks due today", "");
 
     allLists[0].tasksArray.forEach((task) => {
       if (isToday(task.dueDate)) {

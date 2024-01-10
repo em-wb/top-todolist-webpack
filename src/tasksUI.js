@@ -105,8 +105,9 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
       "",
       [["data-index-number", i]]
     );
-    createElement("hr", "break", tasksCtr);
+
     renderPriorityStatus(taskTitle, task);
+    createElement("hr", "break", taskItem);
     i++;
   });
 }
