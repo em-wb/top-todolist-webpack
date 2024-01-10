@@ -188,7 +188,7 @@ export function getTaskDialogELs() {
     }
     let chosenList = newTaskForm.elements["dropdownList"].value
       ? newTaskForm.elements["dropdownList"].value
-      : "All Tasks";
+      : "All tasks";
     if (chosenList === allLists[0].title) chosenList = allLists[0];
     else {
       allLists.forEach((list) => {
