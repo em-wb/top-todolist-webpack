@@ -1,8 +1,10 @@
-export function addAssignedList(list) {
-  if (list.tasksArray.some((task) => task === this.task)) {
-    this.assignedLists.push(list);
-  }
-}
+import { saveListToStorage } from "./lists";
+
+// export function addAssignedList(list) {
+//   if (list.tasksArray.some((task) => task === this.task)) {
+//     this.assignedLists.push(list);
+//   }
+// }
 
 export default function createTask(
   title,
@@ -19,9 +21,8 @@ export default function createTask(
     priority: priority,
     assignedLists: Array.isArray(lists) ? lists : [lists],
     completed: completed,
-    addAssignedList: addAssignedList,
+    // addAssignedList: addAssignedList,
   };
 
-  console.log(task);
   return task;
 }

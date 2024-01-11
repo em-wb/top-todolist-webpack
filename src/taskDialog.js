@@ -1,7 +1,6 @@
 import createElement from "./createElement";
-import { allLists, removeTask } from "./lists";
+import { allLists, removeTask, saveListToStorage } from "./lists";
 import createTask from "./tasks";
-import { renderCoreApp } from "./tasksUI";
 
 let newTask = true;
 let editedTask = null;
@@ -151,7 +150,6 @@ export default function createNewTaskDialog() {
 
 export function openDialogForThisTask(taskToOpen, itemIndex) {
   if (taskToOpen) {
-    console.log("thisishappening", taskToOpen);
     const newTaskForm = document.getElementById("newTaskForm");
     const taskDialog = document.getElementById("taskDialog");
     newTaskForm.elements["inputTaskTitle"].value = taskToOpen.title;
@@ -209,17 +207,16 @@ export function getTaskDialogELs() {
       list.addTask(newTask);
     });
 
+    console.log("alllists", allLists);
+
     newTaskForm.reset();
     taskDialog.close();
   });
 
   deleteTaskBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    console.log("edited task?", editedTask);
     if (editedTask) {
-      console.log("edit", editedTask, "taskindex", taskIndex);
       removeTask(editedTask, taskIndex);
-      console.log("delete btn");
     }
     newTaskForm.reset();
     taskDialog.close();

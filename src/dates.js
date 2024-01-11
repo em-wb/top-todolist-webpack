@@ -11,7 +11,6 @@ function checkIfToday(date, dueDateDiv) {
 }
 
 export default function formatDueDates() {
-  console.log("due");
   const dueDates = document.querySelectorAll(".dueDate");
   dueDates.forEach((dueDate) => {
     const date = dueDate.innerText;

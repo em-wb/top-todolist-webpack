@@ -47,6 +47,5 @@ export default function renderAllLists() {
   renderFooter();
   getListDialogELs();
   renderMenuEvLis();
-  console.log("renderlists");
   renderThisListEL();
 }

@@ -7,7 +7,6 @@ export default function renderMenuEvLis() {
   const todayBtn = document.getElementById("menuItem2");
   todayBtn.addEventListener("click", () => {
     const todaysList = createList("Today", "All tasks due today", "gold");
-    console.log("todays list", todaysList);
     allLists[0].tasksArray.forEach((task) => {
       if (isToday(task.dueDate)) {
         task.assignedLists.push(todaysList);

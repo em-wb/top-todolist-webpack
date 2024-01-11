@@ -89,10 +89,7 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
       changeListDiv,
       ""
     );
-    console.log("tasks lists", task.assignedLists);
     const listColour = task.assignedLists.slice(-1);
-
-    console.log("listCOl", listColour[0].colour);
     listAssignment.style.backgroundColor = listColour[0].colour;
     createElement("small", "dueDate", taskCompleteDiv, task.dueDate);
     createElement(
@@ -152,7 +149,6 @@ function renderCoreAppCtr() {
 
 function renderProfileInfo() {
   const profileCtr = createElement("div", "profile-ctr", content);
-  console.log(profileCtr);
   createElement("h1", "user-name", profileCtr, "Vivi90");
   createElement(
     "i",
@@ -171,12 +167,10 @@ export function renderProfile() {
 export function renderThisListEL() {
   const listColours = document.querySelectorAll(".listAssignment");
   listColours.forEach((listColour) => {
-    console.log("LC", listColour);
     listColour.addEventListener("click", () => {
-      console.log("click");
       allLists.forEach((list) => {
-        if (listColour.style.backgroundColor === list.colour) console.log("yo");
-        renderCoreApp(list);
+        if (listColour.style.backgroundColor === list.colour)
+          renderCoreApp(list);
       });
     });
   });
@@ -198,16 +192,27 @@ function completeTaskEL(list) {
 
 export function renderCoreApp(list) {
   clearContents();
-  console.log("clear");
-  const { tasksCtr, doneCtr } = renderCoreAppCtr();
-  renderHeader(list);
-  renderTaskItems(tasksCtr, doneCtr, list);
-  createNewTaskDialog();
-  renderFooter();
-  getTaskDialogELs();
-  editThisTaskEL();
-  formatDueDates();
-  renderMenuEvLis();
-  renderThisListEL();
-  completeTaskEL(list);
+  const storedLists = JSON.parse(localStorage.getItem("lists")) || [];
+  console.log(storedLists);
+  let listToOpen = null;
+  storedLists.forEach((storedList) => {
+    console.log(storedList, list);
+    if (list === storedList) {
+      listToOpen = JSON.parse(localStorage.getItem(storedList));
+    }
+    console.log(listToOpen);
+  });
+  if (list) {
+    const { tasksCtr, doneCtr } = renderCoreAppCtr();
+    renderHeader(list);
+    renderTaskItems(tasksCtr, doneCtr, list);
+    createNewTaskDialog();
+    renderFooter();
+    getTaskDialogELs();
+    editThisTaskEL();
+    formatDueDates();
+    renderMenuEvLis();
+    renderThisListEL();
+    completeTaskEL(list);
+  }
 }

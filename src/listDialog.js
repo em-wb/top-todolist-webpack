@@ -1,5 +1,5 @@
 import createElement from "./createElement";
-import createList, { allLists, removeList } from "./lists";
+import createList, { allLists } from "./lists";
 import Picker from "vanilla-picker";
 import "vanilla-picker/dist/vanilla-picker.csp.css";
 

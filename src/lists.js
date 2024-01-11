@@ -8,6 +8,7 @@ export const allLists = [];
 function addToAllListsArray() {
   allLists.push(this);
   renderAllLists();
+  saveListToStorage();
 }
 
 function addTask(task) {
@@ -16,6 +17,7 @@ function addTask(task) {
   }
   listToRender = task.assignedLists.slice(-1);
   findListToRender(listToRender);
+  saveListToStorage();
 }
 
 export function removeTask(taskToDelete, itemIndex) {
@@ -34,6 +36,40 @@ function findListToRender(listToRender) {
   });
 }
 
+function stringifyWithCircular(obj) {
+  const seen = new WeakSet();
+
+  return JSON.stringify(obj, (key, value) => {
+    if (typeof value === "object" && value !== null) {
+      if (seen.has(value)) {
+        return "[Circular Reference]";
+      }
+      seen.add(value);
+    }
+    return value;
+  });
+}
+
+export function saveListToStorage() {
+  const serializedData = stringifyWithCircular(allLists);
+  console.log("sd", serializedData);
+  localStorage.setItem("lists", serializedData);
+}
+
+export function loadListsFromStorage() {
+  const storedLists = JSON.parse(localStorage.getItem("lists")) || [];
+  allLists.length = 0;
+  storedLists.forEach((storedList) => {
+    const newList = createList(
+      storedList.title,
+      storedList.description,
+      storedList.colour
+    );
+    newList.tasksArray = storedList.tasksArray;
+    renderCoreApp(allLists[0]);
+  });
+}
+
 export default function createList(title, description, colour) {
   const list = {
     title: title,
@@ -46,6 +82,7 @@ export default function createList(title, description, colour) {
   };
 
   list.addToAllListsArray();
+  saveListToStorage();
 
   return list;
 }
