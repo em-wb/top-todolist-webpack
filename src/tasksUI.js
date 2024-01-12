@@ -78,7 +78,7 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
     createElement("p", "taskDesc", taskInfoDiv, task.description);
     const editTask = createElement(
       "div",
-      ["editTask", "fa-solid", "fa-eye"],
+      ["view-edit", "fa-solid", "fa-eye"],
       editDiv,
       "",
       [["data-index-number", i]]

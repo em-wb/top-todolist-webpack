@@ -1,5 +1,5 @@
 import createElement from "./createElement";
-import createList, { allLists } from "./lists";
+import createList, { allLists, removeList } from "./lists";
 import Picker from "vanilla-picker";
 import "vanilla-picker/dist/vanilla-picker.csp.css";
 
@@ -149,7 +149,7 @@ export function getListDialogELs() {
   submitListBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (editedList) {
-      //   removeTask(editedTask, taskIndex);  /////REMOVE LIST
+      //   removeList(editedTask, listIndex);  /////REMOVE LIST
     }
 
     const newList = createList(
@@ -166,6 +166,7 @@ export function getListDialogELs() {
     e.preventDefault();
     if (editedList) {
       removeList(editedList, listIndex);
+      console.log("deklete", editedList, listIndex);
     }
     newListForm.reset();
     listDialog.close();

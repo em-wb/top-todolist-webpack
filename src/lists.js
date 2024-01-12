@@ -30,6 +30,12 @@ export function removeTask(taskToDelete, itemIndex) {
   renderCoreApp(listToRender);
 }
 
+export function removeList(listToDelete, itemIndex) {
+  allLists.splice(itemIndex, 1);
+  saveListToStorage();
+  renderAllLists();
+}
+
 function findListToRender(listToRender) {
   allLists.forEach((list) => {
     if (list === listToRender[0]) {
