@@ -126,6 +126,8 @@ export function openDialogForThisList(listToOpen, listItemIndex) {
     editedList = listToOpen;
     listIndex = listItemIndex;
     listDialog.showModal();
+    const deleteBtn = document.getElementById("deleteListBtn");
+    if (listItemIndex == 0) deleteBtn.classList.add("hidden");
   }
 }
 

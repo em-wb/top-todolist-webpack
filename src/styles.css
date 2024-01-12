@@ -207,7 +207,7 @@ textarea,
   font-size: 0.8rem;
 }
 
-.editTask {
+.view-edit {
   color: grey;
   opacity: 80%;
 }
@@ -375,7 +375,8 @@ label {
   justify-content: space-between;
 }
 
-.list-colour {
+.list-colour,
+.view-edit {
   align-self: center;
   margin-right: 10%;
 }
@@ -385,4 +386,9 @@ label {
   border-radius: 1rem;
   text-align: center;
   margin-top: 5px;
+}
+
+.hidden {
+  display: none;
+  color: blue;
 }
