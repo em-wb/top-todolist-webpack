@@ -56,18 +56,61 @@ export function saveListToStorage() {
   localStorage.setItem("lists", serializedData);
 }
 
+function getDefaultList() {
+  const listAll = createList("All tasks", "All your tasks in one list", "blue");
+
+  const task1 = createTask(
+    "My first to do",
+    "I need to do something",
+    "2023-11-13",
+    true,
+    allLists[0],
+    false
+  );
+
+  const task2 = createTask(
+    "My second to do",
+    "I need to do something",
+    "2023-12-20",
+    false,
+    allLists[0],
+    true
+  );
+
+  const task3 = createTask(
+    "Task 3",
+    null,
+    "2023-12-18",
+    false,
+    allLists[0],
+    false
+  );
+
+  allLists.forEach((list) => {
+    list.addTask(task1);
+    list.addTask(task2);
+    list.addTask(task3);
+  });
+
+  renderCoreApp(listAll);
+
+  document.getElementById("menuItem1").classList.add("selected");
+}
+
 export function loadListsFromStorage() {
   const storedLists = JSON.parse(localStorage.getItem("lists")) || [];
   allLists.length = 0;
-  storedLists.forEach((storedList) => {
-    const newList = createList(
-      storedList.title,
-      storedList.description,
-      storedList.colour
-    );
-    newList.tasksArray = storedList.tasksArray;
-    renderCoreApp(allLists[0]);
-  });
+  if (storedLists.length > 0) {
+    storedLists.forEach((storedList) => {
+      const newList = createList(
+        storedList.title,
+        storedList.description,
+        storedList.colour
+      );
+      newList.tasksArray = storedList.tasksArray;
+      renderCoreApp(allLists[0]);
+    });
+  } else getDefaultList();
 }
 
 export default function createList(title, description, colour) {
@@ -82,7 +125,7 @@ export default function createList(title, description, colour) {
   };
 
   list.addToAllListsArray();
-  saveListToStorage();
+  // saveListToStorage();
 
   return list;
 }

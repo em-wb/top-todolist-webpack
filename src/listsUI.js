@@ -40,6 +40,7 @@ function renderListAppCtr() {
 
 export default function renderAllLists() {
   clearContents();
+
   const { listCtr } = renderListAppCtr();
   renderHeader("", true);
   createNewListDialog();

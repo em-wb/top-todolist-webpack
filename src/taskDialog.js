@@ -207,8 +207,6 @@ export function getTaskDialogELs() {
       list.addTask(newTask);
     });
 
-    console.log("alllists", allLists);
-
     newTaskForm.reset();
     taskDialog.close();
   });

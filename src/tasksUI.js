@@ -192,16 +192,6 @@ function completeTaskEL(list) {
 
 export function renderCoreApp(list) {
   clearContents();
-  const storedLists = JSON.parse(localStorage.getItem("lists")) || [];
-  console.log(storedLists);
-  let listToOpen = null;
-  storedLists.forEach((storedList) => {
-    console.log(storedList, list);
-    if (list === storedList) {
-      listToOpen = JSON.parse(localStorage.getItem(storedList));
-    }
-    console.log(listToOpen);
-  });
   if (list) {
     const { tasksCtr, doneCtr } = renderCoreAppCtr();
     renderHeader(list);
