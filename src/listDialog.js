@@ -2,6 +2,7 @@ import createElement from "./createElement";
 import createList, { allLists, removeList } from "./lists";
 import Picker from "vanilla-picker";
 import "vanilla-picker/dist/vanilla-picker.csp.css";
+import renderAllLists from "./listsUI";
 
 let newList = true;
 let editedList = null;
@@ -126,8 +127,6 @@ export function openDialogForThisList(listToOpen, listItemIndex) {
     editedList = listToOpen;
     listIndex = listItemIndex;
     listDialog.showModal();
-    const deleteBtn = document.getElementById("deleteListBtn");
-    if (listItemIndex == 0) deleteBtn.classList.add("hidden");
   }
 }
 
@@ -161,6 +160,7 @@ export function getListDialogELs() {
     );
 
     newListForm.reset();
+    renderAllLists();
     listDialog.close();
   });
 

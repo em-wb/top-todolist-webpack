@@ -19,23 +19,28 @@ function renderListItems(listCtr) {
     const textCtr = createElement("div", "text-ctr", listItem);
     createElement("h4", "listTitle", textCtr, list.title);
     createElement("p", "list-desc", textCtr, list.description);
+    const listBtnsCtr = createElement("div", "list-btns-ctr", listItem);
     const editList = createElement(
       "div",
       ["editList", "view-edit", "fa-solid", "fa-eye"],
-      listItem,
+      listBtnsCtr,
       "",
-      [["data-index-number", i]]
+      [
+        ["data-index-number", i],
+        ["id", `editList${i}`],
+      ]
     );
 
     const listColor = createElement(
       "div",
       ["list-colour", list.colour, "listAssignment"],
-      listItem
+      listBtnsCtr
     );
     listColor.style.backgroundColor = list.colour;
     createElement("hr", "break", listCtr);
     i++;
   });
+  document.getElementById("editList0").classList.remove("editList", "fa-eye");
 }
 
 function editThisListEL() {
@@ -74,6 +79,6 @@ export default function renderAllLists() {
   renderFooter();
   getListDialogELs();
   renderMenuEvLis();
-  renderThisListEL();
   editThisListEL();
+  renderThisListEL();
 }

@@ -375,6 +375,12 @@ label {
   justify-content: space-between;
 }
 
+.list-btns-ctr {
+  display: flex;
+  width: 20%;
+  justify-content: space-between;
+}
+
 .list-colour,
 .view-edit {
   align-self: center;

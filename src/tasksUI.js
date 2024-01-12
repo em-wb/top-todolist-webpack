@@ -112,7 +112,7 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
 }
 
 function editThisTaskEL() {
-  const editTasks = document.querySelectorAll(".editTask");
+  const editTasks = document.querySelectorAll(".view-edit");
   editTasks.forEach((editTask) => {
     editTask.addEventListener("click", () => {
       const itemIndex = editTask.getAttribute("data-index-number");
@@ -167,10 +167,12 @@ export function renderProfile() {
 export function renderThisListEL() {
   const listColours = document.querySelectorAll(".listAssignment");
   listColours.forEach((listColour) => {
+    console.log("heyyyyy");
+    console.log("listcolours", listColours);
     listColour.addEventListener("click", () => {
       allLists.forEach((list) => {
-        if (listColour.style.backgroundColor === list.colour)
-          renderCoreApp(list);
+        if (listColour.style.backgroundColor == list.colour) console.log("hi");
+        renderCoreApp(list);
       });
     });
   });
@@ -181,10 +183,15 @@ function completeTaskEL(list) {
   completeTask.forEach((completeTaskBtn) => {
     completeTaskBtn.addEventListener("click", () => {
       const taskToComplete = completeTaskBtn.getAttribute("data-index-number");
-      allLists.forEach((list) => {
-        list.tasksArray[taskToComplete].completed =
-          !allLists[0].tasksArray[taskToComplete].completed;
-      });
+      console.log(taskToComplete);
+      list.tasksArray[taskToComplete].completed =
+        !list.tasksArray[taskToComplete].completed;
+      // allLists.forEach((list) => {
+      //   console.log(list);
+      //   console.log("here", list.tasksArray[taskToComplete]);
+      //   list.tasksArray[taskToComplete].completed =
+      //     !list.tasksArray[taskToComplete].completed;
+      // });
       renderCoreApp(list);
     });
   });
