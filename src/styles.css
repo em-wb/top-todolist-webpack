@@ -363,6 +363,13 @@ label {
   font-size: 3rem;
 }
 
+.list-ctr {
+  grid-row: 2/7;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
 .list-item {
   display: flex;
   justify-content: space-between;
