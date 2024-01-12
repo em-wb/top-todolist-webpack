@@ -1,4 +1,4 @@
-import createList, { allLists } from "./lists";
+import createList, { allLists, saveListToStorage } from "./lists";
 import { isToday } from "date-fns";
 import { renderCoreApp, renderProfile } from "./tasksUI";
 import renderAllLists from "./listsUI";
@@ -17,6 +17,7 @@ export default function renderMenuEvLis() {
     renderCoreApp(todaysList);
     todayBtn.classList.add("selected");
     allLists.splice(-1, 1);
+    saveListToStorage();
   });
 
   document.getElementById("menuItem1").addEventListener("click", () => {
