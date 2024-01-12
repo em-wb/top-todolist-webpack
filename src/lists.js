@@ -1,5 +1,6 @@
 import renderAllLists from "./listsUI";
 import { renderCoreApp } from "./tasksUI";
+import createTask from "./tasks";
 
 let listToRender = "";
 
@@ -17,6 +18,7 @@ function addTask(task) {
   }
   listToRender = task.assignedLists.slice(-1);
   findListToRender(listToRender);
+  console.log("listTR", listToRender);
   saveListToStorage();
 }
 
@@ -57,8 +59,9 @@ export function saveListToStorage() {
 }
 
 function getDefaultList() {
+  console.log("a");
   const listAll = createList("All tasks", "All your tasks in one list", "blue");
-
+  console.log("b");
   const task1 = createTask(
     "My first to do",
     "I need to do something",
@@ -91,26 +94,27 @@ function getDefaultList() {
     list.addTask(task2);
     list.addTask(task3);
   });
-
+  console.log("c");
   renderCoreApp(listAll);
-
+  console.log("d");
   document.getElementById("menuItem1").classList.add("selected");
 }
 
 export function loadListsFromStorage() {
   const storedLists = JSON.parse(localStorage.getItem("lists")) || [];
   allLists.length = 0;
-  if (storedLists.length > 0) {
-    storedLists.forEach((storedList) => {
-      const newList = createList(
-        storedList.title,
-        storedList.description,
-        storedList.colour
-      );
-      newList.tasksArray = storedList.tasksArray;
-      renderCoreApp(allLists[0]);
-    });
-  } else getDefaultList();
+  console.log("x");
+  storedLists.forEach((storedList) => {
+    const newList = createList(
+      storedList.title,
+      storedList.description,
+      storedList.colour
+    );
+    newList.tasksArray = storedList.tasksArray;
+  });
+  console.log("f", allLists);
+  allLists.length > 0 ? renderAllLists(allLists[0]) : getDefaultList();
+  console.log("e");
 }
 
 export default function createList(title, description, colour) {
