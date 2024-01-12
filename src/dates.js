@@ -13,11 +13,13 @@ function checkIfToday(date, dueDateDiv) {
 export default function formatDueDates() {
   const dueDates = document.querySelectorAll(".dueDate");
   dueDates.forEach((dueDate) => {
-    const date = dueDate.innerText;
-    const parsedDate = parseISO(date);
-    checkIfPast(parsedDate, dueDate);
-    checkIfToday(parsedDate, dueDate);
-    const formattedDate = format(parsedDate, "dd MMM yy");
-    dueDate.innerText = formattedDate;
+    if (dueDate.innerText) {
+      const date = dueDate.innerText;
+      const parsedDate = parseISO(date);
+      checkIfPast(parsedDate, dueDate);
+      checkIfToday(parsedDate, dueDate);
+      const formattedDate = format(parsedDate, "dd MMM yy");
+      dueDate.innerText = formattedDate;
+    }
   });
 }
