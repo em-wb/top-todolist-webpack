@@ -4,8 +4,7 @@ import { renderCoreApp, renderProfile } from "./tasksUI";
 import renderAllLists from "./listsUI";
 
 export default function renderMenuEvLis() {
-  const todayBtn = document.getElementById("menuItem2");
-  todayBtn.addEventListener("click", () => {
+  document.getElementById("menuItem2").addEventListener("click", () => {
     const todaysList = createList("Today", "All tasks due today", "gold");
     allLists[0].tasksArray.forEach((task) => {
       if (isToday(task.dueDate)) {
@@ -15,7 +14,7 @@ export default function renderMenuEvLis() {
     });
 
     renderCoreApp(todaysList);
-    todayBtn.classList.add("selected");
+    document.getElementById("menuItem2").classList.add("selected");
     allLists.splice(-1, 1);
     saveListToStorage();
   });
