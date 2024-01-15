@@ -13,12 +13,12 @@ function addToAllListsArray() {
 }
 
 function addTask(task) {
-  if (task.assignedLists.some((list) => list === this)) {
+  if (task.assignedLists.some((list) => list === this.title)) {
     this.tasksArray.push(task);
+    listToRender = this;
+    console.log("listnew", this);
   }
-  listToRender = task.assignedLists.slice(-1);
-  findListToRender(listToRender);
-  console.log("listTR", listToRender);
+  renderCoreApp(listToRender);
   saveListToStorage();
 }
 
@@ -36,32 +36,34 @@ export function removeList(listToDelete, itemIndex) {
   renderAllLists();
 }
 
-function findListToRender(listToRender) {
-  allLists.forEach((list) => {
-    if (list === listToRender[0]) {
-      renderCoreApp(list);
-    }
-  });
-}
+// function findListToRender(listToRender) {
+//   allLists.forEach((list) => {
+//     if (list === listToRender[0]) {
+//       renderCoreApp(list);
+//     }
+//   });
+// }
 
 function stringifyWithCircular(obj) {
-  const seen = new WeakSet();
+  // const seen = new WeakSet();
 
-  return JSON.stringify(obj, (key, value) => {
-    if (typeof value === "object" && value !== null) {
-      if (seen.has(value)) {
-        return "[Circular Reference]";
-      }
-      seen.add(value);
-    }
-    return value;
-  });
+  // return JSON.stringify(obj, (key, value) => {
+  //   if (typeof value === "object" && value !== null) {
+  //     if (seen.has(value)) {
+  //       return "[Circular Reference]";
+  //     }
+  //     seen.add(value);
+  //   }
+  // //   return value;
+  // });
+  return JSON.stringify(obj);
 }
 
 export function saveListToStorage() {
   const serializedData = stringifyWithCircular(allLists);
-  console.log("sd", serializedData);
+  const serializedTaskData = stringifyWithCircular(allLists[0].tasksArray);
   localStorage.setItem("lists", serializedData);
+  localStorage.setItem("tasks", serializedTaskData);
 }
 
 function getDefaultList() {
@@ -73,7 +75,7 @@ function getDefaultList() {
     "I need to do something",
     "2023-11-13",
     true,
-    allLists[0],
+    allLists[0].title,
     false
   );
 
@@ -82,7 +84,7 @@ function getDefaultList() {
     "I need to do something",
     "2023-12-20",
     false,
-    allLists[0],
+    allLists[0].title,
     true
   );
 
@@ -91,7 +93,7 @@ function getDefaultList() {
     null,
     "2023-12-18",
     false,
-    allLists[0],
+    allLists[0].title,
     false
   );
 
@@ -109,6 +111,7 @@ function getDefaultList() {
 export function loadListsFromStorage() {
   const storedLists = JSON.parse(localStorage.getItem("lists")) || [];
   allLists.length = 0;
+  console.log(allLists, "alllists");
   console.log("x");
   storedLists.forEach((storedList) => {
     const newList = createList(
@@ -120,6 +123,7 @@ export function loadListsFromStorage() {
   });
   console.log("f", allLists);
   allLists.length > 0 ? renderAllLists(allLists[0]) : getDefaultList();
+  saveListToStorage();
   console.log("e");
 }
 

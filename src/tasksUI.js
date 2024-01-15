@@ -89,8 +89,16 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
       changeListDiv,
       ""
     );
-    const listColour = task.assignedLists.slice(-1);
-    listAssignment.style.backgroundColor = listColour[0].colour;
+    console.log(task.assignedLists, "THIS");
+    const listName = task.assignedLists.slice(-1);
+    let fullList;
+    allLists.forEach((list) => {
+      if (listName == list.title) {
+        fullList = list;
+      }
+    });
+
+    listAssignment.style.backgroundColor = fullList.colour;
     createElement("small", "dueDate", taskCompleteDiv, task.dueDate);
     createElement(
       "button",
@@ -165,14 +173,16 @@ export function renderProfile() {
 }
 
 export function renderThisListEL() {
-  const listColours = document.querySelectorAll(".listAssignment");
-  listColours.forEach((listColour) => {
-    console.log("heyyyyy");
-    console.log("listcolours", listColours);
-    listColour.addEventListener("click", () => {
+  const listIcons = document.querySelectorAll(".listAssignment");
+  listIcons.forEach((listIcon) => {
+    listIcon.addEventListener("click", () => {
       allLists.forEach((list) => {
-        if (listColour.style.backgroundColor == list.colour) console.log("hi");
-        renderCoreApp(list);
+        const listIconColour = listIcon.style.backgroundColor
+          .toString()
+          .replaceAll(" ", "");
+        if (listIconColour === list.colour) {
+          renderCoreApp(list);
+        }
       });
     });
   });
