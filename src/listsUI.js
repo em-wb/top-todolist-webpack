@@ -3,6 +3,7 @@ import {
   renderFooter,
   renderHeader,
   renderThisListEL,
+  renderBanner,
 } from "./tasksUI";
 import renderMenuEvLis from "./menu";
 import createElement from "./createElement";
@@ -71,7 +72,7 @@ function renderListAppCtr() {
 
 export default function renderAllLists() {
   clearContents();
-
+  renderBanner();
   const { listCtr } = renderListAppCtr();
   renderHeader("", true);
   createNewListDialog();
