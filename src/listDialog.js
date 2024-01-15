@@ -150,7 +150,7 @@ export function getListDialogELs() {
   submitListBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (editedList) {
-      //   removeList(editedTask, listIndex);  /////REMOVE LIST
+      removeList(editedList, listIndex);
     }
 
     const newList = createList(
