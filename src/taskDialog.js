@@ -182,6 +182,7 @@ export function getTaskDialogELs() {
   submitTaskBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (editedTask) {
+      console.log(editedTask, taskIndex, "if edited");
       removeTask(editedTask, taskIndex);
     }
     let chosenList = newTaskForm.elements["dropdownList"].value

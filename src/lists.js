@@ -23,9 +23,12 @@ function addTask(task) {
 }
 
 export function removeTask(taskToDelete, itemIndex) {
-  listToRender = taskToDelete.assignedLists[1]
+  const listTitleToRender = taskToDelete.assignedLists[1]
     ? taskToDelete.assignedLists[1]
     : taskToDelete.assignedLists[0];
+  if (allLists.some((list) => list === listTitleToRender)) {
+    listToRender = list;
+  }
   allLists[0].tasksArray.splice(itemIndex, 1);
   renderCoreApp(listToRender);
 }
