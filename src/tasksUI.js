@@ -97,7 +97,6 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
         fullList = list;
       }
     });
-
     listAssignment.style.backgroundColor = fullList.colour;
     createElement("small", "dueDate", taskCompleteDiv, task.dueDate);
     createElement(
