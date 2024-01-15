@@ -43,12 +43,12 @@ export function renderHeader(list, allLists) {
     titleCtr,
     allLists ? "" : list.description
   );
-  const ellipsisDiv = createElement("div", "ellipsisDiv", header);
-  const ellipsis = createElement(
-    "i",
-    ["fa-solid", "fa-ellipsis-vertical"],
-    ellipsisDiv
-  );
+  // const ellipsisDiv = createElement("div", "ellipsisDiv", header);
+  // const ellipsis = createElement(
+  //   "i",
+  //   ["fa-solid", "fa-ellipsis-vertical"],
+  //   ellipsisDiv
+  // );
 }
 
 export function renderFooter() {
@@ -123,6 +123,16 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
     createElement("p", "no-tasks-text", noTasksCtr, "You're up to date!");
     noTasksImg.src = Complete;
   }
+  if (doneCtr.childNodes.length === 1) {
+    console.log("Noooo");
+    createElement(
+      "p",
+      "nothing-complete",
+      doneCtr,
+      "Complete a task to see it here..."
+    );
+    createElement("hr", "break", doneCtr);
+  }
 }
 
 function editThisTaskEL() {
@@ -162,6 +172,7 @@ function renderCoreAppCtr() {
 }
 
 function renderProfileInfo() {
+  renderBanner();
   const profileCtr = createElement("div", "profile-ctr", content);
   createElement("h1", "user-name", profileCtr, "Vivi90");
   createElement(
@@ -195,9 +206,12 @@ export function renderThisListEL() {
 }
 
 function completeTaskEL(list) {
+  console.log("hello2");
   const completeTask = document.querySelectorAll(".completeBtn");
   completeTask.forEach((completeTaskBtn) => {
+    console.log("hello3");
     completeTaskBtn.addEventListener("click", () => {
+      console.log("tick");
       const taskToComplete = completeTaskBtn.getAttribute("data-index-number");
       console.log(taskToComplete);
       list.tasksArray[taskToComplete].completed =
@@ -213,10 +227,23 @@ function completeTaskEL(list) {
   });
 }
 
+export function renderBanner() {
+  const banner = createElement("div", "banner", content);
+  createElement("h3", "logo", banner, "Absolistly");
+  const bannerProfile = createElement("div", "banner-profile", banner);
+  createElement("H2", "user-name", bannerProfile, "Hello, Vivi90");
+  createElement(
+    "i",
+    ["profile-pic", "fa-solid", "fa-person-burst"],
+    bannerProfile
+  );
+}
+
 export function renderCoreApp(list) {
   clearContents();
   if (list) {
     const { tasksCtr, doneCtr } = renderCoreAppCtr();
+    renderBanner();
     renderHeader(list);
     renderTaskItems(tasksCtr, doneCtr, list);
     createNewTaskDialog();
@@ -227,5 +254,6 @@ export function renderCoreApp(list) {
     renderMenuEvLis();
     renderThisListEL();
     completeTaskEL(list);
+    console.log("hello");
   }
 }
