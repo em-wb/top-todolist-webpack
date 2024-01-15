@@ -152,6 +152,21 @@ textarea,
   padding: 0 10px 0 10px;
 }
 
+.no-tasks-ctr {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin-top: 2rem;
+}
+
+.no-tasks-img {
+  height: 8rem;
+  width: auto;
+}
+
 .taskItem {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
@@ -209,7 +224,8 @@ textarea,
   font-size: 0.8rem;
 }
 
-.view-edit {
+.view-edit,
+.no-tasks-text {
   color: grey;
   opacity: 80%;
 }

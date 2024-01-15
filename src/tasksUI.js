@@ -7,6 +7,7 @@ import createNewTaskDialog, {
 import formatDueDates from "./dates";
 import renderToday, { renderAllTasks } from "./menu";
 import renderMenuEvLis from "./menu";
+import Complete from "./complete.png";
 
 const iconListFooter = [
   { classes: ["fa-solid", "fa-list"], text: "All tasks" },
@@ -116,6 +117,12 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
     createElement("hr", "break", taskItem);
     i++;
   });
+  if (!tasksCtr.hasChildNodes()) {
+    const noTasksCtr = createElement("div", "no-tasks-ctr", tasksCtr);
+    const noTasksImg = createElement("img", "no-tasks-img", noTasksCtr);
+    createElement("p", "no-tasks-text", noTasksCtr, "You're up to date!");
+    noTasksImg.src = Complete;
+  }
 }
 
 function editThisTaskEL() {
