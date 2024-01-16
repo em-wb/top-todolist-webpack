@@ -139,7 +139,7 @@ textarea,
   font-style: italic;
   font-size: 0.9rem;
   opacity: 80%;
-  color: #f6f4f9;
+  color: #fca3b9;
 }
 
 .coreAppCtr {
@@ -454,6 +454,7 @@ label {
     grid-row: 1/2;
     font-size: 2rem;
     text-align: center;
+    color: #f6f4f9;
   }
 
   .coreAppCtr {
