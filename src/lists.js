@@ -53,7 +53,7 @@ function getDefaultList() {
   const task1 = createTask(
     "My first to do",
     "I need to do something",
-    "2023-11-13",
+    "2024-11-13",
     true,
     allLists[0].title,
     false
@@ -71,7 +71,7 @@ function getDefaultList() {
   const task3 = createTask(
     "Task 3",
     null,
-    "2023-12-18",
+    "2024-06-18",
     false,
     allLists[0].title,
     false
