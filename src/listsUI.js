@@ -2,16 +2,12 @@ import {
   clearContents,
   renderFooter,
   renderHeader,
-  renderThisListEL,
   renderBanner,
-} from "./tasksUI";
+} from "./coreUI";
 import renderMenuEvLis from "./menu";
 import createElement from "./createElement";
 import { allLists } from "./lists";
-import createNewListDialog, {
-  getListDialogELs,
-  openDialogForThisList,
-} from "./listDialog";
+import createNewListDialog, { getListDialogELs } from "./listDialog";
 import { addCoreEventListeners } from "./coreELs";
 
 function renderListItems(listCtr) {
@@ -47,34 +43,6 @@ function renderListItems(listCtr) {
   document.getElementById("editList0").classList.remove("editList", "fa-eye");
 }
 
-// function editThisListEL() {
-//   document.addEventListener("click", (e) => {
-//     if (e.target.matches(".list-item")) {
-//       const itemIndex = e.target.getAttribute("data-index-number");
-//       console.log("itemind", itemIndex);
-//       const listToOpen = allLists[itemIndex];
-//       console.log("open", listToOpen, itemIndex);
-//       if (itemIndex != 0) {
-//         openDialogForThisList(listToOpen, itemIndex);
-//       }
-//     }
-//   });
-// }
-// const editLists = document.querySelectorAll(".list-item");
-// console.log("edit");
-// editLists.forEach((editList) => {
-//   console.log("edit2");
-//   editList.addEventListener("click", () => {
-//     const itemIndex = editList.getAttribute("data-index-number");
-//     console.log("itemind", itemIndex);
-//     const listToOpen = allLists[itemIndex];
-//     console.log("open", listToOpen, itemIndex);
-//     if (itemIndex != 0) {
-//       openDialogForThisList(listToOpen, itemIndex);
-//     }
-//   });
-// });
-
 function renderListAppCtr() {
   const listCtr = createElement("div", "list-ctr", content, "");
   createElement(
@@ -99,6 +67,4 @@ export default function renderAllLists() {
   getListDialogELs();
   renderMenuEvLis();
   addCoreEventListeners();
-  // editThisListEL();
-  // renderThisListEL();
 }

@@ -1,11 +1,7 @@
 import createElement from "./createElement";
-import createList, { allLists, removeTask } from "./lists";
-import createNewTaskDialog, {
-  getTaskDialogELs,
-  openDialogForThisTask,
-} from "./taskDialog";
+import { allLists } from "./lists";
+import createNewTaskDialog, { getTaskDialogELs } from "./taskDialog";
 import formatDueDates from "./dates";
-import renderToday, { renderAllTasks } from "./menu";
 import renderMenuEvLis from "./menu";
 import Complete from "./complete.png";
 import { addCoreEventListeners, completeTaskEL } from "./coreELs";
@@ -44,12 +40,6 @@ export function renderHeader(list, allLists) {
     titleCtr,
     allLists ? "" : list.description
   );
-  // const ellipsisDiv = createElement("div", "ellipsisDiv", header);
-  // const ellipsis = createElement(
-  //   "i",
-  //   ["fa-solid", "fa-ellipsis-vertical"],
-  //   ellipsisDiv
-  // );
 }
 
 export function renderFooter() {
@@ -92,7 +82,6 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
       changeListDiv,
       ""
     );
-    console.log(task.assignedLists, "THIS");
     const listName = task.assignedLists.slice(-1);
     let fullList;
     allLists.forEach((list) => {
@@ -126,7 +115,6 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
     noTasksImg.src = Complete;
   }
   if (doneCtr.childNodes.length === 1) {
-    console.log("Noooo");
     createElement(
       "p",
       "nothing-complete",
@@ -136,17 +124,6 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
     createElement("hr", "break", doneCtr);
   }
 }
-
-// function editThisTaskEL() {
-//   const editTasks = document.querySelectorAll(".view-edit");
-//   editTasks.forEach((editTask) => {
-//     editTask.addEventListener("click", () => {
-//       const itemIndex = editTask.getAttribute("data-index-number");
-//       const taskToOpen = allLists[0].tasksArray[itemIndex];
-//       openDialogForThisTask(taskToOpen, itemIndex);
-//     });
-//   });
-// }
 
 export function clearContents() {
   const content = document.getElementById("content");
@@ -191,44 +168,6 @@ export function renderProfile() {
   renderMenuEvLis();
 }
 
-// export function renderThisListEL() {
-//   const listIcons = document.querySelectorAll(".listAssignment");
-//   listIcons.forEach((listIcon) => {
-//     listIcon.addEventListener("click", () => {
-//       allLists.forEach((list) => {
-//         const listIconColour = listIcon.style.backgroundColor
-//           .toString()
-//           .replaceAll(" ", "");
-//         if (listIconColour === list.colour) {
-//           renderCoreApp(list);
-//         }
-//       });
-//     });
-//   });
-// }
-
-// function completeTaskEL(list) {
-//   console.log("hello2");
-//   const completeTask = document.querySelectorAll(".completeBtn");
-//   completeTask.forEach((completeTaskBtn) => {
-//     console.log("hello3");
-//     completeTaskBtn.addEventListener("click", () => {
-//       console.log("tick");
-//       const taskToComplete = completeTaskBtn.getAttribute("data-index-number");
-//       console.log(taskToComplete);
-//       list.tasksArray[taskToComplete].completed =
-//         !list.tasksArray[taskToComplete].completed;
-//       // allLists.forEach((list) => {
-//       //   console.log(list);
-//       //   console.log("here", list.tasksArray[taskToComplete]);
-//       //   list.tasksArray[taskToComplete].completed =
-//       //     !list.tasksArray[taskToComplete].completed;
-//       // });
-//       renderCoreApp(list);
-//     });
-//   });
-// }
-
 export function renderBanner() {
   const banner = createElement("div", "banner", content);
   createElement("h3", "logo", banner, "Absolistly");
@@ -251,12 +190,9 @@ export function renderCoreApp(list) {
     createNewTaskDialog();
     renderFooter();
     getTaskDialogELs();
-    // editThisTaskEL();
     formatDueDates();
     renderMenuEvLis();
-    // renderThisListEL();
     completeTaskEL(list);
     addCoreEventListeners();
-    console.log("hello");
   }
 }

@@ -1,5 +1,5 @@
 import createElement from "./createElement";
-import { allLists, removeTask, saveListToStorage } from "./lists";
+import { allLists, removeTask } from "./lists";
 import createTask from "./tasks";
 
 let newTask = true;
@@ -169,6 +169,7 @@ export function getTaskDialogELs() {
   const newTaskForm = document.getElementById("newTaskForm");
   const submitTaskBtn = document.getElementById("submitTaskBtn");
   const deleteTaskBtn = document.getElementById("deleteTaskBtn");
+
   document.getElementById("addNewBtn").addEventListener("click", (e) => {
     e.preventDefault();
     taskDialog.showModal();

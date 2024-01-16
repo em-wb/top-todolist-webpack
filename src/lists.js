@@ -1,5 +1,5 @@
 import renderAllLists from "./listsUI";
-import { renderCoreApp } from "./tasksUI";
+import { renderCoreApp } from "./coreUI";
 import createTask from "./tasks";
 
 let listToRender = "";
@@ -38,14 +38,6 @@ export function removeList(listToDelete, itemIndex) {
   saveListToStorage();
   renderAllLists();
 }
-
-// function findListToRender(listToRender) {
-//   allLists.forEach((list) => {
-//     if (list === listToRender[0]) {
-//       renderCoreApp(list);
-//     }
-//   });
-// }
 
 function stringifyWithCircular(obj) {
   // const seen = new WeakSet();
@@ -142,7 +134,6 @@ export default function createList(title, description, colour) {
   };
 
   list.addToAllListsArray();
-  // saveListToStorage();
 
   return list;
 }

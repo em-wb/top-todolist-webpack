@@ -1,6 +1,6 @@
 import createList, { allLists, saveListToStorage } from "./lists";
 import { isToday } from "date-fns";
-import { renderCoreApp, renderProfile } from "./tasksUI";
+import { renderCoreApp, renderProfile } from "./coreUI";
 import renderAllLists from "./listsUI";
 
 export default function renderMenuEvLis() {

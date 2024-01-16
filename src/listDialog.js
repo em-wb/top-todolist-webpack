@@ -1,5 +1,5 @@
 import createElement from "./createElement";
-import createList, { allLists, removeList } from "./lists";
+import createList, { removeList } from "./lists";
 import Picker from "vanilla-picker";
 import "vanilla-picker/dist/vanilla-picker.csp.css";
 import renderAllLists from "./listsUI";
@@ -153,7 +153,7 @@ export function getListDialogELs() {
       removeList(editedList, listIndex);
     }
 
-    const newList = createList(
+    createList(
       newListForm.elements["inputListTitle"].value,
       newListForm.elements["inputListDesc"].value,
       listColor
@@ -168,7 +168,6 @@ export function getListDialogELs() {
     e.preventDefault();
     if (editedList) {
       removeList(editedList, listIndex);
-      console.log("deklete", editedList, listIndex);
     }
     newListForm.reset();
     listDialog.close();
