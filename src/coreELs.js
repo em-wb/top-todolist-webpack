@@ -1,13 +1,13 @@
 import { openDialogForThisList } from "./listDialog";
 import { openDialogForThisTask } from "./taskDialog";
-import { renderCoreApp } from "./tasksUI";
+import { renderCoreApp } from "./coreUI";
 import { allLists } from "./lists";
 
 export function addCoreEventListeners() {
   console.log("i'm being activated");
   //render list
   document.addEventListener("click", (e) => {
-    if (e.target.matches(".list-item")) {
+    if (e.target.matches(".view-edit")) {
       console.log("i'm being activate EL");
       const itemIndex = e.target.getAttribute("data-index-number");
       console.log("itemind", itemIndex);
@@ -59,12 +59,6 @@ export function completeTaskEL(list) {
       console.log(taskToComplete);
       list.tasksArray[taskToComplete].completed =
         !list.tasksArray[taskToComplete].completed;
-      // allLists.forEach((list) => {
-      //   console.log(list);
-      //   console.log("here", list.tasksArray[taskToComplete]);
-      //   list.tasksArray[taskToComplete].completed =
-      //     !list.tasksArray[taskToComplete].completed;
-      // });
       renderCoreApp(list);
     });
   });
