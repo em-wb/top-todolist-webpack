@@ -450,6 +450,9 @@ label {
     grid-column: 2/3;
   }
 
+  dialog {
+    max-width: 600px;
+  }
   .logo {
     grid-row: 1/2;
     font-size: 2rem;
