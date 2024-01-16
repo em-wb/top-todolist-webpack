@@ -8,6 +8,7 @@ import formatDueDates from "./dates";
 import renderToday, { renderAllTasks } from "./menu";
 import renderMenuEvLis from "./menu";
 import Complete from "./complete.png";
+import { addCoreEventListeners, completeTaskEL } from "./coreELs";
 
 const iconListFooter = [
   { classes: ["fa-solid", "fa-list"], text: "All tasks" },
@@ -69,7 +70,8 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
       "div",
       "taskItem",
       task.completed ? doneCtr : tasksCtr,
-      ""
+      "",
+      [["data-index-number", i]]
     );
     const taskInfoDiv = createElement("div", "taskInfoDiv", taskItem);
     const editDiv = createElement("div", "editDiv", taskItem, "");
@@ -135,16 +137,16 @@ function renderTaskItems(tasksCtr, doneCtr, list) {
   }
 }
 
-function editThisTaskEL() {
-  const editTasks = document.querySelectorAll(".view-edit");
-  editTasks.forEach((editTask) => {
-    editTask.addEventListener("click", () => {
-      const itemIndex = editTask.getAttribute("data-index-number");
-      const taskToOpen = allLists[0].tasksArray[itemIndex];
-      openDialogForThisTask(taskToOpen, itemIndex);
-    });
-  });
-}
+// function editThisTaskEL() {
+//   const editTasks = document.querySelectorAll(".view-edit");
+//   editTasks.forEach((editTask) => {
+//     editTask.addEventListener("click", () => {
+//       const itemIndex = editTask.getAttribute("data-index-number");
+//       const taskToOpen = allLists[0].tasksArray[itemIndex];
+//       openDialogForThisTask(taskToOpen, itemIndex);
+//     });
+//   });
+// }
 
 export function clearContents() {
   const content = document.getElementById("content");
@@ -189,43 +191,43 @@ export function renderProfile() {
   renderMenuEvLis();
 }
 
-export function renderThisListEL() {
-  const listIcons = document.querySelectorAll(".listAssignment");
-  listIcons.forEach((listIcon) => {
-    listIcon.addEventListener("click", () => {
-      allLists.forEach((list) => {
-        const listIconColour = listIcon.style.backgroundColor
-          .toString()
-          .replaceAll(" ", "");
-        if (listIconColour === list.colour) {
-          renderCoreApp(list);
-        }
-      });
-    });
-  });
-}
+// export function renderThisListEL() {
+//   const listIcons = document.querySelectorAll(".listAssignment");
+//   listIcons.forEach((listIcon) => {
+//     listIcon.addEventListener("click", () => {
+//       allLists.forEach((list) => {
+//         const listIconColour = listIcon.style.backgroundColor
+//           .toString()
+//           .replaceAll(" ", "");
+//         if (listIconColour === list.colour) {
+//           renderCoreApp(list);
+//         }
+//       });
+//     });
+//   });
+// }
 
-function completeTaskEL(list) {
-  console.log("hello2");
-  const completeTask = document.querySelectorAll(".completeBtn");
-  completeTask.forEach((completeTaskBtn) => {
-    console.log("hello3");
-    completeTaskBtn.addEventListener("click", () => {
-      console.log("tick");
-      const taskToComplete = completeTaskBtn.getAttribute("data-index-number");
-      console.log(taskToComplete);
-      list.tasksArray[taskToComplete].completed =
-        !list.tasksArray[taskToComplete].completed;
-      // allLists.forEach((list) => {
-      //   console.log(list);
-      //   console.log("here", list.tasksArray[taskToComplete]);
-      //   list.tasksArray[taskToComplete].completed =
-      //     !list.tasksArray[taskToComplete].completed;
-      // });
-      renderCoreApp(list);
-    });
-  });
-}
+// function completeTaskEL(list) {
+//   console.log("hello2");
+//   const completeTask = document.querySelectorAll(".completeBtn");
+//   completeTask.forEach((completeTaskBtn) => {
+//     console.log("hello3");
+//     completeTaskBtn.addEventListener("click", () => {
+//       console.log("tick");
+//       const taskToComplete = completeTaskBtn.getAttribute("data-index-number");
+//       console.log(taskToComplete);
+//       list.tasksArray[taskToComplete].completed =
+//         !list.tasksArray[taskToComplete].completed;
+//       // allLists.forEach((list) => {
+//       //   console.log(list);
+//       //   console.log("here", list.tasksArray[taskToComplete]);
+//       //   list.tasksArray[taskToComplete].completed =
+//       //     !list.tasksArray[taskToComplete].completed;
+//       // });
+//       renderCoreApp(list);
+//     });
+//   });
+// }
 
 export function renderBanner() {
   const banner = createElement("div", "banner", content);
@@ -249,11 +251,12 @@ export function renderCoreApp(list) {
     createNewTaskDialog();
     renderFooter();
     getTaskDialogELs();
-    editThisTaskEL();
+    // editThisTaskEL();
     formatDueDates();
     renderMenuEvLis();
-    renderThisListEL();
+    // renderThisListEL();
     completeTaskEL(list);
+    addCoreEventListeners();
     console.log("hello");
   }
 }
