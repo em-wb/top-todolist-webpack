@@ -432,6 +432,13 @@ label {
   display: none;
 }
 
+.menuItemDiv:hover,
+.view-edit:hover,
+.listAssignment:hover,
+button:hover {
+  cursor: pointer;
+}
+
 @media (min-width: 720px) {
   .content {
     grid-template-columns: 300px 1fr;
