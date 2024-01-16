@@ -39,26 +39,11 @@ export function removeList(listToDelete, itemIndex) {
   renderAllLists();
 }
 
-function stringifyWithCircular(obj) {
-  // const seen = new WeakSet();
-
-  // return JSON.stringify(obj, (key, value) => {
-  //   if (typeof value === "object" && value !== null) {
-  //     if (seen.has(value)) {
-  //       return "[Circular Reference]";
-  //     }
-  //     seen.add(value);
-  //   }
-  // //   return value;
-  // });
-  return JSON.stringify(obj);
-}
-
 export function saveListToStorage() {
-  const serializedData = stringifyWithCircular(allLists);
-  const serializedTaskData = stringifyWithCircular(allLists[0].tasksArray);
-  localStorage.setItem("lists", serializedData);
-  localStorage.setItem("tasks", serializedTaskData);
+  const allData = JSON.stringify(allLists);
+  const taskData = JSON.stringify(allLists[0].tasksArray);
+  localStorage.setItem("lists", allData);
+  localStorage.setItem("tasks", taskData);
 }
 
 function getDefaultList() {
