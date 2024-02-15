@@ -3,15 +3,15 @@ export default function createTask(
   description,
   dueDate,
   priority,
-  lists,
-  completed
+  completed,
+  additionalList
 ) {
   const task = {
     title: title,
     description: description,
     dueDate: dueDate,
     priority: priority,
-    assignedLists: Array.isArray(lists) ? lists : [lists],
+    assignedLists: additionalList ? [1, additionalList] : [1],
     completed: completed,
   };
 
