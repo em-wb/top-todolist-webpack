@@ -29,12 +29,16 @@ export function renderTask(task) {
   createElement("h2", "task-title", textDiv, task.title);
   createElement("p", "task-desc", textDiv, task.description);
   const openEditDiv = createElement("div", "open-edit-div", taskCtr);
+  const editBtn = createElement("button", "open-edit", openEditDiv);
   createElement(
-    "div",
-    ["editList", "view-edit", "fa-solid", "fa-eye"],
-    openEditDiv
+    "i",
+    ["editList", "view-edit", "fa-solid", "fa-pen-to-square"],
+
+    editBtn,
+    "",
+    [["title", "Edit & Delete"]]
   );
-  createElement("p", "open-edit", openEditDiv, "View / Edit");
+
   const listColor = createElement("div", "list-color", openEditDiv);
   listColor.style.backgroundColor = task.color;
   const taskCompleteDiv = createElement("div", "task-complete-div", taskCtr);
@@ -46,6 +50,7 @@ export function renderTask(task) {
       "fa-solid",
       "fa-check",
       task.completed ? "doneBtn" : "todoBtn",
+      "button",
     ],
     taskCompleteDiv,
     ""
