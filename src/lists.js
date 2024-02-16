@@ -26,12 +26,12 @@ export function addListToStorage(list) {
   localStorage.setItem("lists", listData);
 }
 
-export function getListTitleDesc(ID) {
+export function getListInfo(ID) {
   const storedLists = JSON.parse(localStorage.getItem("lists")) || [];
   if (storedLists.length > 0) {
     storedLists.forEach((storedList) => {
       if (storedList.listID == ID) {
-        renderListName(storedList.title, storedList.description);
+        renderListName(storedList);
       }
     });
   } else {
@@ -40,7 +40,7 @@ export function getListTitleDesc(ID) {
       "All your tasks in one list",
       "blue"
     );
-    renderListName(allTasks.title, allTasks.description);
+    renderListName(allTasks);
   }
 }
 

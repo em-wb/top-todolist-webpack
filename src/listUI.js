@@ -1,10 +1,11 @@
 import createElement from "./createElement";
+import formatDueDates from "./date";
 
-export function renderListName(listTitle, listDesc) {
+export function renderListName(list) {
   const viewCtr = document.getElementById("view-ctr");
   const headingCtr = createElement("div", "heading-ctr", viewCtr);
-  const h1 = createElement("h1", "h1", headingCtr, listTitle);
-  const desc = createElement("p", "desc", headingCtr, listDesc);
+  const h1 = createElement("h1", "h1", headingCtr, list.title);
+  const desc = createElement("p", "desc", headingCtr, list.description);
 }
 
 // function getTasks(task) {
@@ -42,7 +43,12 @@ export function renderTask(task) {
   const listColor = createElement("div", "list-color", openEditDiv);
   listColor.style.backgroundColor = task.color;
   const taskCompleteDiv = createElement("div", "task-complete-div", taskCtr);
-  createElement("small", "dueDate", taskCompleteDiv, task.dueDate);
+  createElement(
+    "small",
+    "due-date",
+    taskCompleteDiv,
+    formatDueDates(task.dueDate, taskCompleteDiv)
+  );
   createElement(
     "button",
     [

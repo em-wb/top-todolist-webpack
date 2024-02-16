@@ -1,5 +1,5 @@
 import { renderTask } from "./listUI";
-import { getListTitleDesc } from "./lists";
+import { getListInfo } from "./lists";
 
 export default function createTask(
   title,
@@ -38,5 +38,5 @@ export function loadTasksFromStorage(listID) {
       }
     });
   }
-  getListTitleDesc(listID);
+  getListInfo(listID);
 }
