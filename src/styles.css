@@ -109,8 +109,24 @@ hr {
   background-color: var(--accent-color);
 }
 
+.add-new-btn {
+  position: fixed;
+  right: 10%;
+  bottom: 25%;
+  z-index: 1000;
+  background-color: #b0b8c7;
+  font-size: 2rem;
+  border-radius: 2rem;
+}
+
+.todo-done-ctr {
+  overflow-y: auto;
+}
+
 .heading-ctr {
   grid-row: 1/2;
+  position: sticky;
+  margin-bottom: 1.5rem;
 }
 
 .task-ctr {
