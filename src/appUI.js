@@ -48,6 +48,11 @@ export function renderViewCtr() {
   const viewCtr = createElement("div", "view-ctr", content, "", [
     ["id", "view-ctr"],
   ]);
+  addTaskCtrs();
+}
+
+export function addTaskCtrs() {
+  const viewCtr = document.getElementById("view-ctr");
   const todoDoneCtr = createElement("div", "todo-done-ctr", viewCtr);
   createElement("div", "todo-ctr", todoDoneCtr, "", [["id", "todo-ctr"]]);
   const doneCtr = createElement("div", "done-ctr", todoDoneCtr, "", [

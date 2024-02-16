@@ -1,5 +1,8 @@
+import clearViewCtr from ".";
 import createElement from "./createElement";
 import formatDueDates from "./date";
+import { getTaskData } from "./tasks";
+import { editedTaskLog, renderTaskForm } from "./addNew";
 
 export function renderListName(list) {
   const viewCtr = document.getElementById("view-ctr");
@@ -8,34 +11,24 @@ export function renderListName(list) {
   const desc = createElement("p", "desc", headingCtr, list.description);
 }
 
-// function getTasks(task) {
-//   const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-//   storedTasks.forEach((storedTask) => {
-//     if (storedTask.assignedLists === listID) {
-//       renderTask(storedTask);
-//     }
-//   });
-// }
-
 function renderPriorityStatus(status, textDiv) {
   if (status) {
     textDiv.classList.add("priority");
   }
 }
 
-export function renderTask(task) {
+export function renderTask(task, index) {
+  console.log(task);
   const todoCtr = document.getElementById("todo-ctr");
   const doneCtr = document.getElementById("done-ctr");
-  const taskCtr = createElement(
-    "div",
-    "task-ctr",
-    task.completed ? doneCtr : todoCtr
-  );
+  const taskCtr = createElement("div", "task-ctr", todoCtr);
   const textDiv = createElement("div", "text-div", taskCtr);
   createElement("h2", "task-title", textDiv, task.title);
   createElement("p", "task-desc", textDiv, task.description);
   const openEditDiv = createElement("div", "open-edit-div", taskCtr);
-  const editBtn = createElement("button", "open-edit", openEditDiv);
+  const editBtn = createElement("button", "open-edit", openEditDiv, "", [
+    ["data-index-number", index],
+  ]);
   createElement(
     "i",
     ["editList", "view-edit", "fa-solid", "fa-pen-to-square"],
@@ -67,4 +60,14 @@ export function renderTask(task) {
     ""
   );
   renderPriorityStatus(task.priority, textDiv);
+  editTaskEL(editBtn);
+}
+
+function editTaskEL(editBtn) {
+  editBtn.addEventListener("click", () => {
+    const taskToEdit = getTaskData(editBtn.dataset.indexNumber);
+    editedTaskLog(taskToEdit);
+    clearViewCtr();
+    renderTaskForm(taskToEdit);
+  });
 }

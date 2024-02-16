@@ -1,11 +1,20 @@
 import createElement from "./createElement";
-import createTask, { loadTasksFromStorage } from "./tasks";
+import createTask, { loadTasksFromStorage, deleteTask } from "./tasks";
 import clearViewCtr from "./index.js";
+import { addTaskCtrs } from "./appUI";
 
-export function renderTaskForm() {
+let edited = false;
+let taskIndex;
+
+export function editedTaskLog(index) {
+  taskIndex = index;
+  edited = true;
+}
+
+export function renderTaskForm(taskToEdit) {
   const viewCtr = document.getElementById("view-ctr");
   const form = createElement("form", "form", viewCtr);
-  createElement("h1", null, form);
+  createElement("h1", null, form, "Task");
   const closeBtn = createElement(
     "button",
     ["closeBtn", "fa-solid", "fa-xmark"],
@@ -20,16 +29,23 @@ export function renderTaskForm() {
       ["required", ""],
       ["placeholder", "Do the grocery shop"],
       ["maxlength", "50"],
+      ["value", taskToEdit ? taskToEdit.title : ""],
     ]);
   createElement("label", null, form, "Description (optional)", [
     ["for", "inputTaskDesc"],
   ]),
-    createElement("textarea", "input", form, "", [
-      ["id", "inputTaskDesc"],
-      ["rows", "2"],
-      ["placeholder", "Eggs, milk, cereal, bread, bananas"],
-      ["maxlength", "250"],
-    ]);
+    createElement(
+      "textarea",
+      "input",
+      form,
+      taskToEdit ? taskToEdit.description : "",
+      [
+        ["id", "inputTaskDesc"],
+        ["rows", "2"],
+        ["placeholder", "Eggs, milk, cereal, bread, bananas"],
+        ["maxlength", "250"],
+      ]
+    );
   createElement("label", "textInput", form, "Due Date", [
     ["for", "inputTaskDate"],
   ]);
@@ -37,11 +53,13 @@ export function renderTaskForm() {
     ["id", "inputTaskDate"],
     ["type", "date"],
     ["required", ""],
+    ["value", taskToEdit ? taskToEdit.dueDate : ""],
   ]);
   createElement("p", null, form, "Priority");
   createElement("input", "highPriority", form, "", [
     ["id", "highPriorityTask"],
     ["type", "checkbox"],
+    ["checked", taskToEdit ? taskToEdit.priority : false],
   ]);
   createElement("label", null, form, "High", [["for", "highPriorityTask"]]);
   createElement("label", null, form, "List(s)", [["for", "dropdownList"]]);
@@ -105,8 +123,8 @@ export function renderTaskForm() {
 function deleteTaskEL(deleteTaskBtn) {
   deleteTaskBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    if (editedTask) {
-      removeTask(editedTask, taskIndex);
+    if (edited) {
+      removeTask(taskIndex);
     }
     clearViewCtr();
     // renderTaskList(currentList); add
@@ -132,7 +150,9 @@ function getAssignedLists(chosenIndex) {
 function submitTaskEL(submitTaskBtn) {
   submitTaskBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    //if edited
+    if (edited) {
+      deleteTask(taskIndex);
+    }
     const dropDown = document.getElementById("dropdownList");
     const selectedIndex = dropDown.selectedIndex;
     const chosenIndex = dropDown.options[selectedIndex].dataset.indexNumber;
@@ -146,6 +166,10 @@ function submitTaskEL(submitTaskBtn) {
       false
     );
     clearViewCtr();
+    addTaskCtrs();
+    console.log("chose", chosenIndex);
     loadTasksFromStorage(chosenIndex);
+    edited = false;
+    taskIndex = null;
   });
 }
