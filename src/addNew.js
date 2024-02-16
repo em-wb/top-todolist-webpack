@@ -2,6 +2,7 @@ import createElement from "./createElement";
 import createTask, { loadTasksFromStorage, deleteTask } from "./tasks";
 import clearViewCtr from "./index.js";
 import { addTaskCtrs } from "./appUI";
+import { addTaskEls } from "./listUI";
 
 let edited = false;
 let taskIndex;
@@ -167,8 +168,10 @@ function submitTaskEL(submitTaskBtn) {
     );
     clearViewCtr();
     addTaskCtrs();
+
     console.log("chose", chosenIndex);
     loadTasksFromStorage(chosenIndex);
+    addTaskEls();
     edited = false;
     taskIndex = null;
   });

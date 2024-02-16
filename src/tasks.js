@@ -16,16 +16,21 @@ export default function createTask(
     priority: priority,
     assignedLists: Array.isArray(list) ? list : [list],
     completed: completed,
+    addTaskToStorage: addTaskToStorage,
   };
-  addTaskToStorage(task);
+  task.addTaskToStorage();
   return task;
 }
 
-function addTaskToStorage(task) {
+function addTaskToStorage() {
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  tasks.push(task);
+  tasks.push(this);
   const taskData = JSON.stringify(tasks);
   localStorage.setItem("tasks", taskData);
+}
+
+function toggleComplete(task) {
+  task.completed = !task.completed;
 }
 
 export function loadTasksFromStorage(listID) {
@@ -56,6 +61,16 @@ export function deleteTask(index) {
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   if (tasks.length > 0) {
     tasks.splice(index, 1);
+    const taskData = JSON.stringify(tasks);
+    localStorage.setItem("tasks", taskData);
+  }
+}
+
+export function updateCompleteStatus(index) {
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  if (tasks.length > 0) {
+    toggleComplete(tasks[index]);
+    console.log(tasks[index].completed);
     const taskData = JSON.stringify(tasks);
     localStorage.setItem("tasks", taskData);
   }
