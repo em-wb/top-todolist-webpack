@@ -18,7 +18,6 @@ export default function createElement(
       newElement.setAttribute(element[0], element[1]);
     });
   }
-
   parentEl.append(newElement);
   return newElement;
 }

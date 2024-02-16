@@ -1,23 +1,19 @@
 import createElement from "./createElement";
-import renderTaskList from "./listUI";
-import createList from "./lists";
-import createTask from "./tasks";
+import createTask, { loadTasksFromStorage } from "./tasks";
+import clearViewCtr from "./index.js";
 
-export function clearViewCtr(viewCtr) {
-  if (viewCtr.hasChildNodes) {
-    while (viewCtr.firstChild) {
-      viewCtr.removeChild(viewCtr.firstChild);
-    }
-  }
-}
-
-export function renderTaskForm(viewCtr) {
+export function renderTaskForm() {
+  const viewCtr = document.getElementById("view-ctr");
   const form = createElement("form", "form", viewCtr);
   createElement("h1", null, form);
-  createElement("button", ["closeBtn", "fa-solid", "fa-xmark"], form, "", [
-    ["id", "close-btn"],
-  ]);
-  createElement("label", null, form, "Title"),
+  const closeBtn = createElement(
+    "button",
+    ["closeBtn", "fa-solid", "fa-xmark"],
+    form,
+    "",
+    [["id", "close-btn"]]
+  );
+  createElement("label", null, form, "Title", [["for", "inputTaskTitle"]]),
     createElement("input", "input", form, "", [
       ["id", "inputTaskTitle"],
       ["type", "text"],
@@ -25,14 +21,18 @@ export function renderTaskForm(viewCtr) {
       ["placeholder", "Do the grocery shop"],
       ["maxlength", "50"],
     ]);
-  createElement("label", null, form, "Description (optional)"),
+  createElement("label", null, form, "Description (optional)", [
+    ["for", "inputTaskDesc"],
+  ]),
     createElement("textarea", "input", form, "", [
       ["id", "inputTaskDesc"],
       ["rows", "2"],
       ["placeholder", "Eggs, milk, cereal, bread, bananas"],
       ["maxlength", "250"],
     ]);
-  createElement("label", "textInput", form, "Due Date");
+  createElement("label", "textInput", form, "Due Date", [
+    ["for", "inputTaskDate"],
+  ]);
   createElement("input", "input", form, "", [
     ["id", "inputTaskDate"],
     ["type", "date"],
@@ -44,23 +44,28 @@ export function renderTaskForm(viewCtr) {
     ["type", "checkbox"],
   ]);
   createElement("label", null, form, "High", [["for", "highPriorityTask"]]);
-  createElement("label", null, form, "List (optional)");
-  createElement("input", null, form, "", [
+  createElement("label", null, form, "List(s)", [["for", "dropdownList"]]);
+  const select = createElement("select", null, form, "", [
     ["id", "dropdownList"],
     ["list", "listOfLists"],
   ]);
-  const datalist = createElement("datalist", null, form, "", [
-    ,
-    ["id", "listOfLists"],
+  createElement("option", null, select, "All tasks", [
+    ["value", "All tasks"],
+    ["data-index-number", "1"],
+    ["disabled"],
+    ["selected"],
   ]);
-  createElement("option", null, datalist, "", [["value", "1"]]);
-  createElement("button", "submitBtn", form, "List it", [
+  const submitBtn = createElement("button", "submitBtn", form, "List it", [
     ["id", "submitTaskBtn"],
     ["type", "submit"],
   ]);
-  createElement("button", "deleteBtn", form, "Delete it", [
-    ["id", "deleteTaskBtn"],
-  ]);
+  const deleteTaskBtn = createElement(
+    "button",
+    "deleteBtn",
+    form,
+    "Delete it",
+    [["id", "deleteTaskBtn"]]
+  );
   // listsArray = parseListsFromStorage();
 
   // if (listsArray >= 1) {
@@ -75,62 +80,64 @@ export function renderTaskForm(viewCtr) {
   // } else {
 
   // }
-  addFormEventListeners();
+  submitTaskEL(submitBtn);
+  closeFormEL(closeBtn);
+  deleteTaskEL(deleteTaskBtn);
 }
 
-function parseListsFromStorage() {
-  const listString = JSON.parse(localStorage.getItem("lists")) || [];
-  let listsArray = [];
-  if (listString) {
-    listString.forEach((list) => {
-      const newList = createList(
-        list.title,
-        list.description,
-        list.color,
-        list.listID
-      );
-      listsArray.push(newList);
-    });
-  }
-  return listsArray;
-}
+// function parseListsFromStorage() {
+//   const listString = JSON.parse(localStorage.getItem("lists")) || [];
+//   let listsArray = [];
+//   if (listString) {
+//     listString.forEach((list) => {
+//       const newList = createList(
+//         list.title,
+//         list.description,
+//         list.color,
+//         list.listID
+//       );
+//       listsArray.push(newList);
+//     });
+//   }
+//   return listsArray;
+// }
 
-function addFormEventListeners() {
-  const closeForm = document.getElementById("close-btn");
-  const newTaskForm = document.getElementById("form");
-  const submitTaskBtn = document.getElementById("submitTaskBtn");
-  const deleteTaskBtn = document.getElementById("deleteTaskBtn");
-  submitTaskEL(submitTaskBtn);
-  closeForm.addEventListener("click", (e) => {
-    newTaskForm.reset();
-    //render list
-  });
-
+function deleteTaskEL(deleteTaskBtn) {
   deleteTaskBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (editedTask) {
       removeTask(editedTask, taskIndex);
     }
-    newTaskForm.reset();
     clearViewCtr();
     // renderTaskList(currentList); add
   });
 }
 
+function closeFormEL(closeForm) {
+  closeForm.addEventListener("click", (e) => {
+    loadTasksFromStorage(1); //currentlist
+  });
+}
+
+function getAssignedLists(chosenIndex) {
+  let assignedLists;
+  if (chosenIndex === "1") {
+    assignedLists = chosenIndex;
+  } else {
+    assignedLists = [1, chosenIndex];
+  }
+  return assignedLists;
+}
+
 function submitTaskEL(submitTaskBtn) {
   submitTaskBtn.addEventListener("click", (e) => {
-    console.log("hey");
     e.preventDefault();
-    const newTaskForm = document.getElementById("form");
     //if edited
-    let chosenList = document.getElementById("dropdownList").value;
-    let assignedLists;
-    if (!chosenList === 1) {
-      assignedLists = [1, chosenList];
-    } else {
-      assignedLists = chosenList;
-    }
-    const newTask = createTask(
+    const dropDown = document.getElementById("dropdownList");
+    const selectedIndex = dropDown.selectedIndex;
+    const chosenIndex = dropDown.options[selectedIndex].dataset.indexNumber;
+    const assignedLists = getAssignedLists(chosenIndex);
+    createTask(
       document.getElementById("inputTaskTitle").value,
       document.getElementById("inputTaskDesc").value,
       document.getElementById("inputTaskDate").value,
@@ -138,14 +145,7 @@ function submitTaskEL(submitTaskBtn) {
       assignedLists,
       false
     );
-    console.log(newTask, "new");
-    // resetForm(newTaskForm);
-
     clearViewCtr();
-    renderTaskList(chosenList);
+    loadTasksFromStorage(chosenIndex);
   });
-}
-
-function resetForm(newTaskForm) {
-  newTaskForm.reset();
 }

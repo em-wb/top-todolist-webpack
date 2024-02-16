@@ -4,6 +4,7 @@ export default function renderAppUI() {
   renderHeader();
   renderNav();
   renderViewCtr();
+  addNewBtn();
 }
 
 const iconListNav = [
@@ -44,5 +45,17 @@ export function renderHeader() {
 }
 
 export function renderViewCtr() {
-  const viewCtr = createElement("div", "view-ctr", content);
+  const viewCtr = createElement("div", "view-ctr", content, "", [
+    ["id", "view-ctr"],
+  ]);
+}
+
+function addNewBtn() {
+  const addNewBtn = createElement(
+    "button",
+    ["add-new-btn", "fa-solid", "fa-plus"],
+    content,
+    "",
+    [["id", "add-new-btn"]]
+  );
 }

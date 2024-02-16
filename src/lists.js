@@ -1,33 +1,60 @@
-let i = 0;
+import { renderListName, renderTask } from "./listUI";
 
-export default function createList(title, description, colour) {
+let i = 0; //listID
+
+export default function createList(title, description, color) {
+  const listID = getListID();
+
   const list = {
     title: title,
     description: description,
-    colour: colour,
-    listID: getListID,
+    color: color,
+    listID: listID,
   };
-  saveListToStorage(list);
+  addListToStorage(list);
+  return list;
 }
-
 function getListID() {
   i++;
   return i;
 }
 
-export function saveListToStorage(list) {
-  localStorage.setItem("lists", list);
+export function addListToStorage(list) {
+  const lists = JSON.parse(localStorage.getItem("lists")) || [];
+  lists.push(list);
+  const listData = JSON.stringify(lists);
+  localStorage.setItem("lists", listData);
 }
 
-export function loadListsFromStorage() {
+export function getListTitleDesc(ID) {
   const storedLists = JSON.parse(localStorage.getItem("lists")) || [];
-  storedLists.forEach((storedList) => {
-    const newList = createList(
-      storedList.title,
-      storedList.description,
-      storedList.colour,
-      storedList.listID
+  if (storedLists.length > 0) {
+    storedLists.forEach((storedList) => {
+      if (storedList.listID == ID) {
+        renderListName(storedList.title, storedList.description);
+      }
+    });
+  } else {
+    const allTasks = createList(
+      "All tasks",
+      "All your tasks in one list",
+      "blue"
     );
-  });
-  renderAllLists();
+    renderListName(allTasks.title, allTasks.description);
+  }
 }
+
+// export function loadListsFromStorage() {
+//   const storedLists = JSON.parse(localStorage.getItem("lists")) || [];
+//   storedLists.forEach((storedList) => {
+//     const newList = createList(
+//       storedList.title,
+//       storedList.description,
+//       storedList.colour,
+//       storedList.listID
+//     );
+//   });
+//   if (newList) {
+//     renderList(newList);
+//   }
+// }

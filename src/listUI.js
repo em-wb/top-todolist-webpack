@@ -1,23 +1,28 @@
 import createElement from "./createElement";
 
-export default function renderTaskList(list) {
-  const h1 = document.getElementsByTagName("h1");
-  h1.innerText = list.title;
-  getTasks(list.listID);
+export function renderListName(listTitle, listDesc) {
+  const viewCtr = document.getElementById("view-ctr");
+  const headingCtr = createElement("div", "heading-ctr", viewCtr);
+  const h1 = createElement("h1", "h1", headingCtr, listTitle);
+  const desc = createElement("p", "desc", headingCtr, listDesc);
 }
 
-function getTasks(listID) {
-  const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  storedTasks.forEach((storedTask) => {
-    if (storedTask.assignedLists === listID) {
-      renderTask(storedTask);
-    }
-  });
+// function getTasks(task) {
+//   const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+//   storedTasks.forEach((storedTask) => {
+//     if (storedTask.assignedLists === listID) {
+//       renderTask(storedTask);
+//     }
+//   });
+// }
+
+function renderPriorityStatus(status, textDiv) {
+  if (status) {
+    textDiv.classList.add("priority");
+  }
 }
 
-function renderPriorityStatus(status) {}
-
-function renderTask(task) {
+export function renderTask(task) {
   const viewCtr = document.getElementById("view-ctr");
   const taskCtr = createElement("div", "task-ctr", viewCtr);
   const textDiv = createElement("div", "text-div", taskCtr);
@@ -45,5 +50,5 @@ function renderTask(task) {
     taskCompleteDiv,
     ""
   );
-  renderPriorityStatus(task.priority);
+  renderPriorityStatus(task.priority, textDiv);
 }
