@@ -129,6 +129,11 @@ hr {
   margin-bottom: 1.5rem;
 }
 
+.logo {
+  padding-top: 1rem;
+  font-size: 1.3rem;
+}
+
 .task-ctr {
   display: grid;
   grid-template-columns: 50% 1fr 1fr;
@@ -241,6 +246,7 @@ hr {
     font-size: 2rem;
     text-align: center;
     color: var(--accent-color);
+    padding: 0;
   }
 
   .header-profile {
