@@ -48,6 +48,12 @@ export function renderViewCtr() {
   const viewCtr = createElement("div", "view-ctr", content, "", [
     ["id", "view-ctr"],
   ]);
+  const todoDoneCtr = createElement("div", "todo-done-ctr", viewCtr);
+  createElement("div", "todo-ctr", todoDoneCtr, "", [["id", "todo-ctr"]]);
+  const doneCtr = createElement("div", "done-ctr", todoDoneCtr, "", [
+    ["id", "done-ctr"],
+  ]);
+  createElement("h2", "done-title", doneCtr, "Done");
 }
 
 function addNewBtn() {

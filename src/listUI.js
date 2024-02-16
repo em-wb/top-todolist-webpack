@@ -24,8 +24,13 @@ function renderPriorityStatus(status, textDiv) {
 }
 
 export function renderTask(task) {
-  const viewCtr = document.getElementById("view-ctr");
-  const taskCtr = createElement("div", "task-ctr", viewCtr);
+  const todoCtr = document.getElementById("todo-ctr");
+  const doneCtr = document.getElementById("done-ctr");
+  const taskCtr = createElement(
+    "div",
+    "task-ctr",
+    task.completed ? doneCtr : todoCtr
+  );
   const textDiv = createElement("div", "text-div", taskCtr);
   createElement("h2", "task-title", textDiv, task.title);
   createElement("p", "task-desc", textDiv, task.description);
