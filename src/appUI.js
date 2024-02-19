@@ -100,11 +100,22 @@ export function renderListColor(item, ctr) {
   listColor.style.backgroundColor = item.color;
 }
 
+function removePastSelected(menuItems) {
+  menuItems.forEach((menuItem) => {
+    menuItem.classList.remove("selected");
+  });
+}
+
+function markAsSelected(menuItem) {
+  menuItem.classList.add("selected");
+}
+
 function addMenuEventLis() {
   const menuItems = document.querySelectorAll(".menuItemDiv");
   menuItems.forEach((menuItem) => {
     menuItem.addEventListener("click", (e) => {
-      console.log(menuItem.dataset.indexNumber);
+      removePastSelected(menuItems);
+      markAsSelected(menuItem);
       openThisPage(menuItem.dataset.indexNumber);
     });
   });
