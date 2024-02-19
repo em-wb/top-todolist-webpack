@@ -2,8 +2,8 @@ import clearViewCtr from ".";
 import createElement from "./createElement";
 import formatDueDates from "./date";
 import { getTaskData, updateCompleteStatus } from "./tasks";
-import { editedTaskLog, renderTaskForm } from "./addNew";
 import { renderItemEdit, renderItemText, renderListColor } from "./appUI";
+import { editedTaskLog, renderTaskForm } from "./addNewTask";
 
 export function renderListName(title, description) {
   const viewCtr = document.getElementById("view-ctr");
