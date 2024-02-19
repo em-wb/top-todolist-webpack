@@ -134,7 +134,7 @@ hr {
   font-size: 1.3rem;
 }
 
-.task-ctr {
+.item-ctr {
   display: grid;
   grid-template-columns: 50% 1fr 1fr;
   grid-template-rows: 1fr 1fr;

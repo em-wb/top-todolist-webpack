@@ -1,6 +1,5 @@
-import clearViewCtr from ".";
 import { renderListName, renderTask } from "./listUI";
-import { getListInfo } from "./lists";
+import { getListInfo } from "./list";
 import { isToday } from "date-fns";
 import { addTaskEventLis } from "./listUI";
 

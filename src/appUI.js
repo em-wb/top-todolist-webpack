@@ -1,6 +1,7 @@
 import clearViewCtr from ".";
 import createElement from "./createElement";
 import { loadTasksFromStorage } from "./tasks";
+import { loadListsFromStorage } from "./list";
 
 export default function renderAppUI() {
   renderHeader();
@@ -66,13 +67,37 @@ export function addTaskCtrs() {
 }
 
 function addNewBtn() {
-  const addNewBtn = createElement(
-    "button",
-    ["add-new-btn", "fa-solid", "fa-plus"],
-    content,
+  createElement("button", ["add-new-btn", "fa-solid", "fa-plus"], content, "", [
+    ["id", "add-new-btn"],
+  ]);
+}
+
+export function renderItemText(item, ctr) {
+  const textDiv = createElement("div", "text-div", ctr);
+  createElement("h2", "task-title", textDiv, item.title);
+  createElement("p", "task-desc", textDiv, item.description);
+  return textDiv;
+}
+
+export function renderItemEdit(ctr, index) {
+  const openEditDiv = createElement("div", "open-edit-div", ctr);
+  const editBtn = createElement("button", "open-edit", openEditDiv, "", [
+    ["data-index-number", index],
+  ]);
+  createElement(
+    "i",
+    ["editList", "view-edit", "fa-solid", "fa-pen-to-square"],
+
+    editBtn,
     "",
-    [["id", "add-new-btn"]]
+    [["title", "Edit & Delete"]]
   );
+  return openEditDiv;
+}
+
+export function renderListColor(item, ctr) {
+  const listColor = createElement("div", "list-color", ctr);
+  listColor.style.backgroundColor = item.color;
 }
 
 function addMenuEventLis() {

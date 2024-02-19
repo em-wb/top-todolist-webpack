@@ -3,6 +3,7 @@ import createElement from "./createElement";
 import formatDueDates from "./date";
 import { getTaskData, updateCompleteStatus } from "./tasks";
 import { editedTaskLog, renderTaskForm } from "./addNew";
+import { renderItemEdit, renderItemText, renderListColor } from "./appUI";
 
 export function renderListName(title, description) {
   const viewCtr = document.getElementById("view-ctr");
@@ -17,44 +18,15 @@ function renderPriorityStatus(status, textDiv) {
   }
 }
 
-export function renderTask(task, index) {
-  console.log(task);
-  const todoCtr = document.getElementById("todo-ctr");
-  const doneCtr = document.getElementById("done-ctr");
-  const taskCtr = createElement(
-    "div",
-    "task-ctr",
-    task.completed ? doneCtr : todoCtr,
-    "",
-    [["id", `task-ctr${index}`]]
-  );
-  console.log(taskCtr);
-  const textDiv = createElement("div", "text-div", taskCtr);
-  createElement("h2", "task-title", textDiv, task.title);
-  createElement("p", "task-desc", textDiv, task.description);
-  const openEditDiv = createElement("div", "open-edit-div", taskCtr);
-  const editBtn = createElement("button", "open-edit", openEditDiv, "", [
-    ["data-index-number", index],
-  ]);
-  createElement(
-    "i",
-    ["editList", "view-edit", "fa-solid", "fa-pen-to-square"],
-
-    editBtn,
-    "",
-    [["title", "Edit & Delete"]]
-  );
-
-  const listColor = createElement("div", "list-color", openEditDiv);
-  listColor.style.backgroundColor = task.color;
-  const taskCompleteDiv = createElement("div", "task-complete-div", taskCtr);
+function renderTaskComplete(task, ctr, index) {
+  const taskCompleteDiv = createElement("div", "task-complete-div", ctr);
   createElement(
     "small",
     "due-date",
     taskCompleteDiv,
     formatDueDates(task.dueDate, taskCompleteDiv)
   );
-  const completeBtn = createElement(
+  createElement(
     "button",
     [
       "complete-btn",
@@ -67,6 +39,23 @@ export function renderTask(task, index) {
     "",
     [["data-index-number", index]]
   );
+}
+
+export function renderTask(task, index) {
+  console.log(task);
+  const todoCtr = document.getElementById("todo-ctr");
+  const doneCtr = document.getElementById("done-ctr");
+  const itemCtr = createElement(
+    "div",
+    "item-ctr",
+    task.completed ? doneCtr : todoCtr,
+    "",
+    [["id", `item-ctr${index}`]]
+  );
+  const textDiv = renderItemText(task, itemCtr);
+  const viewEditDiv = renderItemEdit(itemCtr, index);
+  renderListColor(task, viewEditDiv);
+  renderTaskComplete(task, itemCtr, index);
   renderPriorityStatus(task.priority, textDiv);
 }
 
@@ -88,11 +77,11 @@ function editTaskEL() {
 }
 
 function updateParent(index) {
-  const taskCtr = document.getElementById(`task-ctr${index}`);
-  let parentID = taskCtr.parentNode.id;
+  const itemCtr = document.getElementById(`item-ctr${index}`);
+  let parentID = itemCtr.parentNode.id;
   parentID = parentID === "todo-ctr" ? "done-ctr" : "todo-ctr";
   const parent = document.getElementById(parentID);
-  parent.appendChild(taskCtr);
+  parent.appendChild(itemCtr);
 }
 
 function completeTaskEL() {
