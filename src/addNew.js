@@ -2,7 +2,7 @@ import createElement from "./createElement";
 import createTask, { loadTasksFromStorage, deleteTask } from "./tasks";
 import clearViewCtr from "./index.js";
 import { addTaskCtrs } from "./appUI";
-import { addTaskEls } from "./listUI";
+import { addTaskEventLis } from "./listUI";
 
 let edited = false;
 let taskIndex;
@@ -171,7 +171,7 @@ function submitTaskEL(submitTaskBtn) {
 
     console.log("chose", chosenIndex);
     loadTasksFromStorage(chosenIndex);
-    addTaskEls();
+    addTaskEventLis();
     edited = false;
     taskIndex = null;
   });

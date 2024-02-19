@@ -4,11 +4,11 @@ import formatDueDates from "./date";
 import { getTaskData, updateCompleteStatus } from "./tasks";
 import { editedTaskLog, renderTaskForm } from "./addNew";
 
-export function renderListName(list) {
+export function renderListName(title, description) {
   const viewCtr = document.getElementById("view-ctr");
   const headingCtr = createElement("div", "heading-ctr", viewCtr);
-  const h1 = createElement("h1", "h1", headingCtr, list.title);
-  const desc = createElement("p", "desc", headingCtr, list.description);
+  const h1 = createElement("h1", "h1", headingCtr, title);
+  const desc = createElement("p", "desc", headingCtr, description);
 }
 
 function renderPriorityStatus(status, textDiv) {
@@ -70,7 +70,7 @@ export function renderTask(task, index) {
   renderPriorityStatus(task.priority, textDiv);
 }
 
-export function addTaskEls() {
+export function addTaskEventLis() {
   editTaskEL();
   completeTaskEL();
 }

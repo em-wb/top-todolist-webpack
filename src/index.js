@@ -1,14 +1,14 @@
 import renderAppUI from "./appUI";
 import { renderTaskForm } from "./addNew";
 import { loadTasksFromStorage } from "./tasks";
-import { addTaskEls } from "./listUI";
+import { addTaskEventLis } from "./listUI";
 import "./styles.css";
 
 document.addEventListener("DOMContentLoaded", () => {
   renderAppUI();
   loadTasksFromStorage(1);
   addNewEventLi();
-  addTaskEls();
+  addTaskEventLis();
 });
 
 function addNewEventLi() {

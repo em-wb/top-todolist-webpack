@@ -1,5 +1,8 @@
-import { renderTask } from "./listUI";
+import clearViewCtr from ".";
+import { renderListName, renderTask } from "./listUI";
 import { getListInfo } from "./lists";
+import { isToday } from "date-fns";
+import { addTaskEventLis } from "./listUI";
 
 export default function createTask(
   title,
@@ -36,20 +39,36 @@ function toggleComplete(task) {
 export function loadTasksFromStorage(listID) {
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   listID = listID.toString();
-  console.log(tasks, "listID", listID);
-  if (tasks.length > 0) {
-    let i = 0;
-    tasks.forEach((task) => {
-      if (task.assignedLists.includes(listID)) {
-        console.log(task, "task", i);
-        renderTask(task, i);
-        i++;
-      }
-    });
+  if (listID == "today") {
+    getTodaysTasks(tasks);
+    renderListName("Today", "All tasks due today");
   }
-  getListInfo(listID);
+  if (tasks.length > 0) {
+    getTasksForThisList(listID, tasks);
+    getListInfo(listID);
+  }
+  addTaskEventLis();
 }
 
+function getTodaysTasks(tasks) {
+  let i = 0;
+  tasks.forEach((task) => {
+    if (isToday(task.dueDate)) {
+      renderTask(task, i);
+      i++;
+    }
+  });
+}
+
+function getTasksForThisList(listID, tasks) {
+  let i = 0;
+  tasks.forEach((task) => {
+    if (task.assignedLists.includes(listID)) {
+      renderTask(task, i);
+      i++;
+    }
+  });
+}
 export function getTaskData(index) {
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   if (tasks.length > 0) {

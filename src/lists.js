@@ -31,7 +31,7 @@ export function getListInfo(ID) {
   if (storedLists.length > 0) {
     storedLists.forEach((storedList) => {
       if (storedList.listID == ID) {
-        renderListName(storedList);
+        renderListName(storedList.title, storedList.description);
       }
     });
   } else {
@@ -40,7 +40,7 @@ export function getListInfo(ID) {
       "All your tasks in one list",
       "blue"
     );
-    renderListName(allTasks);
+    renderListName(allTasks.title, allTasks.description);
   }
 }
 
