@@ -1,10 +1,13 @@
+import clearViewCtr from ".";
 import createElement from "./createElement";
+import { loadTasksFromStorage } from "./tasks";
 
 export default function renderAppUI() {
   renderHeader();
   renderNav();
   renderViewCtr();
   addNewBtn();
+  addMenuEventLis();
 }
 
 const iconListNav = [
@@ -19,6 +22,7 @@ function getIconMenu(menuDiv) {
   iconListNav.forEach((icon) => {
     const menuItemDiv = createElement("div", "menuItemDiv", menuDiv, "", [
       ["id", `menuItem${i}`],
+      ["data-index-number", `${i}`],
     ]);
     createElement("i", icon.classes, menuItemDiv);
     createElement("small", "menuText", menuItemDiv, icon.text);
@@ -69,4 +73,31 @@ function addNewBtn() {
     "",
     [["id", "add-new-btn"]]
   );
+}
+
+function addMenuEventLis() {
+  const menuItems = document.querySelectorAll(".menuItemDiv");
+  menuItems.forEach((menuItem) => {
+    menuItem.addEventListener("click", (e) => {
+      console.log(menuItem.dataset.indexNumber);
+      openThisPage(menuItem.dataset.indexNumber);
+    });
+  });
+}
+
+function openThisPage(index) {
+  console.log(index, "here");
+  clearViewCtr();
+  addTaskCtrs();
+  if (index == 1) {
+    loadTasksFromStorage(index);
+  }
+  if (index == 2) {
+    loadTasksFromStorage("today");
+  }
+  if (index == 3) {
+    loadListsFromStorage();
+  } else if (index == 4) {
+    loadProfileFromStorage();
+  }
 }
