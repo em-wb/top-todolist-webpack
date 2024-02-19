@@ -45,6 +45,8 @@ export function loadTasksFromStorage(listID) {
   if (tasks.length > 0) {
     getTasksForThisList(listID, tasks);
     getListInfo(listID);
+  } else {
+    getListInfo();
   }
   addTaskEventLis();
 }
