@@ -12,59 +12,89 @@ export function editedTaskLog(index) {
   edited = true;
 }
 
-export function renderTaskForm(taskToEdit) {
+function getViewCtr() {
   const viewCtr = document.getElementById("view-ctr");
-  const form = createElement("form", "form", viewCtr);
-  createElement("h1", null, form, "Task");
+  return viewCtr;
+}
+
+function renderCloseBtn(ctr) {
   const closeBtn = createElement(
     "button",
     ["closeBtn", "fa-solid", "fa-xmark"],
-    form,
+    ctr,
     "",
     [["id", "close-btn"]]
   );
-  createElement("label", null, form, "Title", [["for", "inputTaskTitle"]]),
+}
+
+function renderMainForm(title, ctr, toEdit) {
+  const form = createElement("form", "form", ctr);
+  createElement("h1", null, form, title);
+  createElement("label", null, form, "Title", [["for", "inputTitle"]]),
     createElement("input", "input", form, "", [
-      ["id", "inputTaskTitle"],
+      ["id", "inputTitle"],
       ["type", "text"],
       ["required", ""],
-      ["placeholder", "Do the grocery shop"],
+      [
+        "placeholder",
+        (title = "Task" ? "Do the grocery shop" : "House renovation"),
+      ],
       ["maxlength", "50"],
-      ["value", taskToEdit ? taskToEdit.title : ""],
+      ["value", toEdit ? toEdit.title : ""],
     ]);
   createElement("label", null, form, "Description (optional)", [
-    ["for", "inputTaskDesc"],
+    ["for", "inputDesc"],
   ]),
-    createElement(
-      "textarea",
-      "input",
-      form,
-      taskToEdit ? taskToEdit.description : "",
+    createElement("textarea", "input", form, toEdit ? toEdit.description : "", [
+      ["id", "inputDesc"],
+      ["rows", "2"],
       [
-        ["id", "inputTaskDesc"],
-        ["rows", "2"],
-        ["placeholder", "Eggs, milk, cereal, bread, bananas"],
-        ["maxlength", "250"],
-      ]
-    );
-  createElement("label", "textInput", form, "Due Date", [
+        "placeholder",
+        (title = "Task"
+          ? "Eggs, milk, cereal, bread, bananas"
+          : "Tasks for project kick-off"),
+      ],
+      ["maxlength", "250"],
+    ]);
+
+  return form;
+}
+
+function renderFormDate(ctr, toEdit) {
+  createElement("label", "textInput", ctr, "Due Date", [
     ["for", "inputTaskDate"],
   ]);
-  createElement("input", "input", form, "", [
+  createElement("input", "input", ctr, "", [
     ["id", "inputTaskDate"],
     ["type", "date"],
     ["required", ""],
-    ["value", taskToEdit ? taskToEdit.dueDate : ""],
+    ["value", toEdit ? toEdit.dueDate : ""],
   ]);
-  createElement("p", null, form, "Priority");
-  createElement("input", "highPriority", form, "", [
+}
+
+function renderSubmitDelete(ctr) {
+  const submitBtn = createElement("button", "submitBtn", ctr, "List it", [
+    ["id", "submitTaskBtn"],
+    ["type", "submit"],
+  ]);
+  const deleteTaskBtn = createElement("button", "deleteBtn", ctr, "Delete it", [
+    ["id", "deleteTaskBtn"],
+  ]);
+}
+
+function renderPriorityStatus(ctr, toEdit) {
+  createElement("p", null, ctr, "Priority");
+  createElement("input", "highPriority", ctr, "", [
     ["id", "highPriorityTask"],
     ["type", "checkbox"],
-    ["checked", taskToEdit ? taskToEdit.priority : false],
+    ["checked", toEdit ? toEdit.priority : false],
   ]);
-  createElement("label", null, form, "High", [["for", "highPriorityTask"]]);
-  createElement("label", null, form, "List(s)", [["for", "dropdownList"]]);
-  const select = createElement("select", null, form, "", [
+  createElement("label", null, ctr, "High", [["for", "highPriorityTask"]]);
+}
+
+function renderDropDown(ctr) {
+  createElement("label", null, ctr, "List(s)", [["for", "dropdownList"]]);
+  const select = createElement("select", null, ctr, "", [
     ["id", "dropdownList"],
     ["list", "listOfLists"],
   ]);
@@ -74,17 +104,23 @@ export function renderTaskForm(taskToEdit) {
     ["disabled"],
     ["selected"],
   ]);
-  const submitBtn = createElement("button", "submitBtn", form, "List it", [
-    ["id", "submitTaskBtn"],
-    ["type", "submit"],
-  ]);
-  const deleteTaskBtn = createElement(
-    "button",
-    "deleteBtn",
-    form,
-    "Delete it",
-    [["id", "deleteTaskBtn"]]
-  );
+}
+
+export function renderListForm(listToEdit) {
+  const viewCtr = getViewCtr();
+  const mainForm = renderMainForm("List", viewCtr, listToEdit);
+  renderCloseBtn(viewCtr);
+  renderSubmitDelete(mainForm);
+}
+
+export function renderTaskForm(taskToEdit) {
+  const viewCtr = getViewCtr();
+  const mainForm = renderMainForm(editOrNew, "Task", viewCtr);
+  renderCloseBtn(viewCtr);
+  renderFormDate(mainForm, taskToEdit);
+  renderPriorityStatus(mainForm, toEdit);
+  renderDropDown(mainForm);
+  renderSubmitDelete(mainForm); //SEPARATE
   // listsArray = parseListsFromStorage();
 
   // if (listsArray >= 1) {
