@@ -1,5 +1,6 @@
 import renderAppUI from "./appUI";
-import { renderTaskForm, renderListForm } from "./addNew";
+import { renderTaskForm } from "./addNewTask";
+import { renderListForm } from "./addNewList";
 import { loadTasksFromStorage } from "./tasks";
 import { addTaskEventLis } from "./listUI";
 import "./styles.css";
