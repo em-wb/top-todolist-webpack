@@ -1,5 +1,5 @@
 import renderAppUI from "./appUI";
-import { renderTaskForm } from "./addNew";
+import { renderTaskForm, renderListForm } from "./addNew";
 import { loadTasksFromStorage } from "./tasks";
 import { addTaskEventLis } from "./listUI";
 import "./styles.css";
@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderAppUI();
   loadTasksFromStorage(1);
   addNewEventLi();
-  addTaskEventLis();
 });
 
 function addNewEventLi() {
@@ -20,10 +19,9 @@ function addNewEventLi() {
 
 function checkType() {
   const allLists = document.getElementById("menuItem3");
-  // if ((allLists.dataset = "selected")) {
-  //   renderListForm();
-  // } else
-  renderTaskForm();
+  if (allLists.classList.contains("selected")) {
+    renderListForm();
+  } else renderTaskForm();
 }
 
 export default function clearViewCtr() {
