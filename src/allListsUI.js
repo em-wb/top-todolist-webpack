@@ -59,8 +59,8 @@ export function addListEventLis() {
 function editListEL() {
   const editBtns = document.querySelectorAll(".open-edit");
   editBtns.forEach((editBtn) => {
-    editBtn.addEventListener("click", (e) => {
-      const listToEdit = getListData(e.target.dataset.indexNumber);
+    editBtn.addEventListener("click", () => {
+      const listToEdit = getListData(editBtn.dataset.indexNumber);
       console.log(listToEdit, "listtoedit");
       editedListLog(listToEdit);
       clearViewCtr();
@@ -73,9 +73,11 @@ function deleteListEL() {
   const deleteBtns = document.querySelectorAll(".delete-list");
   deleteBtns.forEach((deleteBtn) => {
     deleteBtn.addEventListener("click", (e) => {
-      deleteList(e.target.dataset.dataIndex);
+      const index = deleteBtn.dataset.indexNumber;
+      console.log("ind", index);
+      deleteList(index);
       clearViewCtr();
-      loadListsFromStorage(); //currentlist
+      loadListsFromStorage();
     });
   });
 }

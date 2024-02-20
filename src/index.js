@@ -18,10 +18,12 @@ function addNewEventLi() {
 }
 
 function checkType() {
-  const allLists = document.getElementById("menuItem3");
+  const allLists = document.getElementById("menuItem2");
   if (allLists.classList.contains("selected")) {
-    renderListForm();
-  } else renderTaskForm();
+    console.log("ys");
+    return renderListForm();
+  }
+  renderTaskForm();
 }
 
 export default function clearViewCtr() {

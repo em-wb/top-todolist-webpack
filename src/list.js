@@ -76,7 +76,7 @@ export function loadListsFromStorage() {
 }
 
 export function deleteList(index) {
-  const lists = JSON.parse(localStorage.getItem("lists")) || [];
+  const lists = getStoredLists();
   if (lists.length > 0) {
     lists.splice(index, 1);
     const listData = JSON.stringify(lists);
