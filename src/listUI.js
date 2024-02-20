@@ -39,14 +39,19 @@ function renderListIcon(task, ctr) {
   return iconDiv;
 }
 
-function renderTaskComplete(task, ctr, index) {
-  const taskCompleteDiv = createElement("div", "task-complete-div", ctr);
+function renderDueDate(task, ctr, index) {
+  const taskDueDiv = createElement("div", "task-due-div", ctr);
   createElement(
     "small",
     "due-date",
-    taskCompleteDiv,
-    formatDueDates(task.dueDate, taskCompleteDiv)
+    taskDueDiv,
+    formatDueDates(task.dueDate, taskDueDiv)
   );
+  return taskDueDiv;
+}
+
+function renderTaskComplete(task, ctr, index) {
+  const taskCompleteDiv = createElement("div", "task-complete-div", ctr);
   createElement(
     "button",
     [
@@ -74,6 +79,7 @@ export function renderTask(task, index) {
     [["id", `item-ctr${index}`]]
   );
   const textDiv = renderItemText(task, itemCtr);
+  renderDueDate(task, itemCtr, index);
   const viewEditDiv = renderItemEdit(itemCtr, index);
   renderListIcon(task, itemCtr);
   renderTaskComplete(task, itemCtr, index);
