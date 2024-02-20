@@ -37,20 +37,20 @@ function toggleComplete(task) {
   task.completed = !task.completed;
 }
 
-export function loadTasksFromStorage(listID) {
+export function loadTasksFromStorage(listIndex) {
   addTaskCtrs();
-  console.log("listID", listID);
+  console.log("listID", listIndex);
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  listID = listID.toString();
-  if (listID == "today") {
+  // listIndex = listID.toString();
+  if (listIndex == "today") {
     renderListName("Today", "All tasks due today");
     return getTodaysTasks(tasks);
   }
   if (tasks.length > 0) {
-    getTasksForThisList(listID, tasks);
-    return getListInfo(listID);
+    getTasksForThisList(listIndex, tasks);
+    return getListInfo(listIndex);
   } else {
-    getListInfo(listID);
+    getListInfo(listIndex);
   }
   addTaskEventLis();
 }

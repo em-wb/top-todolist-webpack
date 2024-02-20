@@ -68,7 +68,7 @@ export function addTaskEventLis() {
 function editTaskEL() {
   const editBtns = document.querySelectorAll(".open-edit");
   editBtns.forEach((editBtn) => {
-    editBtn.addEventListener("click", () => {
+    editBtn.addEventListener("click", (e) => {
       const taskToEdit = getTaskData(editBtn.dataset.indexNumber);
       editedLog(taskToEdit);
       clearViewCtr();

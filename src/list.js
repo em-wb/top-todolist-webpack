@@ -2,32 +2,32 @@ import { renderListName, renderTask } from "./listUI";
 import renderList, { allListsView } from "./allListsUI";
 import { addListEventLis } from "./allListsUI";
 
-function getListID() {
-  const lists = getStoredLists();
-  let idArray = [];
-  let nextID;
-  if (lists.length > 0) {
-    lists.forEach((list) => {
-      idArray.push(list.listID);
-      nextID = Math.max(...idArray) + 1;
-    });
-  } else nextID = 1;
-  return nextID;
-}
+// function getListID() {
+//   const lists = getStoredLists();
+//   let idArray = [];
+//   let nextID;
+//   if (lists.length > 0) {
+//     lists.forEach((list) => {
+//       idArray.push(list.listID);
+//       nextID = Math.max(...idArray) + 1;
+//     });
+//   } else nextID = 1;
+//   return nextID;
+// }
 
 export default function createList(title, description, color) {
-  const listID = getListID();
+  // const listID = getListID();
   const list = {
     title: title,
     description: description,
     color: color,
-    listID: listID,
+    // listID: listID,
   };
   addListToStorage(list);
   return list;
 }
 
-function getStoredLists() {
+export function getStoredLists() {
   const storedLists = JSON.parse(localStorage.getItem("lists")) || [];
   return storedLists;
 }
@@ -42,9 +42,7 @@ export function addListToStorage(list) {
 export function getListData(index) {
   const storedLists = getStoredLists();
   if (storedLists.length > 0) {
-    const foundList = storedLists.find(
-      (storedList) => storedList.listID == index
-    );
+    const foundList = storedLists[index];
     if (foundList) {
       return foundList;
     }

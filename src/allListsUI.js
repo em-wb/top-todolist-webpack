@@ -1,10 +1,13 @@
 import clearViewCtr from ".";
 import { renderItemEdit, renderItemText } from "./appUI";
 import createElement from "./createElement";
-import { editedLog } from "./addNewTask";
+import { editedListLog } from "./addNewList";
 import { getListData } from "./list";
+import { renderListForm } from "./addNewList";
+import { deleteList, loadListsFromStorage } from "./list";
 
 export default function renderList(list, i) {
+  console.log("i", i);
   const listsCtr = document.getElementById("lists-ctr");
   const listItem = createElement("div", "list-item", listsCtr, "", [
     ["data-index-number", `${i}`],
@@ -33,7 +36,7 @@ export function allListsView() {
 }
 
 function renderItemDelete(ctr, index) {
-  const openEditDiv = document.getElementById("open-edit-div");
+  const openEditDiv = document.getElementById(`open-edit-div${index}`);
   const deleteBtn = createElement("button", "delete-list", openEditDiv, "", [
     ["data-index-number", index],
   ]);
@@ -56,10 +59,10 @@ export function addListEventLis() {
 function editListEL() {
   const editBtns = document.querySelectorAll(".open-edit");
   editBtns.forEach((editBtn) => {
-    editBtn.addEventListener("click", () => {
-      const listToEdit = getListData(editBtn.dataset.indexNumber);
+    editBtn.addEventListener("click", (e) => {
+      const listToEdit = getListData(e.target.dataset.indexNumber);
       console.log(listToEdit, "listtoedit");
-      editedLog(listToEdit);
+      editedListLog(listToEdit);
       clearViewCtr();
       renderListForm(listToEdit);
     });

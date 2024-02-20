@@ -10,6 +10,7 @@ import clearViewCtr from ".";
 import { addTaskCtrs } from "./appUI";
 import { loadTasksFromStorage } from "./tasks";
 import { addTaskEventLis } from "./listUI";
+import { getStoredLists } from "./list";
 
 let edited = false;
 let editedIndex;
@@ -49,10 +50,29 @@ function renderDropDown(ctr) {
   ]);
   createElement("option", null, select, "All tasks", [
     ["value", "All tasks"],
-    ["data-index-number", "1"],
+    ["data-index-number", 0],
     ["disabled"],
     ["selected"],
   ]);
+  const listArray = getListOptions();
+  renderListOptions(select, listArray);
+}
+
+function getListOptions() {
+  const listArray = getStoredLists();
+  listArray.splice(0, 1);
+  return listArray;
+}
+
+function renderListOptions(select, listArray) {
+  let i = 1;
+  listArray.forEach((list) => {
+    createElement("option", null, select, list.title, [
+      ["value", list.title],
+      ["data-index-number", i],
+    ]);
+    i++;
+  });
 }
 
 export function renderTaskForm(taskToEdit) {

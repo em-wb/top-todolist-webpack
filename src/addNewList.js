@@ -4,9 +4,9 @@ import renderMainForm, {
   renderDelete,
   renderSubmit,
 } from "./addNew";
-import { editedLog } from "./addNewTask";
-import createList, { loadListsFromStorage } from "./list";
+import createList, { loadListsFromStorage, deleteList } from "./list";
 import clearViewCtr from ".";
+import { addListEventLis } from "./allListsUI";
 
 let edited = false;
 let editedIndex;
@@ -18,22 +18,27 @@ export function renderListForm(listToEdit) {
   const submitBtn = renderSubmit(mainForm);
   const deleteBtn = renderDelete(mainForm);
   submitListEL(submitBtn);
+  deleteListEL(deleteBtn);
 }
 
-// function deleteTaskEL(deleteTaskBtn) {
-//   deleteTaskBtn.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     if (edited) {
-//       deleteTask(taskIndex);
-//     }
-//     clearViewCtr();
-//     addTaskCtrs();
-//     loadTasksFromStorage(1); //currentlist
-//     addTaskEventLis();
-//     edited = false;
-//     taskIndex = null;
-//   });
-// }
+export function editedListLog(index) {
+  editedIndex = index;
+  edited = true;
+}
+
+function deleteListEL(deleteBtn) {
+  deleteBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (edited) {
+      deleteList(editedIndex);
+    }
+    clearViewCtr();
+    loadListsFromStorage();
+    addListEventLis();
+    edited = false;
+    editedIndex = null;
+  });
+}
 
 // function closeFormEL(closeBtn) {
 //   closeBtn.addEventListener("click", (e) => {
@@ -59,7 +64,7 @@ function submitListEL(submitListBtn) {
     );
     clearViewCtr();
     loadListsFromStorage();
-    addListELs();
+    addListEventLis();
     edited = false;
     editedIndex = null;
   });
