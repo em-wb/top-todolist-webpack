@@ -19,7 +19,7 @@ const iconListNav = [
 ];
 
 function getIconMenu(menuDiv) {
-  let i = 1;
+  let i = 0;
   iconListNav.forEach((icon) => {
     const menuItemDiv = createElement("div", "menuItemDiv", menuDiv, "", [
       ["id", `menuItem${i}`],
@@ -125,16 +125,16 @@ function addMenuEventLis() {
 function openThisPage(index) {
   console.log(index, "here");
   clearViewCtr();
-  if (index == 1) {
+  if (index == 0) {
     loadTasksFromStorage(index);
     console.log("index1", index);
   }
-  if (index == 2) {
+  if (index == 1) {
     loadTasksFromStorage("today");
   }
-  if (index == 3) {
+  if (index == 2) {
     loadListsFromStorage();
-  } else if (index == 4) {
+  } else if (index == 3) {
     loadProfileFromStorage();
   }
 }

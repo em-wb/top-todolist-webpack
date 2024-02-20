@@ -91,10 +91,10 @@ export function renderTaskForm(taskToEdit) {
 
 function getAssignedLists(chosenIndex) {
   let assignedLists;
-  if (chosenIndex === "1") {
+  if (chosenIndex === 0) {
     assignedLists = chosenIndex;
   } else {
-    assignedLists = [1, chosenIndex];
+    assignedLists = [0, chosenIndex];
   }
   return assignedLists;
 }
@@ -107,7 +107,7 @@ function deleteTaskEL(deleteTaskBtn) {
     }
     clearViewCtr();
 
-    loadTasksFromStorage(1); //currentlist
+    loadTasksFromStorage(0); //currentlist
     addTaskEventLis();
     edited = false;
     editedIndex = null;
@@ -117,7 +117,7 @@ function deleteTaskEL(deleteTaskBtn) {
 function closeFormEL(closeBtn) {
   closeBtn.addEventListener("click", (e) => {
     clearViewCtr();
-    loadTasksFromStorage(1); //currentlist
+    loadTasksFromStorage(0); //currentlist
     addTaskEventLis();
     edited = false;
     editedIndex = null;

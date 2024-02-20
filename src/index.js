@@ -6,7 +6,7 @@ import "./styles.css";
 
 document.addEventListener("DOMContentLoaded", () => {
   renderAppUI();
-  loadTasksFromStorage(1);
+  loadTasksFromStorage(0);
   addNewEventLi();
 });
 
