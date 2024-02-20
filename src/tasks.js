@@ -67,7 +67,7 @@ function getTodaysTasks(tasks) {
 function getTasksForThisList(listID, tasks) {
   let i = 0;
   tasks.forEach((task) => {
-    if (task.assignedLists.includes(listID)) {
+    if (task.assignedLists.toString().includes(listID.toString())) {
       renderTask(task, i);
       i++;
     }
