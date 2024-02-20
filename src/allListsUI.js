@@ -1,6 +1,8 @@
 import clearViewCtr from ".";
 import { renderItemEdit, renderItemText } from "./appUI";
 import createElement from "./createElement";
+import { editedLog } from "./addNewTask";
+import { getListData } from "./list";
 
 export default function renderList(list, i) {
   const listsCtr = document.getElementById("lists-ctr");
@@ -8,14 +10,15 @@ export default function renderList(list, i) {
     ["data-index-number", `${i}`],
   ]);
   const textCtr = renderItemText(list, listItem);
-  const viewEditDiv = renderItemEdit(listItem, i);
+  const viewEditBtn = renderItemEdit(listItem, i);
+  const deleteBtn = renderItemDelete(listItem, i);
 }
 
 function addListOfListsCtr(viewCtr) {
   createElement("div", "lists-ctr", viewCtr, "", [["id", "lists-ctr"]]);
 }
 
-export function allListsName() {
+export function allListsView() {
   clearViewCtr();
   const viewCtr = document.getElementById("view-ctr");
   const headingCtr = createElement("div", "heading-ctr", viewCtr);
@@ -27,6 +30,51 @@ export function allListsName() {
     "View and edit all task lists"
   );
   addListOfListsCtr(viewCtr);
+}
+
+function renderItemDelete(ctr, index) {
+  const openEditDiv = document.getElementById("open-edit-div");
+  const deleteBtn = createElement("button", "delete-list", openEditDiv, "", [
+    ["data-index-number", index],
+  ]);
+  createElement(
+    "i",
+    ["delete-list-icon", "fa-solid", "fa-trash"],
+
+    deleteBtn,
+    "",
+    [["title", "Delete list"]]
+  );
+  return deleteBtn;
+}
+
+export function addListEventLis() {
+  editListEL();
+  deleteListEL();
+}
+
+function editListEL() {
+  const editBtns = document.querySelectorAll(".open-edit");
+  editBtns.forEach((editBtn) => {
+    editBtn.addEventListener("click", () => {
+      const listToEdit = getListData(editBtn.dataset.indexNumber);
+      console.log(listToEdit, "listtoedit");
+      editedLog(listToEdit);
+      clearViewCtr();
+      renderListForm(listToEdit);
+    });
+  });
+}
+
+function deleteListEL() {
+  const deleteBtns = document.querySelectorAll(".delete-list");
+  deleteBtns.forEach((deleteBtn) => {
+    deleteBtn.addEventListener("click", (e) => {
+      deleteList(e.target.dataset.dataIndex);
+      clearViewCtr();
+      loadListsFromStorage(); //currentlist
+    });
+  });
 }
 
 //  const listItem = createElement("div", "list-item", listCtr, "", [

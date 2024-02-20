@@ -1,11 +1,22 @@
 import { renderListName, renderTask } from "./listUI";
-import renderList, { allListsName } from "./allListsUI";
+import renderList, { allListsView } from "./allListsUI";
+import { addListEventLis } from "./allListsUI";
 
-let i = 0; //listID
+function getListID() {
+  const lists = getStoredLists();
+  let idArray = [];
+  let nextID;
+  if (lists.length > 0) {
+    lists.forEach((list) => {
+      idArray.push(list.listID);
+      nextID = Math.max(...idArray) + 1;
+    });
+  } else nextID = 1;
+  return nextID;
+}
 
 export default function createList(title, description, color) {
   const listID = getListID();
-
   const list = {
     title: title,
     description: description,
@@ -15,26 +26,36 @@ export default function createList(title, description, color) {
   addListToStorage(list);
   return list;
 }
-function getListID() {
-  i++;
-  return i;
+
+function getStoredLists() {
+  const storedLists = JSON.parse(localStorage.getItem("lists")) || [];
+  return storedLists;
 }
 
 export function addListToStorage(list) {
-  const lists = JSON.parse(localStorage.getItem("lists")) || [];
+  const lists = getStoredLists();
   lists.push(list);
   const listData = JSON.stringify(lists);
   localStorage.setItem("lists", listData);
 }
 
-export function getListInfo(ID) {
-  const storedLists = JSON.parse(localStorage.getItem("lists")) || [];
+export function getListData(index) {
+  const storedLists = getStoredLists();
   if (storedLists.length > 0) {
-    storedLists.forEach((storedList) => {
-      if (storedList.listID == ID) {
-        renderListName(storedList.title, storedList.description);
-      }
-    });
+    const foundList = storedLists.find(
+      (storedList) => storedList.listID == index
+    );
+    if (foundList) {
+      return foundList;
+    }
+    return null;
+  }
+}
+
+export function getListInfo(ID) {
+  const list = getListData(ID);
+  if (list) {
+    renderListName(list.title, list.description);
   } else {
     const allTasks = createList(
       "All tasks",
@@ -46,11 +67,21 @@ export function getListInfo(ID) {
 }
 
 export function loadListsFromStorage() {
-  allListsName();
-  const storedLists = JSON.parse(localStorage.getItem("lists")) || [];
+  allListsView();
+  const storedLists = getStoredLists();
   let i = 0;
   storedLists.forEach((storedList) => {
     renderList(storedList, i);
     i++;
   });
+  addListEventLis();
+}
+
+export function deleteList(index) {
+  const lists = JSON.parse(localStorage.getItem("lists")) || [];
+  if (lists.length > 0) {
+    lists.splice(index, 1);
+    const listData = JSON.stringify(lists);
+    localStorage.setItem("lists", listData);
+  }
 }

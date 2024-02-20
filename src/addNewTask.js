@@ -12,10 +12,10 @@ import { loadTasksFromStorage } from "./tasks";
 import { addTaskEventLis } from "./listUI";
 
 let edited = false;
-let taskIndex;
+let editedIndex;
 
-export function editedTaskLog(index) {
-  taskIndex = index;
+export function editedLog(index) {
+  editedIndex = index;
   edited = true;
 }
 
@@ -83,14 +83,14 @@ function deleteTaskEL(deleteTaskBtn) {
   deleteTaskBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (edited) {
-      deleteTask(taskIndex);
+      deleteTask(editedIndex);
     }
     clearViewCtr();
     addTaskCtrs();
     loadTasksFromStorage(1); //currentlist
     addTaskEventLis();
     edited = false;
-    taskIndex = null;
+    editedIndex = null;
   });
 }
 
@@ -101,7 +101,7 @@ function closeFormEL(closeBtn) {
     loadTasksFromStorage(1); //currentlist
     addTaskEventLis();
     edited = false;
-    taskIndex = null;
+    editedIndex = null;
   });
 }
 
@@ -109,7 +109,7 @@ function submitTaskEL(submitTaskBtn) {
   submitTaskBtn.addEventListener("click", (e) => {
     e.preventDefault();
     if (edited) {
-      deleteTask(taskIndex);
+      deleteTask(editedIndex);
     }
     const dropDown = document.getElementById("dropdownList");
     const selectedIndex = dropDown.selectedIndex;
@@ -130,6 +130,6 @@ function submitTaskEL(submitTaskBtn) {
     loadTasksFromStorage(chosenIndex);
     addTaskEventLis();
     edited = false;
-    taskIndex = null;
+    editedIndex = null;
   });
 }

@@ -2,7 +2,6 @@ import renderAppUI from "./appUI";
 import { renderTaskForm } from "./addNewTask";
 import { renderListForm } from "./addNewList";
 import { loadTasksFromStorage } from "./tasks";
-import { addTaskEventLis } from "./listUI";
 import "./styles.css";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -27,9 +26,12 @@ function checkType() {
 
 export default function clearViewCtr() {
   const viewCtr = document.getElementById("view-ctr");
+  let i = 0;
   if (viewCtr.hasChildNodes) {
     while (viewCtr.firstChild) {
       viewCtr.removeChild(viewCtr.firstChild);
+      console.log("clear", i);
+      i++;
     }
   }
 }

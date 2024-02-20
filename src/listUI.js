@@ -3,7 +3,8 @@ import createElement from "./createElement";
 import formatDueDates from "./date";
 import { getTaskData, updateCompleteStatus } from "./tasks";
 import { renderItemEdit, renderItemText, renderListColor } from "./appUI";
-import { editedTaskLog, renderTaskForm } from "./addNewTask";
+import { editedLog, renderTaskForm } from "./addNewTask";
+import { addListEventLis } from "./allListsUI";
 
 export function renderListName(title, description) {
   const viewCtr = document.getElementById("view-ctr");
@@ -69,7 +70,7 @@ function editTaskEL() {
   editBtns.forEach((editBtn) => {
     editBtn.addEventListener("click", () => {
       const taskToEdit = getTaskData(editBtn.dataset.indexNumber);
-      editedTaskLog(taskToEdit);
+      editedLog(taskToEdit);
       clearViewCtr();
       renderTaskForm(taskToEdit);
     });

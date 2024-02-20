@@ -53,7 +53,6 @@ export function renderViewCtr() {
   const viewCtr = createElement("div", "view-ctr", content, "", [
     ["id", "view-ctr"],
   ]);
-  addTaskCtrs();
 }
 
 export function addTaskCtrs() {
@@ -80,7 +79,9 @@ export function renderItemText(item, ctr) {
 }
 
 export function renderItemEdit(ctr, index) {
-  const openEditDiv = createElement("div", "open-edit-div", ctr);
+  const openEditDiv = createElement("div", "open-edit-div", ctr, "", [
+    ["id", "open-edit-div"],
+  ]);
   const editBtn = createElement("button", "open-edit", openEditDiv, "", [
     ["data-index-number", index],
   ]);
@@ -92,7 +93,7 @@ export function renderItemEdit(ctr, index) {
     "",
     [["title", "Edit & Delete"]]
   );
-  return openEditDiv;
+  return editBtn;
 }
 
 export function renderListColor(item, ctr) {
@@ -124,9 +125,9 @@ function addMenuEventLis() {
 function openThisPage(index) {
   console.log(index, "here");
   clearViewCtr();
-  addTaskCtrs();
   if (index == 1) {
     loadTasksFromStorage(index);
+    console.log("index1", index);
   }
   if (index == 2) {
     loadTasksFromStorage("today");
