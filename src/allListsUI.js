@@ -5,6 +5,7 @@ import { editedListLog } from "./addNewList";
 import { getListData } from "./list";
 import { renderListForm } from "./addNewList";
 import { deleteList, loadListsFromStorage } from "./list";
+import { loadTasksFromStorage } from "./tasks";
 
 export default function renderList(list, i) {
   console.log("i", i);
@@ -37,9 +38,13 @@ export function allListsView() {
 
 function renderItemDelete(ctr, index) {
   const openEditDiv = document.getElementById(`open-edit-div${index}`);
-  const deleteBtn = createElement("button", "delete-list", openEditDiv, "", [
-    ["data-index-number", index],
-  ]);
+  const deleteBtn = createElement(
+    "button",
+    ["delete-list", "button"],
+    openEditDiv,
+    "",
+    [["data-index-number", index]]
+  );
   createElement(
     "i",
     ["delete-list-icon", "fa-solid", "fa-trash"],
@@ -54,6 +59,7 @@ function renderItemDelete(ctr, index) {
 export function addListEventLis() {
   editListEL();
   deleteListEL();
+  openListEL();
 }
 
 function editListEL() {
@@ -78,6 +84,22 @@ function deleteListEL() {
       deleteList(index);
       clearViewCtr();
       loadListsFromStorage();
+    });
+  });
+}
+
+function openListEL() {
+  const listItems = document.querySelectorAll(".list-item");
+  listItems.forEach((listItem) => {
+    listItem.addEventListener("click", (e) => {
+      const tagName = e.target.tagName;
+      console.log(tagName, "tagname");
+      if (tagName !== "BUTTON" && tagName !== "I") {
+        console.log(tagName, "tagname");
+        const index = listItem.dataset.indexNumber;
+        clearViewCtr();
+        loadTasksFromStorage(index);
+      }
     });
   });
 }

@@ -82,9 +82,13 @@ export function renderItemEdit(ctr, index) {
   const openEditDiv = createElement("div", "open-edit-div", ctr, "", [
     ["id", `open-edit-div${index}`],
   ]);
-  const editBtn = createElement("button", "open-edit", openEditDiv, "", [
-    ["data-index-number", index],
-  ]);
+  const editBtn = createElement(
+    "button",
+    ["open-edit", "button"],
+    openEditDiv,
+    "",
+    [["data-index-number", index]]
+  );
   createElement(
     "i",
     ["editList", "view-edit", "fa-solid", "fa-pen-to-square"],
