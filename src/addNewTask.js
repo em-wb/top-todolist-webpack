@@ -86,7 +86,7 @@ function deleteTaskEL(deleteTaskBtn) {
       deleteTask(editedIndex);
     }
     clearViewCtr();
-    addTaskCtrs();
+
     loadTasksFromStorage(1); //currentlist
     addTaskEventLis();
     edited = false;
@@ -97,7 +97,6 @@ function deleteTaskEL(deleteTaskBtn) {
 function closeFormEL(closeBtn) {
   closeBtn.addEventListener("click", (e) => {
     clearViewCtr();
-    addTaskCtrs();
     loadTasksFromStorage(1); //currentlist
     addTaskEventLis();
     edited = false;
@@ -124,7 +123,6 @@ function submitTaskEL(submitTaskBtn) {
       false
     );
     clearViewCtr();
-    addTaskCtrs();
 
     console.log("chose", chosenIndex);
     loadTasksFromStorage(chosenIndex);
