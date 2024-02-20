@@ -14,11 +14,12 @@ let editedIndex;
 export function renderListForm(listToEdit) {
   const viewCtr = getViewCtr();
   const mainForm = renderMainForm("List", viewCtr, listToEdit);
-  renderCloseBtn(viewCtr);
+  const closeBtn = renderCloseBtn(viewCtr);
   const submitBtn = renderSubmit(mainForm);
   const deleteBtn = renderDelete(mainForm);
   submitListEL(submitBtn);
   deleteListEL(deleteBtn);
+  closeListEL(closeBtn);
 }
 
 export function editedListLog(index) {
@@ -40,16 +41,14 @@ function deleteListEL(deleteBtn) {
   });
 }
 
-// function closeFormEL(closeBtn) {
-//   closeBtn.addEventListener("click", (e) => {
-//     clearViewCtr();
-//     addTaskCtrs();
-//     loadTasksFromStorage(1); //currentlist
-//     addTaskEventLis();
-//     edited = false;
-//     taskIndex = null;
-//   });
-// }
+function closeListEL(closeBtn) {
+  closeBtn.addEventListener("click", (e) => {
+    clearViewCtr();
+    loadListsFromStorage();
+    edited = false;
+    editedIndex = null;
+  });
+}
 
 function submitListEL(submitListBtn) {
   submitListBtn.addEventListener("click", (e) => {
