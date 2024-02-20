@@ -44,11 +44,10 @@ export function loadTasksFromStorage(listIndex) {
   // listIndex = listID.toString();
   if (listIndex == "today") {
     renderListName("Today", "All tasks due today");
-    return getTodaysTasks(tasks);
-  }
-  if (tasks.length > 0) {
+    getTodaysTasks(tasks);
+  } else if (tasks.length > 0) {
     getTasksForThisList(listIndex, tasks);
-    return getListInfo(listIndex);
+    getListInfo(listIndex);
   } else {
     getListInfo(listIndex);
   }
