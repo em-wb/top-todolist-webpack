@@ -1,10 +1,15 @@
 import clearViewCtr from ".";
 import createElement from "./createElement";
 import formatDueDates from "./date";
-import { getTaskData, updateCompleteStatus } from "./tasks";
-import { renderItemEdit, renderItemText, renderListColor } from "./appUI";
+import {
+  getTaskData,
+  loadTasksFromStorage,
+  updateCompleteStatus,
+} from "./tasks";
+import { renderItemEdit, renderItemText } from "./appUI";
 import { editedLog, renderTaskForm } from "./addNewTask";
 import { addListEventLis } from "./allListsUI";
+import { getListData } from "./list";
 
 export function renderListName(title, description) {
   const viewCtr = document.getElementById("view-ctr");
@@ -17,6 +22,21 @@ function renderPriorityStatus(status, textDiv) {
   if (status) {
     textDiv.classList.add("priority");
   }
+}
+
+function renderListIcon(task, ctr) {
+  let iconDiv;
+  if (task.assignedLists.length > 1) {
+    const listIndex = task.assignedLists.slice(1, 2);
+    const list = getListData(listIndex);
+    if (list.icon) {
+      const listBtn = createElement("button", "list-icon", ctr, list.icon, [
+        ["id", "list-icon"],
+      ]);
+      openListEL(listBtn, listIndex);
+    }
+  }
+  return iconDiv;
 }
 
 function renderTaskComplete(task, ctr, index) {
@@ -55,7 +75,7 @@ export function renderTask(task, index) {
   );
   const textDiv = renderItemText(task, itemCtr);
   const viewEditDiv = renderItemEdit(itemCtr, index);
-  renderListColor(task, viewEditDiv);
+  renderListIcon(task, itemCtr);
   renderTaskComplete(task, itemCtr, index);
   renderPriorityStatus(task.priority, textDiv);
 }
@@ -63,6 +83,13 @@ export function renderTask(task, index) {
 export function addTaskEventLis() {
   editTaskEL();
   completeTaskEL();
+}
+
+function openListEL(listBtn, listIndex) {
+  listBtn.addEventListener("click", (e) => {
+    clearViewCtr();
+    loadTasksFromStorage(listIndex);
+  });
 }
 
 function editTaskEL() {

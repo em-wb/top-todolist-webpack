@@ -63,7 +63,8 @@ export function editedListLog(index) {
 }
 
 function iconBtnEL(iconBtn, emojiPicker) {
-  iconBtn.addEventListener("click", () => {
+  iconBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     emojiPicker.classList.toggle("hidden");
   });
 }
@@ -100,7 +101,7 @@ function submitListEL(submitListBtn) {
     createList(
       document.getElementById("inputTitle").value,
       document.getElementById("inputDesc").value,
-      "blue" //add colour chart
+      document.getElementById("selected-emoji").value
     );
     clearViewCtr();
     loadListsFromStorage();

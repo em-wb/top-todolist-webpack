@@ -101,8 +101,7 @@ export function renderItemEdit(ctr, index) {
 }
 
 export function renderListColor(item, ctr) {
-  const listColor = createElement("div", "list-color", ctr);
-  listColor.style.backgroundColor = item.color;
+  const listIcon = createElement("button", "list-icon", ctr, item);
 }
 
 function removePastSelected(menuItems) {

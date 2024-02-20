@@ -14,8 +14,14 @@ export default function renderList(list, i) {
     ["data-index-number", `${i}`],
   ]);
   const textCtr = renderItemText(list, listItem);
+  const iconBtn = list.icon
+    ? createElement("button", "list-icon-button", listItem, list.icon, [
+        ["id", "list-icon-button"],
+      ])
+    : null;
   const viewEditBtn = renderItemEdit(listItem, i);
   const deleteBtn = renderItemDelete(listItem, i);
+  console.log(list.icon, list.title);
 }
 
 function addListOfListsCtr(viewCtr) {
@@ -103,46 +109,3 @@ function openListEL() {
     });
   });
 }
-
-//  const listItem = createElement("div", "list-item", listCtr, "", [
-//       ["data-index-number", i],
-//     ]);
-//     const textCtr = createElement("div", "text-ctr", listItem);
-//     createElement("h4", "listTitle", textCtr, list.title);
-//     createElement("p", "list-desc", textCtr, list.description);
-//     const listBtnsCtr = createElement("div", "list-btns-ctr", listItem);
-//     const editList = createElement(
-//       "div",
-//       ["editList", "view-edit", "fa-solid", "fa-eye"],
-//       listBtnsCtr,
-//       "",
-//       [
-//         ["data-index-number", i],
-//         ["id", `editList${i}`],
-//       ]
-//     );
-
-//     const listColor = createElement(
-//       "div",
-//       ["list-colour", list.colour, "listAssignment"],
-//       listBtnsCtr
-//     );
-//     listColor.style.backgroundColor = list.colour;
-//     createElement("hr", "break", listCtr);
-//     i++;
-//   });
-//   document.getElementById("editList0").classList.remove("editList", "fa-eye");
-// }
-
-// function renderListAppCtr() {
-//   const listCtr = createElement("div", "list-ctr", content, "");
-//   createElement(
-//     "button",
-//     ["addNewListBtn", "fa-solid", "fa-plus"],
-//     content,
-//     "",
-//     [["id", "addNewListBtn"]]
-//   );
-
-//   return { listCtr };
-// }

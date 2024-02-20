@@ -15,12 +15,12 @@ import { addListEventLis } from "./allListsUI";
 //   return nextID;
 // }
 
-export default function createList(title, description, color) {
+export default function createList(title, description, icon) {
   // const listID = getListID();
   const list = {
     title: title,
     description: description,
-    color: color,
+    icon: icon,
     // listID: listID,
   };
   addListToStorage(list);
@@ -40,6 +40,7 @@ export function addListToStorage(list) {
 }
 
 export function getListData(index) {
+  console.log(index, "listind");
   const storedLists = getStoredLists();
   if (storedLists.length > 0) {
     const foundList = storedLists[index];
@@ -58,7 +59,7 @@ export function getListInfo(ID) {
     const allTasks = createList(
       "All tasks",
       "All your tasks in one list",
-      "blue"
+      null
     );
     renderListName(allTasks.title, allTasks.description);
   }
