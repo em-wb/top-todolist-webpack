@@ -14,14 +14,15 @@ export default function renderList(list, i) {
     ["data-index-number", `${i}`],
   ]);
   const textCtr = renderItemText(list, listItem);
-  const iconBtn = list.icon
-    ? createElement("button", "list-icon-button", listItem, list.icon, [
-        ["id", "list-icon-button"],
+  const icon = list.icon
+    ? createElement("div", "list-icon", listItem, list.icon, [
+        ["id", "list-icon"],
       ])
     : null;
-  const viewEditBtn = renderItemEdit(listItem, i);
-  const deleteBtn = renderItemDelete(listItem, i);
-  console.log(list.icon, list.title);
+  if (i !== 0) {
+    const viewEditBtn = renderItemEdit(listItem, i);
+    const deleteBtn = renderItemDelete(listItem, i);
+  }
 }
 
 function addListOfListsCtr(viewCtr) {
