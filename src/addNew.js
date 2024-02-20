@@ -37,11 +37,6 @@ export default function renderMainForm(title, ctr, toEdit) {
   return form;
 }
 
-export function editedTaskLog(index) {
-  taskIndex = index;
-  edited = true;
-}
-
 export function getViewCtr() {
   const viewCtr = document.getElementById("view-ctr");
   return viewCtr;
@@ -72,34 +67,3 @@ export function renderDelete(ctr) {
   ]);
   return deleteBtn;
 }
-
-// listsArray = parseListsFromStorage();
-
-// if (listsArray >= 1) {
-//   listsArray.forEach((list) => {
-//     if (list.title !== "All tasks") {
-//       createElement("option", "listOptions", dropdown, "", [
-//         ["value", list.title],
-//         ["id", list.listID],
-//       ]);
-//     }
-//   });
-// } else {
-
-// }
-// function parseListsFromStorage() {
-//   const listString = JSON.parse(localStorage.getItem("lists")) || [];
-//   let listsArray = [];
-//   if (listString) {
-//     listString.forEach((list) => {
-//       const newList = createList(
-//         list.title,
-//         list.description,
-//         list.color,
-//         list.listID
-//       );
-//       listsArray.push(newList);
-//     });
-//   }
-//   return listsArray;
-// }

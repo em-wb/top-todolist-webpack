@@ -203,6 +203,10 @@ hr {
   font-weight: 600;
 }
 
+.hidden {
+  display: none;
+}
+
 @media (min-width: 720px) {
   footer {
     grid-column: 1/2;
