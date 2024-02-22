@@ -100,10 +100,6 @@ export function renderItemEdit(ctr, index) {
   return editBtn;
 }
 
-export function renderListColor(item, ctr) {
-  const listIcon = createElement("button", "list-icon", ctr, item);
-}
-
 function removePastSelected(menuItems) {
   menuItems.forEach((menuItem) => {
     menuItem.classList.remove("selected");
