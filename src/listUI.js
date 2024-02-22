@@ -10,6 +10,7 @@ import { renderItemEdit, renderItemText } from "./appUI";
 import { editedLog, renderTaskForm } from "./addNewTask";
 import { addListEventLis } from "./allListsUI";
 import { getListData } from "./list";
+import Complete from "./complete.png";
 
 export function renderListName(title, description) {
   const viewCtr = document.getElementById("view-ctr");
@@ -94,6 +95,40 @@ export function renderTask(task, index) {
   renderPriorityStatus(task.priority, textDiv);
 }
 
+export function checkIfEmpty() {
+  const todoCtr = document.getElementById("todo-ctr");
+  const doneCtr = document.getElementById("done-ctr");
+  if (!todoCtr.hasChildNodes()) {
+    const noTasksCtr = createElement("div", "no-tasks-ctr", todoCtr, "", [
+      ["id", "no-tasks-ctr"],
+    ]);
+    const noTasksImg = createElement("img", "no-tasks-img", noTasksCtr);
+    createElement("p", "no-tasks-text", noTasksCtr, "You're up to date!");
+    noTasksImg.src = Complete;
+  }
+  if (todoCtr.childNodes.length > 1) {
+    const empty = document.getElementById("no-tasks-ctr");
+    if (empty) {
+      empty.remove();
+    }
+  }
+  if (doneCtr.childNodes.length === 1) {
+    createElement(
+      "p",
+      ["nothing-complete", "no-tasks-text"],
+      doneCtr,
+      "Complete a task to see it here...",
+      [["id", "nothing-complete"]]
+    );
+  }
+  if (doneCtr.childNodes.length > 2) {
+    const empty = document.getElementById("nothing-complete");
+    if (empty) {
+      empty.remove();
+    }
+  }
+}
+
 export function addTaskEventLis() {
   editTaskEL();
   completeTaskEL();
@@ -135,6 +170,7 @@ function completeTaskEL() {
       const taskToEdit = getTaskData(index);
       updateParent(index);
       updateCompleteStatus(index);
+      checkIfEmpty();
     });
   });
 }

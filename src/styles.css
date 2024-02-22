@@ -61,6 +61,12 @@ hr {
   opacity: 80%;
 }
 
+img {
+  width: 50%;
+  height: auto;
+  padding-right: 1.3rem;
+}
+
 .content {
   display: grid;
   grid-template-columns: 25% 75%;
@@ -123,6 +129,29 @@ hr {
 .todo-done-ctr,
 .lists-ctr {
   overflow-y: auto;
+}
+
+.todo-ctr {
+  margin-bottom: 3rem;
+}
+
+.done-ctr {
+  margin: 0 0.5rem;
+}
+
+.done-title {
+  margin-bottom: 2rem;
+}
+
+.nothing-complete {
+  border-bottom: #b0b8c7 solid 1px;
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
+.no-tasks-text {
+  font-size: 0.9rem;
+  opacity: 60%;
 }
 
 .heading-ctr {
@@ -231,6 +260,11 @@ hr {
 .today,
 .overdue {
   font-weight: 600;
+}
+
+.no-tasks-ctr {
+  text-align: center;
+  margin-top: 2rem;
 }
 
 .hidden {

@@ -1,7 +1,7 @@
 import { renderListName, renderTask } from "./listUI";
 import { getListInfo } from "./list";
 import { isToday } from "date-fns";
-import { addTaskEventLis } from "./listUI";
+import { addTaskEventLis, checkIfEmpty } from "./listUI";
 import clearViewCtr from ".";
 import { addTaskCtrs } from "./appUI";
 
@@ -52,6 +52,7 @@ export function loadTasksFromStorage(listIndex) {
     getListInfo(listIndex);
   }
   addTaskEventLis();
+  checkIfEmpty();
 }
 
 function getTodaysTasks(tasks) {
@@ -73,6 +74,7 @@ function getTasksForThisList(listID, tasks) {
     }
   });
 }
+
 export function getTaskData(index) {
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   if (tasks.length > 0) {
