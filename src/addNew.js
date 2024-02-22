@@ -3,12 +3,17 @@ import createTask, { loadTasksFromStorage, deleteTask } from "./tasks";
 import clearViewCtr from "./index.js";
 import { addTaskCtrs } from "./appUI";
 import { addTaskEventLis } from "./listUI";
+import { add } from "date-fns";
 
 export default function renderMainForm(title, ctr, toEdit) {
-  const form = createElement("form", "form", ctr);
-  createElement("h1", null, form, title);
-  createElement("label", null, form, "Title", [["for", "inputTitle"]]),
-    createElement("input", "input", form, "", [
+  const addNew = createElement("div", "add-new", ctr, "", [["id", "add-new"]]);
+  createElement("h1", "h1-new", addNew, title);
+  const form = createElement("form", "form", addNew);
+  const closeCtr = renderCloseBtn(form);
+  const titleCtr = createElement("div", "form-ctr", form);
+  const descCtr = createElement("div", "form-ctr", form);
+  createElement("label", null, titleCtr, "Title", [["for", "inputTitle"]]),
+    createElement("input", "input", titleCtr, "", [
       ["id", "inputTitle"],
       ["type", "text"],
       ["required", ""],
@@ -19,20 +24,26 @@ export default function renderMainForm(title, ctr, toEdit) {
       ["maxlength", "50"],
       ["value", toEdit ? toEdit.title : ""],
     ]);
-  createElement("label", null, form, "Description (optional)", [
+  createElement("label", null, descCtr, "Description (optional)", [
     ["for", "inputDesc"],
   ]),
-    createElement("textarea", "input", form, toEdit ? toEdit.description : "", [
-      ["id", "inputDesc"],
-      ["rows", "2"],
+    createElement(
+      "textarea",
+      "input",
+      descCtr,
+      toEdit ? toEdit.description : "",
       [
-        "placeholder",
-        (title = "Task"
-          ? "Eggs, milk, cereal, bread, bananas"
-          : "Tasks for project kick-off"),
-      ],
-      ["maxlength", "250"],
-    ]);
+        ["id", "inputDesc"],
+        ["rows", "2"],
+        [
+          "placeholder",
+          (title = "Task"
+            ? "Eggs, milk, cereal, bread, bananas"
+            : "Tasks for project kick-off"),
+        ],
+        ["maxlength", "250"],
+      ]
+    );
 
   return form;
 }
@@ -43,10 +54,11 @@ export function getViewCtr() {
 }
 
 export function renderCloseBtn(ctr) {
+  const closeBtnCtr = createElement("div", "close-ctr", ctr);
   const closeBtn = createElement(
     "button",
     ["close-btn", "fa-solid", "fa-xmark"],
-    ctr,
+    closeBtnCtr,
     "",
     [["id", "close-btn"]]
   );

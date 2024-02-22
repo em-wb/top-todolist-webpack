@@ -33,18 +33,20 @@ function renderFormDate(ctr, toEdit) {
 }
 
 function renderPriorityStatus(ctr, toEdit) {
-  createElement("p", null, ctr, "Priority");
+  // createElement("p", null, ctr, "Priority");
+  createElement("label", null, ctr, "High priority", [
+    ["for", "highPriorityTask"],
+  ]);
   createElement("input", "highPriority", ctr, "", [
     ["id", "highPriorityTask"],
     ["type", "checkbox"],
     ["checked", toEdit ? toEdit.priority : false],
   ]);
-  createElement("label", null, ctr, "High", [["for", "highPriorityTask"]]);
 }
 
 function renderDropDown(ctr) {
   createElement("label", null, ctr, "List(s)", [["for", "dropdownList"]]);
-  const select = createElement("select", null, ctr, "", [
+  const select = createElement("select", "input", ctr, "", [
     ["id", "dropdownList"],
     ["list", "listOfLists"],
   ]);
@@ -78,14 +80,18 @@ function renderListOptions(select, listArray) {
 export function renderTaskForm(taskToEdit) {
   const viewCtr = getViewCtr();
   const mainForm = renderMainForm("Task", viewCtr, taskToEdit);
-  const closeBtn = renderCloseBtn(viewCtr);
-  renderFormDate(mainForm, taskToEdit);
-  renderPriorityStatus(mainForm, taskToEdit);
-  renderDropDown(mainForm);
-  const submitBtn = renderSubmit(mainForm);
-  const deleteBtn = renderDelete(mainForm);
+  // const closeBtn = renderCloseBtn(mainForm);
+  const dateCtr = createElement("div", "form-ctr", mainForm);
+  const priorityCtr = createElement("div", "priority-ctr", mainForm);
+  const listCtr = createElement("div", "form-ctr", mainForm);
+  renderFormDate(dateCtr, taskToEdit);
+  renderPriorityStatus(priorityCtr, taskToEdit);
+  renderDropDown(listCtr);
+  const buttonCtr = createElement("div", "button-ctr", mainForm);
+  const submitBtn = renderSubmit(buttonCtr);
+  const deleteBtn = renderDelete(buttonCtr);
   submitTaskEL(submitBtn);
-  closeFormEL(closeBtn);
+  closeFormEL();
   deleteTaskEL(deleteBtn);
 }
 
@@ -114,8 +120,8 @@ function deleteTaskEL(deleteTaskBtn) {
   });
 }
 
-function closeFormEL(closeBtn) {
-  closeBtn.addEventListener("click", (e) => {
+function closeFormEL() {
+  document.getElementById("close-btn").addEventListener("click", (e) => {
     clearViewCtr();
     loadTasksFromStorage(0); //currentlist
     addTaskEventLis();
@@ -143,7 +149,6 @@ function submitTaskEL(submitTaskBtn) {
       false
     );
     clearViewCtr();
-
     console.log("chose", chosenIndex);
     loadTasksFromStorage(chosenIndex);
     addTaskEventLis();

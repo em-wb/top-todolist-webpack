@@ -8,8 +8,6 @@ import createList, { loadListsFromStorage, deleteList } from "./list";
 import clearViewCtr from ".";
 import { addListEventLis } from "./allListsUI";
 import createElement from "./createElement";
-// import Picker from "vanilla-picker";
-// import "vanilla-picker/dist/vanilla-picker.csp.css";
 import "emoji-picker-element";
 
 let edited = false;
@@ -18,27 +16,28 @@ let editedIndex;
 export function renderListForm(listToEdit) {
   const viewCtr = getViewCtr();
   const mainForm = renderMainForm("List", viewCtr, listToEdit);
-  const closeBtn = renderCloseBtn(viewCtr);
-
-  const iconBtn = createElement("button", "icon-btn", mainForm, "Add icon", [
+  const iconCtr = createElement("div", "choose-icon-ctr", mainForm);
+  const iconBtn = createElement("button", "icon-btn", iconCtr, "Add icon", [
     ["id", "icon-btn"],
   ]);
-  const selectedEmoji = renderSelectedEmoji(mainForm);
+  const selectedEmoji = renderSelectedEmoji(iconCtr);
   const emojiPicker = renderEmojiPicker(mainForm, selectedEmoji);
-  const submitBtn = renderSubmit(mainForm);
-  const deleteBtn = renderDelete(mainForm);
+  const buttonCtr = createElement("div", "button-ctr", mainForm);
+  const submitBtn = renderSubmit(buttonCtr);
+  const deleteBtn = renderDelete(buttonCtr);
   iconBtnEL(iconBtn, emojiPicker);
   submitListEL(submitBtn);
   deleteListEL(deleteBtn);
-  closeListEL(closeBtn);
+  closeListEL();
 }
 
 function renderSelectedEmoji(mainForm) {
-  createElement("label", "select-emoji", mainForm, "List Icon", [
-    ["for", "selected-emoji"],
-  ]);
+  // createElement("label", "select-emoji", mainForm, "List Icon", [
+  //   ["for", "selected-emoji"],
+  // ]);
   const selectedEmoji = createElement("input", "selected-emoji", mainForm, "", [
     ["id", "selected-emoji"],
+    ["title", "View List"],
   ]);
 
   return selectedEmoji;
@@ -83,8 +82,8 @@ function deleteListEL(deleteBtn) {
   });
 }
 
-function closeListEL(closeBtn) {
-  closeBtn.addEventListener("click", (e) => {
+function closeListEL() {
+  document.getElementById("close-btn").addEventListener("click", (e) => {
     clearViewCtr();
     loadListsFromStorage();
     edited = false;
