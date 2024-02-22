@@ -10,19 +10,29 @@ import { loadTasksFromStorage } from "./tasks";
 export default function renderList(list, i) {
   console.log("i", i);
   const listsCtr = document.getElementById("lists-ctr");
-  const listItem = createElement("div", "list-item", listsCtr, "", [
-    ["data-index-number", `${i}`],
-  ]);
+  const listItem = createElement(
+    "div",
+    ["list-item", "item-ctr"],
+    listsCtr,
+    "",
+    [["data-index-number", `${i}`]]
+  );
   const textCtr = renderItemText(list, listItem);
-  const icon = list.icon
-    ? createElement("div", "list-icon", listItem, list.icon, [
-        ["id", "list-icon"],
-      ])
-    : null;
+  const icon = renderListIcon(list, listItem);
   if (i !== 0) {
     const viewEditBtn = renderItemEdit(listItem, i);
     const deleteBtn = renderItemDelete(listItem, i);
   }
+}
+
+function renderListIcon(list, ctr) {
+  const iconDiv = createElement("div", "icon-div", ctr);
+  const listIcon = list.icon
+    ? createElement("div", "list-icon", iconDiv, list.icon, [
+        ["id", "list-icon"],
+      ])
+    : null;
+  return iconDiv;
 }
 
 function addListOfListsCtr(viewCtr) {
@@ -44,11 +54,11 @@ export function allListsView() {
 }
 
 function renderItemDelete(ctr, index) {
-  const openEditDiv = document.getElementById(`open-edit-div${index}`);
+  const deleteDiv = createElement("div", "delete-div", ctr);
   const deleteBtn = createElement(
     "button",
     ["delete-list", "button"],
-    openEditDiv,
+    deleteDiv,
     "",
     [["data-index-number", index]]
   );
