@@ -83,9 +83,10 @@ function editListEL() {
   const editBtns = document.querySelectorAll(".open-edit");
   editBtns.forEach((editBtn) => {
     editBtn.addEventListener("click", () => {
-      const listToEdit = getListData(editBtn.dataset.indexNumber);
+      const index = editBtn.dataset.indexNumber;
+      const listToEdit = getListData(index);
       console.log(listToEdit, "listtoedit");
-      editedListLog(listToEdit);
+      editedListLog(index);
       clearViewCtr();
       renderListForm(listToEdit);
     });

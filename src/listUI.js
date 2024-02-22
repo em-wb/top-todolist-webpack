@@ -102,8 +102,9 @@ function editTaskEL() {
   const editBtns = document.querySelectorAll(".open-edit");
   editBtns.forEach((editBtn) => {
     editBtn.addEventListener("click", (e) => {
-      const taskToEdit = getTaskData(editBtn.dataset.indexNumber);
-      editedLog(taskToEdit);
+      const index = editBtn.dataset.indexNumber;
+      const taskToEdit = getTaskData(index);
+      editedLog(index);
       clearViewCtr();
       renderTaskForm(taskToEdit);
     });
