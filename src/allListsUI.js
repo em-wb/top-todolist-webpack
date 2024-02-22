@@ -28,7 +28,7 @@ export default function renderList(list, i) {
 function renderListIcon(list, ctr) {
   const iconDiv = createElement("div", "icon-div", ctr);
   const listIcon = list.icon
-    ? createElement("div", "list-icon", iconDiv, list.icon, [
+    ? createElement("button", "list-icon-btn", iconDiv, list.icon, [
         ["id", "list-icon"],
       ])
     : null;
@@ -111,8 +111,7 @@ function openListEL() {
   listItems.forEach((listItem) => {
     listItem.addEventListener("click", (e) => {
       const tagName = e.target.tagName;
-      console.log(tagName, "tagname");
-      if (tagName !== "BUTTON" && tagName !== "I") {
+      if (tagName !== "I") {
         console.log(tagName, "tagname");
         const index = listItem.dataset.indexNumber;
         clearViewCtr();

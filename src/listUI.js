@@ -30,9 +30,17 @@ function renderListIcon(task, ctr) {
     const listIndex = task.assignedLists.slice(1, 2);
     const list = getListData(listIndex);
     if (list.icon) {
-      const listBtn = createElement("button", "list-icon", ctr, list.icon, [
-        ["id", "list-icon"],
-      ]);
+      const iconCtr = createElement("div", "icon-div", ctr);
+      const listBtn = createElement(
+        "button",
+        "list-icon-btn",
+        iconCtr,
+        list.icon,
+        [
+          ["id", "list-icon"],
+          ["title", "View List"],
+        ]
+      );
       openListEL(listBtn, listIndex);
     }
   }
@@ -79,7 +87,7 @@ export function renderTask(task, index) {
     [["id", `item-ctr${index}`]]
   );
   const textDiv = renderItemText(task, itemCtr);
-  renderDueDate(task, itemCtr, index);
+  renderDueDate(task, textDiv, index);
   const viewEditDiv = renderItemEdit(itemCtr, index);
   renderListIcon(task, itemCtr);
   renderTaskComplete(task, itemCtr, index);
