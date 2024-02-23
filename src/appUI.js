@@ -29,6 +29,7 @@ function getIconMenu(menuDiv) {
     createElement("small", "menuText", menuItemDiv, icon.text);
     i++;
   });
+  document.getElementById("menuItem0").classList.add("selected");
 }
 
 export function renderNav() {
