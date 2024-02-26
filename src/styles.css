@@ -150,7 +150,7 @@ form {
 }
 
 .done-ctr {
-  margin: 0 0.5rem;
+  margin: 20% 0.5rem 0 0;
 }
 
 .done-title {
@@ -177,10 +177,6 @@ form {
 .logo {
   padding-top: 1rem;
   font-size: 1.3rem;
-}
-
-.done-ctr {
-  margin-top: 20%;
 }
 
 .item-ctr {
