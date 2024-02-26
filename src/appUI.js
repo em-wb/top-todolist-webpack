@@ -131,11 +131,9 @@ function addMenuEventLis() {
 }
 
 function openThisPage(index) {
-  console.log(index, "here");
   clearViewCtr();
   if (index == 0) {
     loadTasksFromStorage(index);
-    console.log("index1", index);
   }
   if (index == 1) {
     loadTasksFromStorage("today");

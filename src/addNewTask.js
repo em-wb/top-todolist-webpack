@@ -146,7 +146,6 @@ function submitTaskEL(submitTaskBtn) {
     );
     clearViewCtr();
     loadTasksFromStorage(chosenIndex);
-    addTaskEventLis();
     edited = false;
     editedIndex = null;
   });
