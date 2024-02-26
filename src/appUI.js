@@ -2,7 +2,12 @@ import clearViewCtr from ".";
 import createElement from "./createElement";
 import { loadTasksFromStorage } from "./tasks";
 import { loadListsFromStorage } from "./list";
-import loadProfileFromStorage from "./profile";
+import loadProfileFromStorage, {
+  loadAvatarFromStorage,
+  loadNameFromStorage,
+  getAvatar,
+  getName,
+} from "./profile";
 
 export default function renderAppUI() {
   renderHeader();
@@ -42,13 +47,15 @@ export function renderNav() {
 
 export function renderHeader() {
   const header = createElement("header", "header", content);
-  createElement("h3", "logo", header, "Absolistly");
+  const logoCtr = createElement("div", "logo-ctr", header);
+  createElement("h3", "logo", logoCtr, "Absolistly");
   const headerProfile = createElement("div", "header-profile", header);
-  createElement(
-    "i",
-    ["profile-pic", "fa-solid", "fa-person-burst"],
-    headerProfile
-  );
+  let userName = loadNameFromStorage();
+  let avatar = loadAvatarFromStorage();
+  userName = getName(userName);
+  avatar = getAvatar(avatar);
+  createElement("p", "user-name-header", headerProfile, `Hello, ${userName}.`);
+  createElement("img", "avatar-header", headerProfile, "", [["src", avatar]]);
 }
 
 export function renderViewCtr() {

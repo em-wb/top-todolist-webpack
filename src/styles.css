@@ -360,6 +360,11 @@ form > .button-ctr > button,
   padding: 0;
 }
 
+.avatar-header {
+  max-height: 5rem;
+  width: fit-content;
+}
+
 .profile-name {
   font-size: 2rem;
 }
@@ -384,7 +389,7 @@ form > .button-ctr > button,
     top: 0;
     display: grid;
     grid-template-columns: 25% 75%;
-    align-content: center;
+    justify-content: center;
     background-color: #fca3b9;
     border: none;
     z-index: 1000;
@@ -429,13 +434,22 @@ form > .button-ctr > button,
   .header-profile {
     display: flex;
     justify-content: end;
+    align-items: center;
     padding-right: 10rem;
+    gap: 2rem;
   }
 
-  .header-profile > i {
+  .header-profile > p {
     color: var(--accent-color);
+    font-weight: var(--heading-weight);
+    font-size: var(--main-font-size);
   }
 
+  .logo-ctr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .view-ctr {
     grid-column: 2/3;
     grid-row: 2/6;
