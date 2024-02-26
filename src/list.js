@@ -40,11 +40,7 @@ export function getListInfo(ID) {
   if (list) {
     renderListName(list.title, list.description);
   } else {
-    const allTasks = createList(
-      "All tasks",
-      "All your tasks in one list",
-      null
-    );
+    const allTasks = createList("All tasks", "View all your tasks", null);
     renderListName(allTasks.title, allTasks.description);
   }
 }

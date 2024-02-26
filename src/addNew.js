@@ -61,7 +61,7 @@ export function renderCloseBtn(ctr) {
 }
 
 export function renderSubmit(ctr) {
-  const submitBtn = createElement("button", "submitBtn", ctr, "List it", [
+  const submitBtn = createElement("button", "submitBtn", ctr, "Submit", [
     ["id", "submitTaskBtn"],
     ["type", "submit"],
   ]);
