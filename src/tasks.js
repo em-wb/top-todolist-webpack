@@ -2,7 +2,6 @@ import { renderListName, renderTask } from "./listUI";
 import { getListInfo } from "./list";
 import { isToday } from "date-fns";
 import { addTaskEventLis, checkIfEmpty } from "./listUI";
-import clearViewCtr from ".";
 import { addTaskCtrs } from "./appUI";
 
 export default function createTask(
@@ -39,9 +38,7 @@ function toggleComplete(task) {
 
 export function loadTasksFromStorage(listIndex) {
   addTaskCtrs();
-  console.log("listID", listIndex);
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  // listIndex = listID.toString();
   if (listIndex == "today") {
     renderListName("Today", "All tasks due today");
     getTodaysTasks(tasks);
@@ -95,7 +92,6 @@ export function updateCompleteStatus(index) {
   const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   if (tasks.length > 0) {
     toggleComplete(tasks[index]);
-    console.log(tasks[index].completed);
     const taskData = JSON.stringify(tasks);
     localStorage.setItem("tasks", taskData);
   }

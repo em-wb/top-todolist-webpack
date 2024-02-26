@@ -8,7 +8,6 @@ import {
 } from "./tasks";
 import { renderItemEdit, renderItemText } from "./appUI";
 import { editedLog, renderTaskForm } from "./addNewTask";
-import { addListEventLis } from "./allListsUI";
 import { getListData } from "./list";
 import Complete from "./complete.png";
 
@@ -77,7 +76,6 @@ function renderTaskComplete(task, ctr, index) {
 }
 
 export function renderTask(task, index) {
-  console.log(task);
   const todoCtr = document.getElementById("todo-ctr");
   const doneCtr = document.getElementById("done-ctr");
   const itemCtr = createElement(

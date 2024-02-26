@@ -20,7 +20,6 @@ function addNewEventLi() {
 function checkType() {
   const allLists = document.getElementById("menuItem2");
   if (allLists.classList.contains("selected")) {
-    console.log("ys");
     return renderListForm();
   }
   renderTaskForm();
@@ -32,7 +31,6 @@ export default function clearViewCtr() {
   if (viewCtr.hasChildNodes) {
     while (viewCtr.firstChild) {
       viewCtr.removeChild(viewCtr.firstChild);
-      console.log("clear", i);
       i++;
     }
   }

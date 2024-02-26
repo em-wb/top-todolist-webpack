@@ -1,5 +1,4 @@
 import renderMainForm, {
-  renderCloseBtn,
   getViewCtr,
   renderDelete,
   renderSubmit,
@@ -7,7 +6,6 @@ import renderMainForm, {
 import createElement from "./createElement";
 import createTask, { deleteTask } from "./tasks";
 import clearViewCtr from ".";
-import { addTaskCtrs } from "./appUI";
 import { loadTasksFromStorage } from "./tasks";
 import { addTaskEventLis } from "./listUI";
 import { getStoredLists } from "./list";
@@ -33,7 +31,6 @@ function renderFormDate(ctr, toEdit) {
 }
 
 function renderPriorityStatus(ctr, toEdit) {
-  // createElement("p", null, ctr, "Priority");
   createElement("label", null, ctr, "High priority", [
     ["for", "highPriorityTask"],
   ]);
@@ -80,7 +77,6 @@ function renderListOptions(select, listArray) {
 export function renderTaskForm(taskToEdit) {
   const viewCtr = getViewCtr();
   const mainForm = renderMainForm("Task", viewCtr, taskToEdit);
-  // const closeBtn = renderCloseBtn(mainForm);
   const dateCtr = createElement("div", "form-ctr", mainForm);
   const priorityCtr = createElement("div", "priority-ctr", mainForm);
   const listCtr = createElement("div", "form-ctr", mainForm);
@@ -113,7 +109,7 @@ function deleteTaskEL(deleteTaskBtn) {
     }
     clearViewCtr();
 
-    loadTasksFromStorage(0); //currentlist
+    loadTasksFromStorage(0);
     addTaskEventLis();
     edited = false;
     editedIndex = null;
@@ -123,7 +119,7 @@ function deleteTaskEL(deleteTaskBtn) {
 function closeFormEL() {
   document.getElementById("close-btn").addEventListener("click", (e) => {
     clearViewCtr();
-    loadTasksFromStorage(0); //currentlist
+    loadTasksFromStorage(0);
     addTaskEventLis();
     edited = false;
     editedIndex = null;
@@ -149,7 +145,6 @@ function submitTaskEL(submitTaskBtn) {
       false
     );
     clearViewCtr();
-    console.log("chose", chosenIndex);
     loadTasksFromStorage(chosenIndex);
     addTaskEventLis();
     edited = false;

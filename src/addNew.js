@@ -1,9 +1,4 @@
 import createElement from "./createElement";
-import createTask, { loadTasksFromStorage, deleteTask } from "./tasks";
-import clearViewCtr from "./index.js";
-import { addTaskCtrs } from "./appUI";
-import { addTaskEventLis } from "./listUI";
-import { add } from "date-fns";
 
 export default function renderMainForm(title, ctr, toEdit) {
   const addNew = createElement("div", "add-new", ctr, "", [["id", "add-new"]]);

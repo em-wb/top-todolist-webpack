@@ -1,5 +1,4 @@
 import renderMainForm, {
-  renderCloseBtn,
   getViewCtr,
   renderDelete,
   renderSubmit,

@@ -1,27 +1,12 @@
-import { renderListName, renderTask } from "./listUI";
+import { renderListName } from "./listUI";
 import renderList, { allListsView } from "./allListsUI";
 import { addListEventLis } from "./allListsUI";
 
-// function getListID() {
-//   const lists = getStoredLists();
-//   let idArray = [];
-//   let nextID;
-//   if (lists.length > 0) {
-//     lists.forEach((list) => {
-//       idArray.push(list.listID);
-//       nextID = Math.max(...idArray) + 1;
-//     });
-//   } else nextID = 1;
-//   return nextID;
-// }
-
 export default function createList(title, description, icon) {
-  // const listID = getListID();
   const list = {
     title: title,
     description: description,
     icon: icon,
-    // listID: listID,
   };
   addListToStorage(list);
   return list;
@@ -40,7 +25,6 @@ export function addListToStorage(list) {
 }
 
 export function getListData(index) {
-  console.log(index, "listind");
   const storedLists = getStoredLists();
   if (storedLists.length > 0) {
     const foundList = storedLists[index];
