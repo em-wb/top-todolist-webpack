@@ -8,7 +8,6 @@ import { deleteList, loadListsFromStorage } from "./list";
 import { loadTasksFromStorage } from "./tasks";
 
 export default function renderList(list, i) {
-  console.log("i", i);
   const listsCtr = document.getElementById("lists-ctr");
   const listItem = createElement(
     "div",
@@ -48,7 +47,7 @@ export function allListsView() {
     "p",
     "desc",
     headingCtr,
-    "View and edit all task lists"
+    "View and edit all lists"
   );
   addListOfListsCtr(viewCtr);
 }
@@ -85,7 +84,6 @@ function editListEL() {
     editBtn.addEventListener("click", () => {
       const index = editBtn.dataset.indexNumber;
       const listToEdit = getListData(index);
-      console.log(listToEdit, "listtoedit");
       editedListLog(index);
       clearViewCtr();
       renderListForm(listToEdit);
@@ -98,7 +96,6 @@ function deleteListEL() {
   deleteBtns.forEach((deleteBtn) => {
     deleteBtn.addEventListener("click", (e) => {
       const index = deleteBtn.dataset.indexNumber;
-      console.log("ind", index);
       deleteList(index);
       clearViewCtr();
       loadListsFromStorage();
@@ -112,7 +109,6 @@ function openListEL() {
     listItem.addEventListener("click", (e) => {
       const tagName = e.target.tagName;
       if (tagName !== "I") {
-        console.log(tagName, "tagname");
         const index = listItem.dataset.indexNumber;
         clearViewCtr();
         loadTasksFromStorage(index);
