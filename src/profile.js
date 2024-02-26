@@ -1,4 +1,5 @@
 import createProfileUI from "./profileUI";
+import { AvatarGenerator } from "random-avatar-generator";
 
 export default function loadProfileFromStorage() {
   const name = loadNameFromStorage();
@@ -27,7 +28,7 @@ export function saveAvatarToStorage(avatar) {
 }
 
 export function getAvatar(avatar) {
-  if (avatar) {
+  if (avatar.length > 0) {
     return avatar;
   }
   const generator = new AvatarGenerator();
@@ -37,7 +38,7 @@ export function getAvatar(avatar) {
 }
 
 export function getName(name) {
-  if (name) {
+  if (name.length > 0) {
     return name;
   }
   name = "NewUser";
