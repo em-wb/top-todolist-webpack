@@ -2,6 +2,7 @@ import clearViewCtr from ".";
 import createElement from "./createElement";
 import { loadTasksFromStorage } from "./tasks";
 import { loadListsFromStorage } from "./list";
+import loadProfileFromStorage from "./profile";
 
 export default function renderAppUI() {
   renderHeader();

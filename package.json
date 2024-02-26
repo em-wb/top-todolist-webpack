@@ -23,6 +23,7 @@
     "date-fns": "^3.0.0",
     "emoji-mart": "^5.5.2",
     "emoji-picker-element": "^1.21.1",
+    "random-avatar-generator": "^2.0.0",
     "react-color": "^2.19.3",
     "vanilla-picker": "^2.12.2"
   }
