@@ -50,7 +50,8 @@ button {
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
-button:hover {
+button:hover,
+.list-item {
   cursor: pointer;
 }
 
@@ -464,7 +465,7 @@ form > .button-ctr > button,
     z-index: 1000;
   }
 
-  .button-ctr > button,
+  form > .button-ctr > button,
   .choose-icon-ctr > button {
     width: 30%;
   }
@@ -472,5 +473,9 @@ form > .button-ctr > button,
   .todo-done-ctr,
   .lists-ctr {
     padding: 0 15%;
+  }
+
+  .profile-ctr {
+    padding-top: 10%;
   }
 }
