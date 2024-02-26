@@ -1,7 +1,12 @@
 import { AvatarGenerator } from "random-avatar-generator";
 import createElement from "./createElement";
 import { getViewCtr } from "./addNew";
-import { saveNameToStorage, saveAvatarToStorage } from "./profile";
+import {
+  saveNameToStorage,
+  saveAvatarToStorage,
+  getName,
+  getAvatar,
+} from "./profile";
 
 export default function createProfileUI(name, avatar) {
   const viewCtr = getViewCtr();
@@ -51,23 +56,4 @@ function editNameEL(editName, profileName) {
     profileName.textContent = name;
     saveNameToStorage(name);
   });
-}
-
-function getAvatar(avatar) {
-  if (avatar) {
-    return avatar;
-  }
-  const generator = new AvatarGenerator();
-  const defaultAvatar = generator.generateRandomAvatar("avatar");
-  saveAvatarToStorage(defaultAvatar);
-  return defaultAvatar;
-}
-
-function getName(name) {
-  if (name) {
-    return name;
-  }
-  name = "NewUser";
-  saveNameToStorage(name);
-  return name;
 }
