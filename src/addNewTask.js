@@ -113,7 +113,6 @@ function deleteTaskEL(deleteTaskBtn) {
     clearViewCtr();
 
     loadTasksFromStorage(0);
-    // addTaskEventLis();
     edited = false;
     editedIndex = null;
   });
@@ -123,7 +122,6 @@ function closeFormEL() {
   document.getElementById("close-btn").addEventListener("click", (e) => {
     clearViewCtr();
     loadTasksFromStorage(0);
-    // addTaskEventLis();
     edited = false;
     editedIndex = null;
   });
@@ -148,7 +146,6 @@ function submitTaskEL(submitTaskBtn) {
       false
     );
     clearViewCtr();
-    // addTaskEventLis();
     loadTasksFromStorage(chosenIndex);
     edited = false;
     editedIndex = null;
