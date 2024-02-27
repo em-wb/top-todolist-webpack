@@ -356,8 +356,8 @@ form > .button-ctr > button,
 }
 
 .selected {
-  font-weight: 900;
   color: var(--accent-color-2);
+  font-weight: 800;
 }
 
 .profile-ctr {
@@ -442,7 +442,7 @@ form > .button-ctr > button,
   }
 
   .menuItemDiv {
-    width: fit-content;
+    min-width: 66px;
   }
 
   .logo {
