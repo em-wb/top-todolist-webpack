@@ -184,6 +184,7 @@ form {
 .logo {
   padding-top: 1rem;
   font-size: 1.3rem;
+  text-shadow: 0.1rem 0.1rem 0px rgba(0, 0, 0, 0.2);
 }
 
 .item-ctr {
