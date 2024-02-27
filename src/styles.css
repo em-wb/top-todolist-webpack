@@ -150,6 +150,10 @@ form {
   overflow-y: auto;
 }
 
+.todo-ctr {
+  min-height: 194.875px;
+}
+
 .done-ctr {
   margin: 10% 0.5rem 0 0;
   opacity: 60%;
@@ -157,6 +161,7 @@ form {
 
 .done-title {
   margin-bottom: 2rem;
+  padding-left: 0.5rem;
 }
 
 .nothing-complete {
@@ -341,6 +346,10 @@ form > .button-ctr > button,
   text-align: center;
 }
 
+.default {
+  font-style: italic;
+}
+
 .hidden {
   display: none;
 }
@@ -440,6 +449,7 @@ form > .button-ctr > button,
     font-size: 2rem;
     text-align: center;
     color: var(--accent-color);
+    opacity: 100%;
     padding: 0;
   }
 

@@ -22,6 +22,9 @@ export default function renderList(list, i) {
     const viewEditBtn = renderItemEdit(listItem, i);
     const deleteBtn = renderItemDelete(listItem, i);
   }
+  if (i === 0) {
+    listItem.classList.add("default");
+  }
 }
 
 function renderListIcon(list, ctr) {
