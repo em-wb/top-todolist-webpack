@@ -6,6 +6,8 @@ import {
   getName,
   getAvatar,
 } from "./profile";
+import { AvatarGenerator } from "random-avatar-generator";
+import { renderHeader } from "./appUI";
 
 export default function createProfileUI(name, avatar) {
   const viewCtr = getViewCtr();
@@ -46,6 +48,7 @@ function randomAvatarEL(img, btn) {
     const avatar = generator.generateRandomAvatar();
     saveAvatarToStorage(avatar);
     img.setAttribute("src", avatar);
+    renderHeader();
   });
 }
 
@@ -54,5 +57,6 @@ function editNameEL(editName, profileName) {
     const name = prompt("Enter profile name");
     profileName.textContent = name;
     saveNameToStorage(name);
+    renderHeader();
   });
 }
