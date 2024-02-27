@@ -34,11 +34,14 @@ function renderPriorityStatus(ctr, toEdit) {
   createElement("label", null, ctr, "High priority", [
     ["for", "highPriorityTask"],
   ]);
-  createElement("input", "highPriority", ctr, "", [
+  console.log("toedit", toEdit);
+  const priorityInput = createElement("input", "highPriority", ctr, "", [
     ["id", "highPriorityTask"],
     ["type", "checkbox"],
-    ["checked", toEdit ? toEdit.priority : false],
   ]);
+  if (toEdit && toEdit.priority === true) {
+    priorityInput.setAttribute("checked", true);
+  }
 }
 
 function renderDropDown(ctr) {
@@ -110,7 +113,7 @@ function deleteTaskEL(deleteTaskBtn) {
     clearViewCtr();
 
     loadTasksFromStorage(0);
-    addTaskEventLis();
+    // addTaskEventLis();
     edited = false;
     editedIndex = null;
   });
@@ -120,7 +123,7 @@ function closeFormEL() {
   document.getElementById("close-btn").addEventListener("click", (e) => {
     clearViewCtr();
     loadTasksFromStorage(0);
-    addTaskEventLis();
+    // addTaskEventLis();
     edited = false;
     editedIndex = null;
   });
@@ -145,6 +148,7 @@ function submitTaskEL(submitTaskBtn) {
       false
     );
     clearViewCtr();
+    // addTaskEventLis();
     loadTasksFromStorage(chosenIndex);
     edited = false;
     editedIndex = null;

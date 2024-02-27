@@ -1,4 +1,3 @@
-import { AvatarGenerator } from "random-avatar-generator";
 import createElement from "./createElement";
 import { getViewCtr } from "./addNew";
 import {
