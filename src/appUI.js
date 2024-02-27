@@ -56,6 +56,7 @@ export function renderHeader() {
   avatar = getAvatar(avatar);
   createElement("p", "user-name-header", headerProfile, `Hello, ${userName}.`);
   createElement("img", "avatar-header", headerProfile, "", [["src", avatar]]);
+  addProfileEL(headerProfile);
 }
 
 export function renderViewCtr() {
@@ -127,6 +128,13 @@ function addMenuEventLis() {
       markAsSelected(menuItem);
       openThisPage(menuItem.dataset.indexNumber);
     });
+  });
+}
+
+function addProfileEL(profileHeader) {
+  profileHeader.addEventListener("click", () => {
+    clearViewCtr();
+    loadProfileFromStorage();
   });
 }
 

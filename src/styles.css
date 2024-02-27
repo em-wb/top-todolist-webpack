@@ -51,7 +51,8 @@ button {
 }
 
 button:hover,
-.list-item {
+.list-item:hover,
+.header-profile:hover {
   cursor: pointer;
 }
 
